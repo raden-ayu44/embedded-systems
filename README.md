@@ -5,9 +5,9 @@ Personal archive of Arduino/ESP32 sketches, notes, wiring diagrams, and video li
 ## Structure
 
 ```
-Sketches/   → Arduino (.ino) sketches
-Docs/       → notes (.md) and wiring diagrams (.png) 
-Videos/     → external links to demo recordings (videos captured by me)
+sketches/   → Arduino (.ino) sketches
+docs/       → notes (.md) and wiring diagrams (.png) 
+videos/     → external links to demo recordings (videos captured by me)
 ```
 
 ## License
