@@ -46,7 +46,9 @@ The key conceptual difference from the earlier examples: there, the action is al
 
 **Order matters**: turning off the old LED has to happen using the OLD value of `ledNumber`, before it's incremented. Reverse that order and the program loses track of which LED needs to be turned off.
 
-## Bugs found along the way (useful material for a "what didn't work" writeup)
+## Caveat — strapping pins in use
+
+`ledPin[]` includes GPIO12, and `buttonPin` is GPIO4 — both are strapping pins, sampled by the chip at boot to decide boot mode. GPIO12 specifically affects flash voltage selection. In practice this sketch has booted and run correctly every time on this board, but strapping-pin behavior can be sensitive to the exact board and what's electrically attached at the moment of power-on — it isn't guaranteed safe on every board. Worth knowing before reusing this pin layout elsewhere.
 
 1. **`ledNumber` was briefly declared `const`** - caused a compile error, since its value needs to change in `loop()`, but `const` forbids any change after declaration.
 2. **An "turn off all LEDs" loop placed outside every `if` condition** - tried early on, but wrong: since it ran on every single pass of `loop()` (thousands of times per second) unconditionally, an LED that had just been turned on would immediately be turned off again the very next pass, before it could ever be visible to the eye.
