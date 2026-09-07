@@ -69,6 +69,10 @@ When the light is at index 7 (the top end) moving forward, `ledNumber + directio
 
 The biggest structural difference from `walking-light.ino` is the `isButtonPressed()` function. Instead of writing out the full three-stage debounce block again for a second button, that logic is wrapped into one function taking a pin and references to its three state variables as parameters, returning true/false in answer to "was this pin just pressed, genuinely?" Both buttons call the same function, each with its own set of state variables.
 
+## Caveat — strapping pins in use
+
+Same as `walking-light.ino`: `ledPin[]` includes GPIO12 and `buttonStepPin` is GPIO4, both strapping pins sampled at boot. Has run correctly every time on this board, but this isn't guaranteed safe on every board or power cycle — see the caveat in the walking-light notes for details.
+
 ## Debugging process and lessons
 
 ### 1. Pin mismatch (again)
