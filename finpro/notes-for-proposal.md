@@ -55,7 +55,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 |---|---|
 | Perumusan masalah medis | Selesai - lihat Bagian 4 |
 | Spesifikasi terukur (range, akurasi, waktu respons, daya) | **BELUM** |
-| Arsitektur sistem + kelayakan teknis | Sebagian - lihat Bagian 6 (alur state machine ada, diagram blok komponen lengkap belum) |
+| Arsitektur sistem + kelayakan teknis | Sebagian besar - lihat Bagian 6 (state machine 2 lapisan lengkap dengan keputusan teknis per state; pin-out diagram blok komponen belum) |
 | BOM dalam anggaran Rp300.000 | **BELUM** |
 | Jadwal selaras dengan gerbang proyek | **BELUM** |
 | Daftar risiko & mitigasi | **BELUM** |
@@ -73,7 +73,7 @@ Keputusan populasi target berubah beberapa kali selama diskusi - dicatat di sini
 | **v3 (final)** | **Mahasiswa Teknik Elektro, Teknik Biomedik, dan Teknik Komputer** (satu departemen di fakultas teknik) | Dipilih karena: (1) tidak mudah ditebak arah hasilnya - benar-benar pertanyaan terbuka; (2) populasi realistis direkrut karena satu departemen; (3) penulis sendiri adalah mahasiswa Teknik Biomedik, memberi motivasi personal yang sah tanpa anekdot yang perlu dijelaskan |
 
 > **Rumusan masalah (draf kerja):**
-> Berbagai jurusan di departemen ini menuntut penggunaan tangan secara berbeda dan berkelanjutan - mahasiswa Teknik Komputer terbiasa mengetik/coding dalam waktu lama, mahasiswa Teknik Elektro banyak menyolder dan menangani komponen kecil, sementara mahasiswa Teknik Biomedik kerap melakukan keduanya. Belum ada cara sederhana untuk memantau apakah pola penggunaan tangan ini memengaruhi kekuatan genggam dari waktu ke waktu - celah inilah yang coba dijawab alat ini, sekaligus menguji apakah perbedaan jurusan benar-benar berkorelasi dengan kekuatan genggam atau tidak.
+> Berbagai jurusan di Departemen Teknik Elektro menuntut penggunaan tangan secara berbeda dan berkelanjutan - mahasiswa Teknik Komputer terbiasa mengetik/coding dalam waktu lama, mahasiswa Teknik Elektro banyak menyolder dan menangani komponen kecil, sementara mahasiswa Teknik Biomedik kerap melakukan keduanya. Belum ada cara sederhana untuk memantau apakah pola penggunaan tangan ini memengaruhi kekuatan genggam dari waktu ke waktu - celah inilah yang coba dijawab alat ini, sekaligus menguji apakah perbedaan jurusan benar-benar berkorelasi dengan kekuatan genggam atau tidak.
 
 ---
 
@@ -100,26 +100,57 @@ tinggi badan, berat badan, tangan dominan, jam coding/menyolder/menggambar per m
 
 ## 6. ARSITEKTUR SISTEM (Alur State Machine)
 
+Dirancang berlapis (hierarchical state, lihat §6.4) - bukan satu loop datar seperti draf awal. **Lapisan luar** menangani satu sesi (3 percobaan + istirahat + ringkasan). **Lapisan dalam** menangani satu percobaan tunggal (4 state). Lapisan dalam "bersarang" di dalam satu kotak pada lapisan luar.
+
+### 6.1 Lapisan luar (per sesi)
+
 ```
-MULAI
-│
-└─ LOOP (setiap sesi pengukuran)
-   │
-   ├─ [WAIT] Menunggu tombol mulai ditekan
-   │
-   ├─ [SENSE] Baca ADC dari HX711 (load cell)
-   │
-   ├─ [PROCESS] Terapkan calibration_factor -> nilai kg/N
-   │             (opsional: filter moving-average, rata-rata 3 percobaan)
-   │
-   ├─ [OUTPUT] Tampilkan di LCD + bunyikan buzzer/nyalakan LED
-   │            + kirim ke cloud/log lokal
-   │
-   └─ Kembali ke [WAIT] untuk sesi berikutnya
+[Siklus percobaan] --(< 3 kali)--> [Istirahat: timer 1 menit] --> kembali ke [Siklus percobaan]
+[Siklus percobaan] --(= 3 kali)--> [Ringkasan: rata-rata & histori] --> [Sesi baru dimulai]
 ```
 
-**Diagram blok komponen (belum lengkap - lihat Bagian 3.2):**
+- **Istirahat**: timer 1 menit sesuai protokol standar (Box 1, Vaishya) untuk mencegah kelelahan otot memengaruhi percobaan berikutnya.
+- **Ringkasan**: hitung rata-rata 3 percobaan, ambil riwayat sesi lalu untuk perbandingan ("lebih kuat dari sesi lalu"), kirim ke cloud/log lokal.
+
+### 6.2 Lapisan dalam (satu siklus percobaan): SIAP -> GENGGAM -> HITUNG -> RESPON
+
+**[SIAP]**
+- Menunggu interrupt tombol (bukan polling `digitalRead()`), agar tetap non-blocking (Sub-CPMK 3).
+- Keputusan terbuka: debounce software (abaikan re-trigger < ~50ms sejak interrupt terakhir) vs debounce hardware (kapasitor).
+- Keputusan terbuka: apakah tare otomatis dijalankan setiap kali masuk state ini, supaya drift nol dari percobaan sebelumnya tidak terbawa.
+- Tidak ada jalur ke ERROR dari state ini.
+
+**[GENGGAM]**
+- Loop baca ADC dari HX711, terapkan `calibration_factor`, lacak nilai puncak (`ref` hanya naik: `if (result >= ref) ref = result;`). Tampilkan real-time ke LCD.
+- Keputusan terbuka: `get_units()` pada library HX711 umum bersifat blocking (menunggu pin DOUT turun) - berpotensi bentrok dengan tuntutan non-blocking. Opsi (a) terima sebagai "acceptable blocking window" (~100ms pada 10Hz), dijustifikasi di makalah; opsi (b) polling `is_ready()` non-blocking digabung state kecil di dalam GENGGAM.
+- Keputusan terbuka: exit trigger - gaya turun kembali di bawah ambang ATAU durasi maksimum tercapai (misal 5 detik), mengacu protokol Vaishya (tahan 3-5 detik).
+- Keputusan terbuka: refresh rate LCD dibuat lebih jarang (misal 100-150ms via timer terpisah) daripada sample rate sensor, supaya tidak membebani I2C/LCD tanpa menambah nilai.
+- Transisi keluar: ke HITUNG (normal), atau ke ERROR (HX711 tidak `is_ready()` dalam batas waktu tertentu / nilai ADC mendekati saturasi 24-bit).
+
+**[HITUNG]**
+- One-shot (bukan loop), dieksekusi sekali begitu GENGGAM selesai. Validasi rentang nilai `ref` terhadap kapasitas load cell (bukan langsung dipercaya). Simpan ke posisi percobaan ke-1/2/3.
+- Sengaja TIDAK menghitung relative HGS di sini - tetap dipindah ke analisis data pasca-pengukuran sesuai keputusan skop di Bagian 5.
+- Keputusan terbuka: smoothing (filter moving-average) dijalankan di GENGGAM sebelum dibandingkan ke `ref` (lebih sederhana, direkomendasikan untuk skop kelas), atau di HITUNG sesaat sebelum finalisasi (lebih presisi, lebih kompleks).
+- Keputusan terbuka: nilai float mentah tetap disimpan di memori sebelum dibulatkan untuk tampilan LCD, supaya presisi tidak hilang untuk analisis akurasi nanti (lihat §6.4, Bab 5 Marwedel).
+- Transisi keluar: ke RESPON (lolos validasi), atau ke ERROR (nilai di luar rentang fisik yang masuk akal).
+
+**[RESPON]**
+- Trigger buzzer/LED/motor getar (Sub-CPMK 5) + tampilkan hasil dengan konteks dalam-sesi ("Percobaan 2 dari 3 - 27.1 kg"). Perbandingan lintas sesi BUKAN di sini - itu terjadi di RINGKASAN (lapisan luar).
+- Keputusan terbuka: feedback harus non-blocking - catat `millis()` saat masuk state, matikan buzzer/LED setelah durasi lewat ambang, dicek di loop utama (bukan `delay()`).
+- Keputusan terbuka: urutan sinyal serentak vs berurutan (misal LCD update dulu, baru buzzer 100ms kemudian) - memengaruhi struktur timer non-blocking.
+- Keputusan terbuka: apakah state ini menahan alur sampai buzzer selesai, atau langsung lanjut ke lapisan luar sambil buzzer masih menyala di background (butuh flag status terpisah).
+- Tidak ada jalur ERROR dari state ini (nilai sudah tervalidasi di HITUNG).
+- Transisi keluar (bercabang ke lapisan luar): percobaan < 3 -> ISTIRAHAT; percobaan = 3 -> RINGKASAN.
+
+### 6.3 Diagram blok komponen (pin-out belum lengkap - lihat Bagian 9)
 `Load cell -> HX711 (amplifier + 24-bit ADC) -> ESP32 -> {LCD, buzzer/LED, WiFi/cloud}`
+
+### 6.4 Referensi teori (Marwedel, *Embedded System Design*, ed. 4)
+- Formalisasi hierarki dua lapisan di atas: **Bab 2, §2.4 Communicating Finite State Machines**, khususnya **§2.4.2 StateCharts** (hierarchical & orthogonal states).
+- Pipeline sensor/ADC (GENGGAM): **Bab 3, §3.2.1 Sensors, §3.2.2 Sample-and-Hold, §3.2.4 ADC**.
+- Aktuator/PWM (RESPON): **Bab 3, §3.6.1 DAC, §3.6.3 Pulse-Width Modulation, §3.6.4 Actuators**.
+- Metodologi validasi akurasi (untuk Bagian 9): **Bab 5, §5.3 Quality Metrics** (RMSE/MAE terhadap beban referensi).
+- Metodologi daftar risiko (untuk Bagian 9): **Bab 5, §5.6.5 Fault Tree Analysis & FMEA**.
 
 ---
 
@@ -160,10 +191,11 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 | Area | Status | Catatan |
 |------|--------|---------|
 | Spesifikasi terukur (range gaya, akurasi, waktu respons, anggaran daya) | Belum dimulai | Perlu ditentukan sebelum BOM (kapasitas load cell bergantung pada range target) |
-| Diagram blok komponen lengkap (bukan hanya alur state) | Sebagian | Perlu pin-out dan interface spesifik (SPI/bit-bang HX711, dst.) |
+| Diagram blok komponen lengkap (bukan hanya alur state) | Sebagian | Alur state machine 2 lapisan sudah lengkap (Bagian 6); yang belum cuma pin-out dan interface spesifik (SPI/bit-bang HX711, dst.) |
 | BOM dengan harga riil, dalam Rp300.000 | Belum dimulai | |
 | Jadwal kerja selaras dengan gerbang G1-G4 | Belum dimulai | |
-| Daftar risiko & mitigasi | Belum dimulai | Perlu mencakup risiko studi banding 3 jurusan: rekrutmen tidak seimbang, sampel kecil, variabel perancu (usia, olahraga, tangan dominan) |
+| Spesifikasi terukur - akurasi | Belum dimulai | Metodologi sudah diidentifikasi: RMSE/MAE terhadap beban referensi (Marwedel Bab 5 §5.3, lihat Bagian 6.4) |
+| Daftar risiko & mitigasi | Belum dimulai | Metodologi sudah diidentifikasi: kerangka FMEA (Marwedel Bab 5 §5.6.5, lihat Bagian 6.4); perlu mencakup risiko studi banding 3 jurusan: rekrutmen tidak seimbang, sampel kecil, variabel perancu (usia, olahraga, tangan dominan) |
 | Proses consent informal untuk partisipan | Disebutkan, belum didetailkan | Cukup persetujuan lisan/tertulis sederhana, bukan proses etik formal |
 
 ---
