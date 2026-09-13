@@ -4,8 +4,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 ---
 
 # Catatan Riset & Perencanaan - Hand Grip Dynamometer
-**Final Project - Sistem Embedded Biomedik dan Praktikum (ENBM605026)**
-**Universitas Indonesia - Program Studi Teknik Biomedik**
+**Final Project - Embedded Systems Course**
 
 > Dokumen ini BUKAN proposal. Ini adalah wadah (vessel) yang menyimpan semua informasi, rujukan, dan keputusan yang sudah diambil sejauh ini, agar penyusunan proposal G1 nanti tinggal menyusun ulang isi dokumen ini ke dalam format yang diminta.
 
@@ -15,8 +14,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 
 | Item | Detail |
 |------|--------|
-| Mata kuliah | Sistem Embedded Biomedik dan Praktikum (ENBM605026) |
-| Institusi | Universitas Indonesia, Fakultas Teknik, Program Studi Teknik Biomedik |
+| Mata kuliah | Mata kuliah embedded system (biomedik) |
 | Posisi saat ini | Minggu ke-4 (topik: ADC, sensor analog, peripheral serial) |
 | Platform wajib | ESP32 (Arduino IDE) |
 | Anggaran komponen | Maksimum Rp300.000 per kelompok, dengan bukti pembelian |
@@ -71,12 +69,11 @@ Keputusan populasi target berubah beberapa kali selama diskusi - dicatat di sini
 | Versi | Populasi target | Alasan ditolak/direvisi |
 |-------|------------------|--------------------------|
 | v1 | Pasien pasca-stroke | Terlalu besar skopnya untuk proyek satu semester; butuh proses rekrutmen populasi rentan yang lebih rumit dari yang bisa ditangani jadwal kelas |
-| v2 | Mahasiswa teknik secara umum, argumen berbasis hobi personal (crafting, menggambar) | Terlalu bergantung pada anekdot pribadi, sulit digeneralisasi ke pembaca proposal |
-| v3 | Mahasiswa teknik, argumen berbasis tugas okupasional (mengetik/coding, menyolder, menggambar manual) | Lebih kuat, tapi populasinya (lintas fakultas) masih sulit direkrut secara realistis |
-| **v4 (final)** | **Mahasiswa Teknik Elektro, Teknik Biomedik, dan Teknik Komputer** (satu departemen: Departemen Teknik Elektro UI) | Dipilih karena: (1) tidak mudah ditebak arah hasilnya - benar-benar pertanyaan terbuka; (2) populasi realistis direkrut karena satu departemen; (3) penulis sendiri adalah mahasiswa Teknik Biomedik, memberi motivasi personal yang sah tanpa anekdot yang perlu dijelaskan |
+| v2 | Mahasiswa teknik, argumen berbasis tugas okupasional (mengetik/coding, menyolder, menggambar manual) | Lebih kuat, tapi populasinya (lintas fakultas) masih sulit direkrut secara realistis |
+| **v3 (final)** | **Mahasiswa Teknik Elektro, Teknik Biomedik, dan Teknik Komputer** (satu departemen di fakultas teknik) | Dipilih karena: (1) tidak mudah ditebak arah hasilnya - benar-benar pertanyaan terbuka; (2) populasi realistis direkrut karena satu departemen; (3) penulis sendiri adalah mahasiswa Teknik Biomedik, memberi motivasi personal yang sah tanpa anekdot yang perlu dijelaskan |
 
 > **Rumusan masalah (draf kerja):**
-> Berbagai jurusan di Departemen Teknik Elektro menuntut penggunaan tangan secara berbeda dan berkelanjutan - mahasiswa Teknik Komputer terbiasa mengetik/coding dalam waktu lama, mahasiswa Teknik Elektro banyak menyolder dan menangani komponen kecil, sementara mahasiswa Teknik Biomedik kerap melakukan keduanya. Belum ada cara sederhana untuk memantau apakah pola penggunaan tangan ini memengaruhi kekuatan genggam dari waktu ke waktu - celah inilah yang coba dijawab alat ini, sekaligus menguji apakah perbedaan jurusan benar-benar berkorelasi dengan kekuatan genggam atau tidak.
+> Berbagai jurusan di departemen ini menuntut penggunaan tangan secara berbeda dan berkelanjutan - mahasiswa Teknik Komputer terbiasa mengetik/coding dalam waktu lama, mahasiswa Teknik Elektro banyak menyolder dan menangani komponen kecil, sementara mahasiswa Teknik Biomedik kerap melakukan keduanya. Belum ada cara sederhana untuk memantau apakah pola penggunaan tangan ini memengaruhi kekuatan genggam dari waktu ke waktu - celah inilah yang coba dijawab alat ini, sekaligus menguji apakah perbedaan jurusan benar-benar berkorelasi dengan kekuatan genggam atau tidak.
 
 ---
 
@@ -179,4 +176,4 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 
 ---
 
-*Dokumen ini adalah catatan riset dan perencanaan untuk proposal akhir mata kuliah Sistem Embedded Biomedik dan Praktikum (ENBM605026), Universitas Indonesia. Bukan proposal final - gunakan sebagai bahan mentah untuk menyusun dokumen proposal G1 sesuai format yang diminta dosen.*
+*Dokumen ini adalah catatan riset dan perencanaan untuk proposal akhir mata kuliah embedded system (biomedik). Bukan proposal final - gunakan sebagai bahan mentah untuk menyusun dokumen proposal G1 sesuai format yang diminta dosen.*
