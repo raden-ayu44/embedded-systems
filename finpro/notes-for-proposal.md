@@ -25,6 +25,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 
 ## 2. SUMBER RUJUKAN
 
+https://drive.google.com/drive/folders/1nbT_B_snksXwBb6IFAcCBsopwRYrQzlZ?usp=sharing
 | Sumber | Fokus utama | Kontribusi ke proyek ini |
 |--------|-------------|---------------------------|
 | Ramadhani et al. 2019 (IJEEEMI) | Alat ukur genggam pasien pasca-stroke: Arduino Uno + HX711 + load cell batang + LCD 16x2 + indikator 3-tingkat | Arsitektur paling sederhana dan paling dekat dengan skala proyek kelas - jadi referensi utama arsitektur hardware |
