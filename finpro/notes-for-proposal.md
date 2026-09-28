@@ -3,7 +3,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 
 ---
 
-# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v11)
+# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v12)
 **Final Project - Embedded Systems Course**
 
 > Dokumen ini BUKAN proposal. Ini adalah wadah (vessel) yang menyimpan semua informasi, rujukan, dan keputusan yang sudah diambil sejauh ini, agar penyusunan proposal G1 nanti tinggal menyusun ulang isi dokumen ini ke dalam format yang diminta.
@@ -46,22 +46,40 @@ https://drive.google.com/drive/folders/1nbT_B_snksXwBb6IFAcCBsopwRYrQzlZ?usp=sha
 | Minggu | Tonggak |
 |--------|---------|
 | 5-6 | Proposal + Design Review (**G1**) - draf disusun sekarang |
-| 7 | Tenggat berkas gerber (wajib untuk ikut batch fabrikasi kolektif) |
+| 7 ATAU 8 | Tenggat berkas gerber - **KONFLIK ANTAR DOKUMEN RESMI, lihat catatan di bawah** |
 | 9 | **G2** - jalur penginderaan & aktuasi hidup di breadboard, PCB dipesan kolektif |
 | 11-12 | PCB diterima; **G3** - PCB dirakit & lolos uji dasar |
 | 14 | **G4** - purwarupa terintegrasi lolos uji mandiri |
 | 16 | UAS - demo expo, makalah, viva individu |
 
-### 3.2 Rubrik G1: Proposal dan Design Review (checklist)
+> ⚠️ **KONFLIK BELUM TERSELESAIKAN (ditemukan saat cross-check dengan Panduan G1, Rubrik G1, dan Template resmi):** BRP asli menyebut tenggat gerber **Minggu ke-7** secara eksplisit di dua tempat (Modul Praktikum 6, dan Bagian D.5 - "berkas gerber yang melewati tenggat Minggu ke-7 tidak diikutsertakan dalam batch"). Panduan Proposal G1 yang baru menyebut **Minggu 8** ("Gerber files due — no extension", baris terpisah dari "PCB layout and gerber" di Minggu 7). **Dua dokumen resmi ini saling bertentangan** - JANGAN tuliskan salah satu sebagai final di proposal sebelum dikonfirmasi ke TA. Ini bukan salah ketik satu pihak yang bisa ditebak - perlu klarifikasi eksternal sebelum jadwal proposal (checklist di Bagian 9) bisa ditulis final.
 
-| Bagian wajib | Status di dokumen ini |
+### 3.2 Checklist Internal Kami (BUKAN rubrik skor resmi - lihat catatan)
+
+> **Catatan penting:** rubrik skor G1 yang sebenarnya cuma punya **4 kriteria** (Perumusan masalah medis; Spesifikasi terukur; Kelayakan teknis+arsitektur+BOM digabung jadi satu; Jadwal+risiko digabung jadi satu), masing-masing 0-100, G1 = rata-rata keempatnya. Tabel di bawah ini checklist tracking internal kami sendiri yang lebih granular (6 baris) - jangan disamakan dengan struktur rubrik resmi saat presentasi design review, supaya tidak salah sebut ke reviewer.
+
+| Bagian wajib (checklist internal) | Status di dokumen ini |
 |---|---|
 | Perumusan masalah medis | Selesai - lihat Bagian 4 |
 | Spesifikasi terukur (range, akurasi, waktu respons, daya) | Sebagian (~25%) - range fisik sudah ditentukan, lihat Bagian 9 |
 | Arsitektur sistem + kelayakan teknis | Sebagian besar - lihat Bagian 6 (state machine 2 lapisan lengkap dengan keputusan teknis per state; pin-out diagram blok komponen belum) |
 | BOM dalam anggaran Rp300.000 | ~90% - lihat Bagian 9.1, harga riil sudah ada |
-| Jadwal selaras dengan gerbang proyek | **BELUM** |
+| Jadwal selaras dengan gerbang proyek | **BELUM** - terhambat konflik tenggat gerber di atas |
 | Daftar risiko & mitigasi | Belum diisi - metodologi (FMEA) sudah ditentukan, lihat Bagian 9 |
+
+### 3.3 Persyaratan format resmi (dari Panduan/Template G1 - belum ditangani di dokumen ini)
+
+| Persyaratan | Sumber | Status |
+|---|---|---|
+| Body maksimal 8 halaman (Bagian 1-6; cover/referensi/lampiran tidak dihitung) | Template | Belum dicek - tunggu draf jadi |
+| Pakai Template resmi apa adanya - urutan bagian TIDAK boleh diubah | Panduan | Belum mulai drafting ke template |
+| Nama file: `G1_Kelompok-XX_Proposal.pdf` | Panduan | Belum ada nomor kelompok |
+| Tiap komponen BOM yang dibeli wajib ada link supplier riil, bukan cuma nama+harga | Template §4 | Bagian 9.1 belum ada link |
+| Tiap risiko wajib 3 bagian: tanda peringatan dini + mitigasi + fallback (bukan cuma metodologi FMEA) | Template §6 | Belum ditulis - FMEA baru metodologi, bukan isi |
+| Tabel alokasi pin - wajib cek tidak ada pin dobel, dan pin input-only/strapping ESP32 tidak disalahgunakan | Template §3.4 | Belum ada sama sekali. Catatan: pin SPI untuk SD card TIDAK lagi relevan setelah keputusan logging di Bagian 4 (cloud+CSV-serial, bukan SD card) - tabel pin jadi lebih sederhana |
+| Power budget wajib ditutup 1 baris: catu daya yang dipilih + arus rated-nya + margin di atas peak current total | Template §3.3 | Belum dihitung sama sekali |
+| Rail aktuator harus terpisah elektris dari rail logika, satu ground bersama | Panduan | Belum dicatat (LED arusnya kecil, tapi tetap perlu 1 baris catatan) |
+| Design review: anggota manapun bisa ditanya bagian manapun, bukan cuma subsistem sendiri | Panduan | Perlu semua anggota paham keseluruhan desain, bukan cuma bagian sendiri |
 
 ---
 
@@ -85,7 +103,7 @@ Keputusan populasi target berubah beberapa kali selama diskusi - dicatat di sini
 
 > **Standar keberhasilan proyek disederhanakan jadi dua hal saja (menggantikan daftar 5-6 fitur "wajib" di Bagian 5 sebagai kriteria sukses utama):**
 > 1. **Measurement** - pengukuran sesuai protokol standar V1 (duduk, siku ditekuk 90°, tahan 3-5 detik, 3 kali percobaan, istirahat ~1 menit antar percobaan), diverifikasi dengan RMSE/MAE terhadap beban referensi (M5).
-> 2. **Logging** - data setiap sesi tersimpan otomatis (tidak hilang, tidak perlu disalin manual), lewat **cloud sebagai jalur utama, dengan CSV-over-USB-serial ke laptop sebagai fallback** (bukan SD card). **Keputusan direvisi** setelah dicek ke Panduan BRP: SD card **tidak wajib** - satu-satunya yang diwajibkan cuma ESP32 sebagai controller utama; *"cloud logging... may be added where the problem needs them; say why in the proposal"* menyebut cloud logging eksplisit sebagai tambahan opsional, bukan requirement, dan SD card cuma disebut di Modul 3 sebagai *"the lab has one SD card module, offered as an optional station"* - fasilitas lab, bukan kewajiban course. Karena lab cuma punya satu unit modul SD (risiko ketersediaan/rebutan kalau dijadwalkan bareng tim lain), fallback logging dipindah ke pola yang sudah diajarkan Modul 3 Guided Example 4 sendiri: *"Logging in Guided Example 4 now goes to a CSV file on your own laptop over the USB serial link."* Ini juga sekaligus menyederhanakan pin allocation (3.4) - tidak perlu jalur SPI terpisah untuk SD card. **Trade-off yang perlu ditulis eksplisit di Bagian 2.2 (What the device will not do)**: fallback CSV ini butuh laptop host tersambung dan menjalankan script penerima saat pengukuran - bukan penyimpanan mandiri seperti SD card tertanam di alat. Karena pengujian aktual dibatasi ke anggota tim (v5) di lingkungan yang terkontrol, ketersediaan laptop saat sesi pengukuran realistis diasumsikan, jadi ini bukan keterbatasan praktis - cuma perlu dinyatakan sebagai batas skop, bukan dibiarkan seolah luput dipikirkan.
+> 2. **Logging** - data setiap sesi tersimpan otomatis (tidak hilang, tidak perlu disalin manual), lewat **cloud sebagai jalur utama, dengan CSV-over-USB-serial ke laptop sebagai fallback** (bukan SD card). **Keputusan direvisi** setelah dicek ke Panduan BRP: SD card **tidak wajib** - satu-satunya yang diwajibkan cuma ESP32 sebagai controller utama; *"cloud logging... may be added where the problem needs them; say why in the proposal"* menyebut cloud logging eksplisit sebagai tambahan opsional, bukan requirement, dan SD card cuma disebut di Modul 3 sebagai *"the lab has one SD card module, offered as an optional station"* - fasilitas lab, bukan kewajiban course. Karena lab cuma punya satu unit modul SD (risiko ketersediaan/rebutan kalau dijadwalkan bareng tim lain), fallback logging dipindah ke pola yang sudah diajarkan Modul 3 Guided Example 4 sendiri: *"Logging in Guided Example 4 now goes to a CSV file on your own laptop over the USB serial link."* Ini juga sekaligus menyederhanakan pin allocation (3.3) - tidak perlu jalur SPI terpisah untuk SD card. **Trade-off yang perlu ditulis eksplisit di Bagian 2.2 (What the device will not do)**: fallback CSV ini butuh laptop host tersambung dan menjalankan script penerima saat pengukuran - bukan penyimpanan mandiri seperti SD card tertanam di alat. Karena pengujian aktual dibatasi ke anggota tim (v5) di lingkungan yang terkontrol, ketersediaan laptop saat sesi pengukuran realistis diasumsikan, jadi ini bukan keterbatasan praktis - cuma perlu dinyatakan sebagai batas skop, bukan dibiarkan seolah luput dipikirkan.
 
 > **Rumusan masalah (draf kerja):**
 > Berbagai jurusan di Departemen Teknik Elektro menuntut penggunaan tangan secara berbeda dan berkelanjutan - mahasiswa Teknik Komputer terbiasa mengetik/coding dalam waktu lama, mahasiswa Teknik Elektro banyak menyolder dan menangani komponen kecil, sementara mahasiswa Teknik Biomedik kerap melakukan keduanya. Belum ada cara sederhana untuk memantau apakah pola penggunaan tangan ini memengaruhi kekuatan genggam dari waktu ke waktu - celah inilah yang coba dijawab alat ini, sekaligus menguji apakah perbedaan jurusan benar-benar berkorelasi dengan kekuatan genggam atau tidak.
@@ -264,19 +282,21 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 | Spesifikasi terukur (range gaya, akurasi, waktu respons, anggaran daya) | Sebagian | Range fisik sensor sudah ditentukan (load cell 180kg, headroom besar dari kekuatan genggam individu terkuat di populasi target ~78kgf, G1). Akurasi/waktu respons/anggaran daya belum dihitung formal - metodologi akurasi sudah diidentifikasi: RMSE/MAE terhadap beban referensi (M5, lihat Bagian 6.4) |
 | Diagram blok komponen lengkap (bukan hanya alur state) | Sebagian | Alur state machine 2 lapisan sudah lengkap (Bagian 6); yang belum cuma pin-out dan interface spesifik (I2C/bit-bang HX711, dst.). Tidak perlu lagi alokasi pin SPI untuk SD card - lihat baris logging di bawah |
 | Media logging: SD card vs cloud vs CSV-over-serial | **Selesai** | Dicek ke Panduan BRP: SD card tidak wajib, cuma disebut di Modul 3 sebagai stasiun opsional lab (1 unit saja - risiko rebutan). Keputusan final: cloud sebagai jalur utama, CSV-over-USB-serial (pola Modul 3 Guided Example 4) sebagai fallback kalau cloud gagal - bukan SD card. Lihat catatan lengkap di Bagian 4 (callout Standar Keberhasilan). Trade-off (butuh laptop host tersambung saat logging fallback) perlu ditulis di Bagian 2.2 proposal |
-| BOM dengan harga riil, dalam Rp300.000 | ~90% - lihat tabel 9.1 | Total Rp165.500 dari Rp300.000 (komponen utama), sisa ~Rp134.500. LED belum dikonfirmasi/checkout |
-| Jadwal kerja selaras dengan gerbang G1-G4 | Belum dimulai | |
-| Daftar risiko & mitigasi | Belum diisi | Metodologi sudah diidentifikasi: kerangka FMEA (M6, lihat Bagian 6.4); perlu mencakup risiko studi banding 3 jurusan: rekrutmen tidak seimbang, sampel kecil, variabel perancu (usia, olahraga, tangan dominan), variasi teknik genggam antar partisipan (belum ada mitigasi hardware - kembali ke instruksi verbal sesuai protokol V1) |
-| Proses consent informal untuk partisipan | Disebutkan, belum didetailkan | Cukup persetujuan lisan/tertulis sederhana, bukan proses etik formal. Tambahkan satu kalimat: pengulangan percobaan kadang terjadi karena alasan teknis (state Error), bukan kesalahan partisipan (lihat Bagian 6.1 & 7) |
+| BOM dengan harga riil, dalam Rp300.000 | ~90% - lihat tabel 9.1 | Total Rp165.500 dari Rp300.000 (komponen utama), sisa ~Rp134.500. LED belum dikonfirmasi/checkout. **Link supplier riil belum ditambahkan ke tabel - wajib untuk Template §4** |
+| Jadwal kerja selaras dengan gerbang G1-G4 | Belum dimulai | Terhambat konflik tenggat gerber Minggu 7 vs 8 (lihat Bagian 3.1) - selesaikan itu dulu sebelum menulis jadwal |
+| Daftar risiko & mitigasi | Belum diisi | Metodologi sudah diidentifikasi: kerangka FMEA (M6, lihat Bagian 6.4). **Wajib ditulis dengan 3 bagian per risiko (tanda peringatan dini + mitigasi + fallback), bukan cuma metodologi** - lihat Bagian 3.3. Perlu mencakup: ketersediaan modul SD card lab (cuma 1 unit, dipakai bergantian - sudah tidak jadi blocker karena keputusan logging di atas, tapi tetap relevan sebagai risiko yang sudah dimitigasi), variasi teknik genggam antar partisipan (belum ada mitigasi hardware - kembali ke instruksi verbal sesuai protokol V1) |
+| Proses consent informal untuk partisipan | **Tidak relevan lagi setelah v5** | v5 cuma menguji anggota tim sendiri (lihat Bagian 4) - tidak perlu proses consent formal ke pihak luar |
+| Tabel alokasi pin ESP32 | Belum dimulai | Wajib untuk Template §3.4 - cek pin input-only (GPIO 34-39) dan strapping pin tidak disalahgunakan. Lebih sederhana sekarang karena tidak perlu SPI untuk SD card |
+| Power budget dengan peak current | Belum dimulai | Wajib untuk Template §3.3 - tutup dengan 1 baris: catu daya dipilih + arus rated + margin di atas peak total |
 
 ### 9.1 BOM (harga riil, per komponen)
 
 | Komponen | Qty | Harga satuan | Subtotal | Catatan |
 |---|---|---|---|---|
-| Load cell 180kg (full bridge, 4 kabel) | 1 | Rp115.000 | Rp115.000 | Perlu frame/tuas di enclosure - lihat Bagian 6.3. Kapasitas dipilih dengan filosofi headroom (C1) di atas data individu terkuat populasi target (G1) |
-| Modul HX711 | 1 | Rp8.500 | Rp8.500 | Beri daya 2.7-5V dari ESP32, gunakan channel A saja |
-| LCD 16x2 I2C (hijau, alamat 0x27/0x3f) | 1 | Rp39.500 | Rp39.500 | Beri daya 3.3V (bukan 5V) - level GPIO ESP32 tidak toleran 5V |
-| Push button tactile 6x6x5mm | 5 (min. order) | Rp500 | Rp2.500 | Cuma butuh 2 (mulai + restart), sisa 3 jadi cadangan |
+| Load cell 180kg (full bridge, 4 kabel) | 1 | Rp115.000 | Rp115.000 | Perlu frame/tuas di enclosure - lihat Bagian 6.3. Kapasitas dipilih dengan filosofi headroom (C1) di atas data individu terkuat populasi target (G1). **Link supplier belum dicatat di sini** |
+| Modul HX711 | 1 | Rp8.500 | Rp8.500 | Beri daya 2.7-5V dari ESP32, gunakan channel A saja. **Link supplier belum dicatat di sini** |
+| LCD 16x2 I2C (hijau, alamat 0x27/0x3f) | 1 | Rp39.500 | Rp39.500 | Beri daya 3.3V (bukan 5V) - level GPIO ESP32 tidak toleran 5V. **Link supplier belum dicatat di sini** |
+| Push button tactile 6x6x5mm | 5 (min. order) | Rp500 | Rp2.500 | Cuma butuh 2 (mulai + restart), sisa 3 jadi cadangan. **Link supplier belum dicatat di sini** |
 | LED indikator | 1 | - | - | **Belum di-checkout** - cek dulu apakah sudah termasuk komponen pasif lab (BRP D.5) sebelum beli sendiri (~Rp500-1.000 kalau beli) |
 | **Total** | | | **~Rp165.500** | Sisa anggaran ~Rp134.500 dari Rp300.000 (belum termasuk LED kalau ternyata perlu beli sendiri) |
 
@@ -362,7 +382,18 @@ Resistor basis untuk transistor driver termasuk komponen pasif yang sudah disedi
 
 ---
 
-- Berapa target jumlah partisipan per jurusan? (mempengaruhi validitas perbandingan 3 kelompok)
+## 12. CROSS-CHECK VS DOKUMEN RESMI G1 (Rubrik, Panduan, Template)
+
+*Log verifikasi terhadap tiga dokumen resmi G1 (Rubrik dan Lembar Penilaian, Panduan Proposal, Template Proposal). Hasil sudah dipindahkan ke bagian relevan (3.1, 3.2, 3.3, 9) - baris di bawah murni jejak audit, supaya jelas apa yang sudah dicek dan apa hasilnya kalau ada yang bertanya nanti.*
+
+- Rubrik skor resmi: 4 kriteria (bukan 6), masing-masing 0-100, G1 = rata-rata. Sudah dikoreksi di Bagian 3.2.
+- Tenggat gerber: **KONFLIK BELUM SELESAI** antara BRP (Minggu 7) dan Panduan G1 (Minggu 8) - lihat Bagian 3.1. Perlu konfirmasi TA sebelum menulis jadwal proposal.
+- Media logging (SD card vs cloud vs CSV-serial): dicek ke Panduan + Modul 3 - SD card cuma fasilitas opsional lab (1 unit), bukan requirement. Diputuskan cloud utama + CSV-serial fallback. Sudah diperbarui di Bagian 4 dan 9.
+- Semua persyaratan format resmi lain (limit halaman, nama file, link supplier, struktur risiko 3-bagian, tabel pin, power budget, pemisahan rail, kesiapan tiap anggota) - dicatat di Bagian 3.3, belum ada satupun yang dikerjakan isinya.
+
+---
+
+- Berapa target jumlah partisipan per jurusan? **Tidak relevan lagi setelah v5 (Bagian 4)** - v5 cuma anggota tim sendiri
 - Apakah akan menggunakan tangan dominan saja, atau kedua tangan?
 - Bagaimana bentuk pencatatan riwayat sesi ditampilkan ke pengguna - cukup di serial monitor untuk demo, atau perlu dashboard sederhana?
 
