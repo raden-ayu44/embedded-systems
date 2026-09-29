@@ -3,7 +3,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 
 ---
 
-# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v12)
+# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v16)
 **Final Project - Embedded Systems Course**
 
 > Dokumen ini BUKAN proposal. Ini adalah wadah (vessel) yang menyimpan semua informasi, rujukan, dan keputusan yang sudah diambil sejauh ini, agar penyusunan proposal G1 nanti tinggal menyusun ulang isi dokumen ini ke dalam format yang diminta.
@@ -117,7 +117,7 @@ Keputusan populasi target berubah beberapa kali selama diskusi - dicatat di sini
 | 1 | Pembacaan gaya real-time (kg/N) | Sub-CPMK 4 (ADC) | Semua paper referensi | Wajib |
 | 2 | Penangkapan gaya puncak per percobaan (MVC) | Sub-CPMK 4 | Ramadhani (R1), Gotthelf (G1), protokol Vaishya (V1) | Wajib |
 | 3 | Tampilan hasil (LCD/serial) | Sub-CPMK 4 | Semua paper referensi | Wajib |
-| 4 | Umpan balik aktuator (buzzer/LED) saat percobaan selesai | Sub-CPMK 5 (aktuator) | Tidak ada di paper - ditambahkan agar Sub-CPMK 5 punya tempat wajar di perangkat ini | Wajib |
+| 4 | Umpan balik aktuator (LED, menyala selama proses genggam) | Sub-CPMK 5 (aktuator) | Tidak ada di paper - ditambahkan agar Sub-CPMK 5 punya tempat wajar di perangkat ini | Wajib |
 | 5 | Pencatatan data lintas-sesi (cloud/lokal) | Sub-CPMK 7 (IoT) | Argumen utama Vaishya: nilai klinis HGS datang dari **pengukuran serial**, bukan sekali baca (V2) | Wajib |
 | 6 | Rata-rata 3 percobaan + timer istirahat | - | Protokol standar Box 1, Vaishya (V1): 3 percobaan per tangan, istirahat ~1 menit | Opsional (murah, hanya logika software) |
 
@@ -148,11 +148,14 @@ Selain siklus percobaan, istirahat, dan ringkasan, ada satu **interrupt transiti
 [Ringkasan] --(kirim berhasil)--> [Sesi baru dimulai]
 ```
 
+- **Catatan scoping storyboard LCD**: storyboard visual yang sudah dibuat (16 layar, lihat riwayat diskusi) itu representatif untuk **jalur sukses saja**. Tampilan layar `Error`/`GagalKirim` yang sebenarnya belum digambar final - itu baru bisa ditentukan konkret setelah modul Error Handling Library (W2) benar-benar dikoding, bukan didesain visual duluan sebelum implementasinya ada. Jadi storyboard yang ada sekarang jangan dianggap mencakup jalur gagal secara visual, walau kebijakannya (kapan CSV ditulis, kapan tahan-tombol-restart) sudah ditetapkan di teks Bagian 6.1 ini.
 - **Error**: state "tahan" (hold) sungguhan (bukan transisi sesaat yang langsung retry) - alat berhenti total, menampilkan jenis error dan pembacaan ADC mentah **secara live** (terus di-update, bukan snapshot beku) supaya pengawas bisa memeriksa fisik alat sambil melihat perubahan pembacaan. Layar tidak berubah sampai pengawas menekan **tombol restart khusus** (komponen baru, bukan reuse tombol mulai) setelah selesai mencatat manual - ini pola **"Error Handling Library"** (W2) yang sama dipakai lagi di `GagalKirim` (lihat bawah). Percobaan yang error TIDAK dihitung sebagai salah satu dari 3 percobaan. Audiens state ini adalah pengawas alat (TA/tim riset), bukan partisipan - jadi larangan "tidak boleh lihat angka mentah" di Bagian 7 sengaja dikecualikan di sini (**keputusan desain kami sendiri**, bukan dari sumber eksternal - alasannya: rubrik Divais dan Demo BRP menilai ketahanan uji adversarial termasuk kondisi gagal, jadi transparansi ke pengawas justru dinilai positif). Dicatat **manual** ke logbook tim (jenis error + waktu relatif `T+mm:ss` sejak alat menyala) - **keputusan tim kami sendiri** untuk TIDAK menambahkan counter otomatis di firmware, karena angka hitungan saja tidak menjelaskan "errornya karena apa", sedangkan logbook manual 1-2 menit memberi konteks yang jauh lebih berguna untuk analisis nanti.
-- **Istirahat**: timer 1 menit sesuai protokol standar Box 1 (V1) untuk mencegah kelelahan otot memengaruhi percobaan berikutnya.
-- **Ringkasan**: hitung rata-rata 3 percobaan, ambil riwayat sesi lalu untuk perbandingan ("lebih kuat dari sesi lalu"), lalu kirim ke cloud. **Kalau kirim gagal** (WiFi terputus di lapangan), masuk ke state `GagalKirim` - pola yang **identik dengan `Error`** di atas (layar diam/live menampilkan data yang gagal terkirim, tidak berubah sampai pengawas selesai mencatat manual, keluar lewat tombol restart yang sama). Bedanya cuma tujuan keluar: `Error` kembali ke `SiklusPercobaan` (karena perlu diulang), `GagalKirim` langsung ke akhir sesi (karena data pengukurannya sudah valid, cuma belum ter-upload - tidak perlu diulang, cukup dicatat).
+- **Istirahat**: dua sub-langkah. (1) "Lepaskan genggaman" - exit begitu gaya turun di bawah threshold onset (threshold yang sama dipakai simetris dengan GENGGAM, lihat 6.2). (2) "Istirahat 60 detik" - timer non-blocking sesuai protokol standar Box 1 (V1) untuk mencegah kelelahan otot memengaruhi percobaan berikutnya.
+- **Ringkasan**: terjadi **SATU KALI SAJA**, setelah percobaan ke-3 (bukan tiap percobaan - ini sempat salah digambar di storyboard awal, sudah diluruskan). Hitung rata-rata 3 percobaan, ambil riwayat sesi lalu untuk perbandingan ("lebih kuat dari sesi lalu"), lalu kirim ke cloud.
+  - **Kirim berhasil**: TIDAK ada pesan CSV ditampilkan sama sekali (CSV memang tidak ditulis di jalur ini). Tampilkan countdown "Selesai" 3 detik (refresh tiap 100ms) lalu **otomatis** kembali ke SIAP sesi baru - tidak perlu pengawas menekan apapun.
+  - **Kirim gagal** (WiFi terputus): tulis data ke CSV lokal, tampilkan pesan `"Dituliskan ke CSV"` - **keputusan kami sendiri, murni untuk kenyamanan psikologis pengguna** (meyakinkan data tidak hilang walau kirim gagal), bukan requirement teknis eksternal. Masuk ke state `GagalKirim` - pola yang **identik dengan `Error`** (layar diam/live, tidak berubah sampai pengawas selesai mencatat manual, keluar lewat tombol restart yang sama, BUKAN otomatis seperti jalur berhasil). Bedanya cuma tujuan keluar: `Error` kembali ke `SiklusPercobaan` (perlu diulang), `GagalKirim` langsung ke akhir sesi (data sudah valid, cuma belum ter-upload).
 
-### 6.2 Lapisan dalam (satu siklus percobaan): SIAP -> GENGGAM -> HITUNG -> RESPON
+### 6.2 Lapisan dalam (satu siklus percobaan): SIAP -> GENGGAM -> HITUNG
 
 **[SIAP]**
 - Menunggu interrupt tombol (bukan polling `digitalRead()`), agar tetap non-blocking (Sub-CPMK 3). Debounce **software** - abaikan re-trigger < ~50ms sejak interrupt terakhir (dicek di dalam ISR pakai `millis()`), teknik dari (W1) - dikonfirmasi juga di Modul Praktikum 1.
@@ -161,26 +164,34 @@ Selain siklus percobaan, istirahat, dan ringkasan, ada satu **interrupt transiti
 - Auto-tare, dijalankan tiap masuk state ini (termasuk setelah kembali dari Istirahat) - **keputusan desain kami sendiri** (bukan dari sumber eksternal manapun - tidak ada satupun dari 5 paper referensi yang membahas auto-tare per percobaan), diputuskan karena kami membandingkan 3 percobaan dalam satu sesi untuk dirata-ratakan, jadi konsistensi titik nol antar percobaan penting untuk validitas data. Dua langkah berurutan dalam state yang sama: (1) tampilkan `"Menyesuaikan nol..."` di LCD, jalankan fungsi tare; (2) begitu selesai (~1 detik, angka pasti menunggu pengujian fisik), ganti tampilan jadi `"Siap - tekan tombol"`. Tidak perlu animasi/state terpisah - durasi tare cukup singkat untuk cukup ditandai teks statis.
 - Tidak ada jalur ke ERROR dari state ini.
 
-**[GENGGAM]**
-- Loop baca ADC dari HX711, terapkan `calibration_factor`, tampilkan real-time ke LCD.
-- HX711 `get_units()` bersifat blocking (menunggu pin DOUT turun, ~100ms pada 10Hz) - **diterima apa adanya** untuk versi awal (bukan polling `is_ready()`), karena cuma satu instance singkat per iterasi dan sudah dibahas Modul Praktikum 2 soal kapan delay masih acceptable.
-- **Smoothing + deteksi plateau digabung jadi satu mekanisme** (circular buffer, W5+W6): simpan 5 pembacaan terakhir dalam buffer melingkar. Tiap pembacaan baru masuk, cek selisih (tertinggi - terendah) dalam buffer terhadap **threshold kestabilan** (nilai pasti menunggu hasil eksperimen - pegang load cell diam, ukur noise alami dari serial monitor; threshold harus di atas noise alami itu). Kalau belum stabil (gaya masih naik menuju puncak), buffer terus bergeser - LCD tetap menampilkan pembacaan real-time dari buffer (sudah halus, tidak goyang) tapi belum ada nilai final. Begitu buffer terdeteksi stabil (gaya sudah plateau), rata-rata buffer itu jadi `ref` (nilai puncak final) - **sekaligus** jadi sinyal untuk exit trigger (lihat bawah). Konsep "tunggu sampai plateau" ini sejalan dengan instruksi protokol asli Box 1 (V1): *"squeeze... until I say stop (when the needle stops rising)"* - deteksi berhentinya kenaikan, bukan cuma durasi tetap semata.
-- Exit trigger: tahan minimum 3 detik (V1), **DAN** salah satu dari: buffer terdeteksi stabil (plateau - exit lebih awal), atau durasi maksimum 5 detik tercapai (batas aman kalau plateau tidak pernah terdeteksi - **keputusan tim kami sendiri** sebagai pengaman, tidak eksplisit di protokol Vaishya). Tidak ada kondisi "gaya turun ke ambang" terpisah - sudah tercakup dalam mekanisme buffer di atas (dicek juga ke R2 & G2: tidak ada satupun implementasi referensi yang pakai threshold gaya untuk deteksi akhir).
-- Refresh rate LCD: dipisah dari sample rate sensor via timer terpisah (`millis()`), supaya sensor tetap dibaca secepat mungkin tapi LCD tidak diupdate berlebihan. Metodologi penentuan angka: eksperimen langsung (modifikasi Walking Light Challenge 1 tanpa tombol, coba beberapa nilai delay 50-500ms, rasakan mana yang terasa "mengalir mulus" vs "patah-patah") + tambahan ~20ms buffer untuk kompensasi waktu kirim I2C ke LCD (**estimasi teknis kami sendiri**, berdasar kecepatan standar I2C 100kHz - bukan dari sumber eksternal manapun). **Angka final masih menunggu hasil eksperimen** - bukan besaran teoretis, jadi tetap terbuka sampai diuji dengan hardware sungguhan.
-- Transisi keluar: ke HITUNG (normal). Kondisi gagal (HX711 tidak `is_ready()` dalam batas waktu tertentu / nilai ADC mendekati saturasi 24-bit) tidak lagi jadi transisi eksplisit dari state ini - ditangani interrupt transition dari batas kotak SiklusPercobaan (lihat §6.1). **Angka batas waktu dan ambang saturasi juga masih menunggu pengujian dengan load cell 180kg sungguhan.**
+**[GENGGAM]** - dua fase di dalam satu state, LED menyala menembus keduanya tanpa putus.
+
+*Fase 1 - Menunggu mulai:* begitu masuk dari SIAP, timer 3-5 detik **belum jalan**. LED menyala (lihat rasional LED di bawah), LCD menampilkan `"Menunggu genggaman"`. Sistem cuma menunggu fluktuasi gaya pertama melewati **threshold onset** (nilai pasti menunggu eksperimen - sama metodologi dengan threshold kestabilan: ukur noise alami load cell diam, threshold di atas itu).
+
+*Fase 2 - Menghitung:* begitu threshold onset terlampaui, timer 3-5 detik mulai, LCD ganti jadi `"Tahan selama 3-5 detik"` (teks beda dari Fase 1 - lebih informatif daripada instruksi statis yang sama di kedua fase). Baca ADC dari HX711, terapkan `calibration_factor`. HX711 `get_units()` bersifat blocking (~100ms pada 10Hz) - **diterima apa adanya**, sudah dibahas Modul Praktikum 2 soal kapan delay masih acceptable. **Smoothing + deteksi plateau** (circular buffer, W5+W6): simpan 5 pembacaan terakhir dalam buffer melingkar, bandingkan selisih (tertinggi-terendah) terhadap threshold kestabilan. Konsep "tunggu sampai plateau" sejalan dengan protokol Box 1 (V1): *"squeeze... until I say stop (when the needle stops rising)"*.
+
+**Threshold onset dan threshold "dilepas terlalu awal" adalah nilai yang SAMA, dicek dua arah** - naik melewati threshold saat Fase 1 = mulai (masuk Fase 2); turun kembali di bawah threshold itu **sebelum 3 detik** = dilepas terlalu awal. Ini simplifikasi sengaja - cuma butuh satu eksperimen kalibrasi, bukan dua threshold terpisah.
+
+**Tiga jalur keluar dari GENGGAM:**
+1. **Dilepas sebelum 3 detik** → masuk `Error` (pola Error Handling Library, W2 - sama seperti kegagalan HX711/ADC saturasi yang sudah ada). Percobaan TIDAK dihitung sebagai salah satu dari 3. Ini kondisi baru yang ditambahkan ke daftar pemicu interrupt transition `Error` di §6.1.
+2. **Plateau tercapai, durasi ≥3 detik** → HITUNG (jalur normal, sudah ada sejak awal).
+3. **Durasi mencapai 5 detik tanpa plateau** → sistem otomatis berhenti menerima gaya, langsung ke HITUNG memakai nilai buffer terbaik yang ada saat itu (bukan dibatalkan) - **Opsi A**, dikonfirmasi eksplisit.
+
+Tidak ada kondisi "gaya turun ke ambang" generik lagi seperti draf sangat awal - sudah digantikan mekanisme onset/plateau/5-detik di atas (dicek juga ke R2 & G2: tidak ada satupun referensi yang pakai threshold gaya untuk deteksi akhir - tapi onset/early-release ini beda kategori, lihat penjelasan di percakapan).
+
+Refresh rate LCD tetap dipisah dari sample rate sensor via timer terpisah (`millis()`). Metodologi penentuan angka: eksperimen langsung (Walking Light Challenge 1 tanpa tombol, coba delay 50-500ms) + ~20ms buffer kompensasi I2C (**estimasi teknis kami sendiri**). **Angka final masih menunggu hasil eksperimen.**
+
+**Rasional LED (keputusan kami sendiri, bukan sitasi eksternal):** LED menyala sepanjang GENGGAM (kedua fase) sampai keluar (ke HITUNG atau ERROR). Alasannya murni aksesibilitas - refresh LCD **sengaja dilambatkan** (150ms+ hasil eksperimen di atas) supaya mata manusia bisa mengikuti angka yang berubah, tapi ini berarti pengguna belum tentu bisa "keep up" secara visual dengan LCD saat itu juga. LED jadi sinyal biner sederhana ("sedang aktif direkam") yang jauh lebih mudah diikuti mata dibanding membaca angka fluktuatif - pelengkap LCD, bukan pengganti.
 
 **[HITUNG]**
-- One-shot (bukan loop), dieksekusi sekali begitu GENGGAM selesai (`ref` sudah jadi hasil rata-rata buffer yang stabil, bukan pembacaan mentah tunggal). Validasi rentang nilai `ref` terhadap kapasitas load cell 180kg (misal reject kalau `ref` > 100kg atau `ref` < 0) - **angka 100kg diturunkan dari data Gotthelf (G1)** (individu terkuat di rentang usia populasi target tercatat ~78kgf; 100kg dipilih sebagai batas dengan margin aman di atas itu tapi jauh di bawah kapasitas sensor 180kg), **angka ambang pasti tetap menunggu pengujian fisik**. Simpan ke posisi percobaan ke-1/2/3.
-- Sengaja TIDAK menghitung relative HGS (V3) di sini - tetap dipindah ke analisis data pasca-pengukuran sesuai keputusan skop di Bagian 5.
-- Smoothing sudah selesai di GENGGAM (lihat atas) - alasan utamanya **bukan** soal larangan "tidak boleh lihat nilai mentah" di Bagian 7 (itu bicara soal kalibrasi kg, bukan smoothing), tapi murni kualitas pengalaman: tampilan real-time yang stabil terasa lebih meyakinkan dilihat pengguna dibanding angka kg yang sudah terkalibrasi tapi masih goyang karena noise.
-- Nilai float mentah (sebelum dibulatkan untuk tampilan LCD) tetap disimpan di memori, supaya presisi tidak hilang untuk analisis akurasi nanti (M5, lihat §6.4).
-- Transisi keluar: ke RESPON (lolos validasi). Nilai di luar rentang fisik yang masuk akal ditangani interrupt transition dari batas kotak SiklusPercobaan (lihat §6.1), bukan transisi eksplisit dari state ini.
+- One-shot (bukan loop), dieksekusi sekali begitu GENGGAM selesai jalur normal (`ref` = rata-rata buffer stabil, atau nilai buffer terbaik kalau exit via batas 5 detik). Validasi rentang nilai `ref` terhadap kapasitas load cell 180kg (reject kalau `ref` > 100kg atau `ref` < 0) - **angka 100kg dari data Gotthelf (G1)**, angka ambang pasti menunggu pengujian fisik. Simpan ke posisi percobaan ke-1/2/3.
+- **Tampilkan hasil dengan konteks dalam-sesi** ("Percobaan 2 dari 3 - 27.1 kg") - fungsi ini pindah ke sini setelah state RESPON dihapus (LED sudah selesai tugasnya di GENGGAM, tidak perlu state terpisah lagi cuma untuk menampilkan angka). Perbandingan lintas sesi BUKAN di sini - itu di RINGKASAN.
+- Sengaja TIDAK menghitung relative HGS (V3) di sini - dipindah ke analisis data pasca-pengukuran (Bagian 5).
+- Smoothing sudah selesai di GENGGAM - alasannya murni kualitas pengalaman (tampilan real-time stabil), bukan soal larangan nilai mentah di Bagian 7 (itu soal kalibrasi kg, beda topik).
+- Nilai float mentah tetap disimpan di memori sebelum dibulatkan untuk LCD, supaya presisi tidak hilang untuk analisis akurasi nanti (M5).
+- Transisi keluar (bercabang langsung ke lapisan luar, tidak ada state RESPON lagi): percobaan < 3 → ISTIRAHAT; percobaan = 3 → RINGKASAN. Nilai di luar rentang fisik masuk akal → interrupt transition ke ERROR dari batas SiklusPercobaan (§6.1).
 
-**[RESPON]**
-- Nyalakan LED (Sub-CPMK 5) + tampilkan hasil dengan konteks dalam-sesi ("Percobaan 2 dari 3 - 27.1 kg"). Perbandingan lintas sesi BUKAN di sini - itu terjadi di RINGKASAN (lapisan luar). **Buzzer sengaja dilepas dari scope - ini keputusan tim kami sendiri** (bukan dari paper/buku manapun), dengan alasan: alat riset kecil-kecilan yang diawasi langsung tidak butuh sinyal audio berlebihan seperti alat komersial, dan bobot penilaian proyek ini lebih besar di firmware daripada aksesoris hardware (lihat Bagian 5).
-- Tidak butuh timer terpisah: LED cukup **diikat ke masuk/keluar state** - menyala begitu masuk RESPON, mati otomatis begitu pindah ke ISTIRAHAT/RINGKASAN. Ini jauh lebih sederhana dari rencana awal (yang mengasumsikan ada durasi bunyi buzzer yang perlu dikelola non-blocking) - keputusan melepas buzzer menghilangkan seluruh kebutuhan pengaturan timing sinyal di state ini.
-- Tidak ada jalur ERROR dari state ini (nilai sudah tervalidasi di HITUNG).
-- Transisi keluar (bercabang ke lapisan luar): percobaan < 3 -> ISTIRAHAT; percobaan = 3 -> RINGKASAN.
+**Buzzer dan state RESPON terpisah sudah dihapus dari scope** - LED cukup, diikat ke durasi GENGGAM (bukan momen "selesai" terpisah). Ini keputusan tim kami sendiri (Bagian 5) - alat riset kecil-kecilan yang diawasi langsung tidak butuh sinyal audio berlebihan, dan bobot penilaian lebih besar di firmware daripada aksesoris hardware.
 
 ### 6.2b Diagram Mermaid (gabungan lapisan luar & dalam)
 
@@ -191,12 +202,11 @@ stateDiagram-v2
     state SiklusPercobaan {
         [*] --> Siap
         Siap --> Genggam: tombol mulai ditekan
-        Genggam --> Hitung: buffer stabil (plateau) / durasi 5 detik tercapai
-        Hitung --> Respon: nilai dalam rentang valid
-        Respon --> [*]
+        Genggam --> Hitung: plateau tercapai (min 3 detik) / durasi 5 detik tercapai
+        Hitung --> [*]
     }
 
-    SiklusPercobaan --> Error: interrupt - kondisi error terdeteksi (dicek tiap iterasi)
+    SiklusPercobaan --> Error: interrupt - HX711 gagal / ADC saturasi / nilai di luar rentang / genggaman dilepas sebelum 3 detik
     Error --> SiklusPercobaan: tombol restart (dedicated, ditekan pengawas)
 
     SiklusPercobaan --> Istirahat: percobaan < 3
@@ -212,6 +222,21 @@ stateDiagram-v2
 
 *Render otomatis di GitHub. Untuk versi draw.io (proposal Word/PDF), gunakan shape UML State Machine dengan composite state untuk `SiklusPercobaan` dan guard condition `[percobaan < 3]` / `[percobaan = 3]` pada label transisi keluar.*
 
+### 6.2c Tabel state lengkap (referensi kerja - bukan versi ringkas proposal)
+
+*Ini versi paling lengkap untuk kerja internal kami, bukan tabel 3.5 proposal yang lebih ringkas. Kolom "Status" menandai mana yang closed vs masih open item.*
+
+| State | Yang terjadi (entry + loop) | Variabel kunci | Kondisi keluar → tujuan | Mekanisme waktu | Sitasi/basis | Status |
+|---|---|---|---|---|---|---|
+| SIAP | Entry: LCD "Menyesuaikan nol...", jalankan `tare()`. Setelah ~1s, LCD → "Siap - tekan tombol". Tunggu interrupt tombol. | `volatile bool tombolDitekan`; timestamp debounce di ISR | Tombol ditekan (lolos debounce ~50ms) → GENGGAM | Interrupt-driven, non-blocking. Durasi tare ~1s - metode blocking/non-blocking tare sendiri belum ditentukan | W1, RU1, RU2 | Sebagian besar closed; metode eksekusi tare masih open |
+| GENGGAM - Fase 1 | Entry: LED on, LCD "Menunggu genggaman". Polling ADC, bandingkan ke `thresholdOnset`. | `thresholdOnset` (TBD) | Force > `thresholdOnset` → lanjut Fase 2 (internal, state sama) | Non-blocking, belum ada timer aktif | Keputusan kami sendiri | Angka threshold masih open |
+| GENGGAM - Fase 2 | Mulai timer, LCD ganti "Tahan selama 3-5 detik". Baca HX711, isi circular buffer 5 sampel, cek stabilitas, update LCD tiap refresh interval. | `buffer[5]`, `thresholdStabilitas` (TBD), `startTime`, `elapsed` | (a) elapsed<3000ms & force<thresholdOnset → ERROR. (b) elapsed≥3000ms & buffer stabil → HITUNG (ref=rata2 buffer). (c) elapsed≥5000ms → HITUNG paksa (Opsi A) | Campuran: loop non-blocking; `get_units()` blocking ~100ms/baca | V1, W5+W6, R2+G2 | thresholdStabilitas dan refresh rate LCD masih pending eksperimen |
+| HITUNG | Validasi `ref` (0<ref≤100kg). Simpan ke slot percobaan ke-n. Tampilkan hasil dalam-sesi ("Percobaan n dari 3"). **Terjadi tiap percobaan (1,2,3)** - sempat hilang dari storyboard awal, dipastikan tetap ada. | `ref` (float presisi penuh), `percobaanKe` | ref valid + percobaanKe<3 → ISTIRAHAT. ref valid + percobaanKe=3 → RINGKASAN. ref invalid → ERROR | Non-blocking, one-shot | G1, M5, V3 | Angka ambang pasti (selain placeholder 100kg) masih pending fisik |
+| ISTIRAHAT | (1) LCD "Lepaskan genggaman" - tunggu force turun di bawah `thresholdOnset` (reuse simetris). (2) LCD "Istirahat 60 detik", mulai timer. | `startTime`, reuse `thresholdOnset` | Sub-langkah 1 selesai → sub-langkah 2. elapsed≥60000ms → SIAP (counter percobaan TIDAK direset) | Non-blocking (threshold check) lalu timer non-blocking | V1 | Closed |
+| RINGKASAN | **Satu kali saja, setelah percobaan ke-3** (bukan tiap percobaan). Hitung rata-rata 3 percobaan, ambil riwayat sesi lalu (sumber belum ditentukan), kirim ke cloud. | `rataRata`, `riwayatSesiLalu` | Kirim berhasil → countdown "Selesai" 3 detik (refresh 100ms) → **otomatis** SIAP sesi baru, TANPA CSV/tombol restart. Kirim gagal → tulis CSV (pesan "Dituliskan ke CSV", murni kenyamanan psikologis pengguna) → GAGALKIRIM (tunggu restart manual) | Kirim: BELUM DITENTUKAN (blocking/async). Countdown sukses: timer 100ms | V2 | Mekanisme kirim (blocking/async) dan sumber riwayat masih open; sisanya closed |
+| ERROR | Tampilkan jenis error (4 kondisi: HX711 timeout, ADC saturasi, nilai di luar rentang, dilepas <3 detik) + ADC mentah live. Tunggu tombol restart. | `jenisError`, waktu masuk (T+mm:ss) | Tombol restart → SIAP (counter percobaan TIDAK berubah) | Interrupt masuk (4 sumber), non-blocking menunggu restart | W2 | Closed secara pola; sengaja tanpa counter otomatis |
+| GAGALKIRIM | Tampilkan data gagal kirim, live/tahan. Pola sama ERROR (reuse modul). | `dataGagalKirim` | Tombol restart → selesai (langsung akhir sesi, beda dari ERROR) | Sama seperti ERROR | W2 | Closed secara pola; bergantung RINGKASAN yang masih open |
+
 ### 6.3 Diagram blok komponen (pin-out belum lengkap - lihat Bagian 9)
 `Load cell -> HX711 (amplifier + 24-bit ADC) -> ESP32 -> {LCD, LED, WiFi/cloud}`
 
@@ -222,7 +247,7 @@ stateDiagram-v2
 - Formalisasi hierarki dua lapisan (§6, §6.1): **M1**
 - Justifikasi platform ESP32 (Bagian 8): **M2**
 - Pipeline sensor/ADC (GENGGAM): **M3**
-- Aktuator/PWM (dasar teori, meski buzzer akhirnya dilepas - RESPON): **M4**
+- Aktuator/PWM (dasar teori, meski buzzer akhirnya dilepas - LED di GENGGAM): **M4**
 - Metodologi validasi akurasi (Bagian 9): **M5**
 - Metodologi daftar risiko (Bagian 9): **M6**
 - Debounce tombol (SIAP): **W1**
@@ -249,7 +274,8 @@ stateDiagram-v2
 - Mengambil alat: cukup kecil digenggam satu tangan, layar/lampu menunjukkan alat siap
 - Memulai: satu tombol, konfirmasi jelas ("Squeeze now")
 - Saat meremas: umpan balik visual real-time (angka naik / bar terisi)
-- Selesai: sinyal jelas (**LED + visual**, lihat Bagian 6.2 RESPON - buzzer/getar sudah dilepas dari scope), hasil ditampilkan dengan konteks ("lebih kuat dari sesi lalu"), bukan angka mentah tanpa makna
+- Saat meremas: LED menyala (aid visual - LCD sengaja lambat direfresh supaya mata bisa mengikuti, LED beri sinyal biner yang lebih gampang diikuti, lihat Bagian 6.2 GENGGAM) + instruksi "TAHAN SELAMA 3-5 DETIK" di LCD
+- Selesai: LED mati, hasil ditampilkan dengan konteks di HITUNG ("Percobaan 2 dari 3 - 27.1 kg"), bukan angka mentah tanpa makna. Buzzer/getar sudah dilepas dari scope sejak awal
 - Antar sesi: alat/dashboard mengingat riwayat, menunjukkan tren - ini adalah **inti nilai alat**, bukan fitur tambahan (argumen utama Vaishya (V2): nilai klinis HGS datang dari pengukuran serial, bukan sekali baca - lihat Bagian 5 Fitur #5)
 - Yang harus dihindari: pengguna tidak boleh melihat angka mentah belum terkalibrasi (dikecualikan untuk pengawas di state Error/GagalKirim - lihat Bagian 6.1); kegagalan pembacaan tidak boleh senyap (rubrik BRP "ketahanan uji adversarial" - lihat Bagian 6.1)
 
