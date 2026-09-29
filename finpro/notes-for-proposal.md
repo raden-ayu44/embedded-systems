@@ -3,7 +3,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 
 ---
 
-# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v19)
+# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v21)
 **Final Project - Embedded Systems Course**
 
 > Dokumen ini BUKAN proposal. Ini adalah wadah (vessel) yang menyimpan semua informasi, rujukan, dan keputusan yang sudah diambil sejauh ini, agar penyusunan proposal G1 nanti tinggal menyusun ulang isi dokumen ini ke dalam format yang diminta.
@@ -149,9 +149,12 @@ Ada satu **interrupt transition** yang berlaku untuk seluruh isi kotak `SiklusPe
 ```
 
 - **Catatan scoping storyboard LCD**: storyboard visual yang sudah dibuat itu representatif untuk **jalur sukses saja**. Tampilan layar `Error`/`GagalKirim` yang sebenarnya belum digambar final - itu baru bisa ditentukan konkret setelah modul Error Handling Library (W2) benar-benar dikoding, bukan didesain visual duluan sebelum implementasinya ada.
-- **Error**: state "tahan" (hold) sungguhan - alat berhenti total, menampilkan jenis error dan pembacaan ADC mentah **secara live** supaya pengawas bisa memeriksa fisik alat. Layar tidak berubah sampai pengawas menekan tombol setelah selesai mencatat manual - pola **"Error Handling Library"** (W2), dipakai lagi di `GagalKirim`. Percobaan yang error TIDAK dihitung sebagai salah satu dari 3. Audiens: pengawas (TA/tim riset), bukan partisipan - larangan "tidak boleh lihat angka mentah" di Bagian 7 sengaja dikecualikan di sini. Dicatat **manual** ke logbook (jenis error + `T+mm:ss`) - **keputusan sadar TIDAK ada counter otomatis**. **Kondisi pemicu (hanya kegagalan sensor/hardware, BUKAN human error - lihat pembagian filosofi di §6.2):** HX711 gagal `is_ready()`, ADC mendekati saturasi, nilai `ref` di luar rentang fisik masuk akal (terdeteksi di titik masuk RESPON+ISTIRAHAT, lihat §6.2).
-- **Satu tombol fisik untuk semua fungsi** (mulai, next, restart) - keputusan direvisi dari draf lama yang sempat pakai 2 tombol terpisah. Alasan: di v5 (Bagian 4), yang menggenggam alat cuma anggota tim sendiri - orang yang sama yang paham firmware-nya, jadi pembedaan "partisipan awam vs pengawas" yang jadi alasan 2-tombol dulu sudah tidak relevan. **Akses keluar dari `Error` khusus butuh tekan-tahan ~1-2 detik** (bukan tekan sekejap seperti pemakaian normal di state lain) - mencegah tekanan reflek/tidak sengaja langsung mengembalikan alat ke siklus sebelum pengawas benar-benar selesai memeriksa fisik. **Teknik implementasi**: perpanjangan dari mekanisme debounce yang sudah ada (W1) - sampling berkala + counter, cuma ambang counter/durasinya diperpanjang dari orde puluhan-ratusan ms (filter noise listrik) ke 1-2 detik (konfirmasi kesengajaan pengguna); bukan mekanisme kode baru, sekadar parameter beda dari kode yang sama. Tidak ada sitasi buku spesifik untuk pola "tekan-tahan" ini - sudah dicek ke Marwedel dan White, tidak ada bagian yang membahasnya eksplisit. **Angka 1-2 detik ini masih tentatif (subject to change)** - perlu diuji fisik hardware dulu sebelum difinalkan ke kode, sama seperti threshold onset/stabilitas lainnya.
-- **Disiplin reset flag**: `tombolDitekan` (dan variabel durasi tekan terkait) wajib di-reset tiap masuk state yang akan menunggu tombol (`Siap`, `Error`, sub-fase 3 `Respon+Istirahat`) - supaya tekanan "nyasar" dari state lain (misal iseng menekan saat masih di `Genggam`, yang tidak pernah mengecek tombol) tidak tersimpan diam-diam lalu tiba-tiba terkonsumsi di state lain yang sedang menunggu. Ini generalisasi dari RU1 (`volatile`), bukan mekanisme terpisah.
+- **Error**: state "tahan" (hold) sungguhan - alat berhenti total, menampilkan jenis error dan pembacaan ADC mentah **secara live** supaya pengawas bisa memeriksa fisik alat. Layar tidak berubah sampai pengawas menekan tombol RESTART (tekan-tahan, lihat bawah) - pola **"Error Handling Library"** (W2), dipakai lagi di `GagalKirim`. Percobaan yang error TIDAK dihitung sebagai salah satu dari 3. Audiens: pengawas (TA/tim riset), bukan partisipan - larangan "tidak boleh lihat angka mentah" di Bagian 7 sengaja dikecualikan di sini. **Dicatat OTOMATIS ke CSV** (jenis error + `T+mm:ss`) - **keputusan direvisi** dari rencana logbook manual sebelumnya, berdasarkan pengalaman lab langsung: logbook manual di tengah kesibukan sesi pengukuran ternyata kurang efektif/sering terlewat dalam praktik, jadi dipindah ke mekanisme otomatis. Reuse infrastruktur CSV yang sama dengan Fitur #5 (logging data pengukuran) - cuma jenis barisnya beda (baris event error, bukan baris hasil pengukuran). **Kondisi pemicu (hanya kegagalan sensor/hardware, BUKAN human error - lihat pembagian filosofi di §6.2):** HX711 gagal `is_ready()`, ADC mendekati saturasi, nilai `ref` di luar rentang fisik masuk akal (terdeteksi di titik masuk RESPON+ISTIRAHAT, lihat §6.2).
+- **Satu tombol fisik untuk semua fungsi** (START, NEXT, RESTART - label beda secara fungsional/dokumentasi, tombol fisik sama) - keputusan direvisi dari draf lama yang sempat pakai 2 tombol terpisah. Alasan: di v5 (Bagian 4), yang menggenggam alat cuma anggota tim sendiri, jadi pembedaan "partisipan awam vs pengawas" yang jadi alasan 2-tombol dulu sudah tidak relevan. **`GagalKirim` dan `Error` sama-sama dilabeli "RESTART" (fungsionalitas sama - mulai sesi/siklus baru), tapi mekanisme tekan beda:**
+  - `GagalKirim` → tap biasa (data sudah aman tersimpan sebelum titik ini, risiko rendah).
+  - `Error` → tekan-tahan ~1-2 detik, **khusus dan sengaja tidak didokumentasikan di tampilan LCD** - ini pengetahuan pengawas (dari training/dokumentasi tim), bukan instruksi yang ditampilkan ke layar. Mekanisme ini cuma "ada" secara fungsional kalau sistem memang sedang di `Error` (dipicu salah satu dari 3 kondisi sensor di atas) - di luar konteks itu, tekan-tahan tidak berarti apa-apa karena tidak ada state yang mengeceknya.
+  - **Teknik implementasi tekan-tahan**: perpanjangan dari mekanisme debounce (W1) - sampling berkala + counter, ambang durasinya diperpanjang dari orde puluhan-ratusan ms (filter noise listrik) ke 1-2 detik (konfirmasi kesengajaan). Tidak ada sitasi buku spesifik untuk pola ini - sudah dicek ke Marwedel dan White, tidak dibahas eksplisit di keduanya. **Angka 1-2 detik masih tentatif (subject to change)** - perlu diuji fisik dulu.
+- **Disiplin reset flag**: `tombolDitekan` (dan variabel durasi tekan terkait) wajib di-reset tiap masuk state yang akan menunggu tombol (`Siap`, `Error`, sub-fase 3 `Respon+Istirahat`) - supaya tekanan "nyasar" dari state lain tidak tersimpan diam-diam lalu tiba-tiba terkonsumsi di state lain yang sedang menunggu. Generalisasi dari RU1 (`volatile`).
 - **Ringkasan**: terjadi **SATU KALI SAJA**, setelah percobaan ke-3. Hitung rata-rata 3 percobaan, ambil riwayat sesi lalu, kirim ke cloud.
   - **Kirim berhasil**: tidak ada pesan CSV. Tampilkan "Peak HGS"/"Avg HGS", tunggu **tombol RESTART ditekan** pengawas/user untuk mulai sesi baru (bukan otomatis - koreksi dari draf sebelumnya yang sempat berasumsi ada countdown auto-return).
   - **Kirim gagal** (WiFi terputus): tulis CSV lokal, tampilkan `"Dituliskan ke CSV"` - **murni kenyamanan psikologis pengguna**, bukan requirement teknis. Masuk `GagalKirim` - pola identik `Error` (tahan, live, restart pengawas). Beda tujuan keluar: `Error` kembali ke `SiklusPercobaan`, `GagalKirim` langsung ke akhir sesi.
@@ -173,7 +176,7 @@ Ada satu **interrupt transition** yang berlaku untuk seluruh isi kotak `SiklusPe
 
 **Threshold onset dan threshold "dilepas terlalu awal" adalah nilai yang SAMA, dicek dua arah** - naik melewati threshold saat Fase 1 = mulai (masuk Fase 2); turun kembali di bawah threshold itu **sebelum 3 detik** = dilepas terlalu awal. Ini simplifikasi sengaja - cuma butuh satu eksperimen kalibrasi, bukan dua threshold terpisah.
 
-**Filosofi pembagian error - disepakati eksplisit:** error yang didokumentasikan (logbook manual, pola `Error` penuh) itu **cuma untuk kegagalan sensor/hardware murni** (HX711, ADC saturasi, nilai di luar rentang fisik). **Human error murni** (user tidak mengikuti instruksi, misal dilepas sebelum 3 detik) **TIDAK didokumentasikan** - dianggap kejadian ringan/wajar, bukan kegagalan alat.
+**Filosofi pembagian error - disepakati eksplisit:** error yang didokumentasikan (dicatat otomatis ke CSV, pola `Error` penuh) itu **cuma untuk kegagalan sensor/hardware murni** (HX711, ADC saturasi, nilai di luar rentang fisik). **Human error murni** (user tidak mengikuti instruksi, misal dilepas sebelum 3 detik) **TIDAK didokumentasikan** - dianggap kejadian ringan/wajar, bukan kegagalan alat.
 
 **Tiga jalur keluar dari GENGGAM:**
 1. **Dilepas sebelum 3 detik** → **auto-reset ringan, TIDAK masuk `Error`**: tampilkan pesan singkat, sistem otomatis kembali ke Fase 1 ("Menunggu genggaman...") - bukan pindah state, bukan hold, tidak dicatat logbook, tidak butuh pengawas. Percobaan ini otomatis diulang tanpa intervensi manual.
@@ -210,26 +213,26 @@ Transisi keluar (ke lapisan luar): percobaan < 3 → kembali ke SIAP (siklus bar
 
 ```mermaid
 stateDiagram-v2
-    [*] --> SiklusPercobaan
+    [*] --> SiklusPengukuran
 
-    state SiklusPercobaan {
-        [*] --> Siap
-        Siap --> Genggam: tombol mulai ditekan
-        Genggam --> Genggam: dilepas sebelum 3 detik (auto-reset ringan, tidak didokumentasikan)
-        Genggam --> Hitung: plateau tercapai (min 3 detik) / durasi 5 detik tercapai
-        Hitung --> RESPON_ISTIRAHAT: nilai valid
-        RESPON_ISTIRAHAT --> [*]: tombol NEXT ditekan
+    state SiklusPengukuran {
+        [*] --> SIAP
+        SIAP --> GENGGAM: tombol ditekan (START)
+        GENGGAM --> GENGGAM: dilepas sebelum 3 detik (auto-reset ringan, tidak untuk didokumentasikan)
+        GENGGAM --> HITUNG: plateau tercapai (min 3 detik) / durasi 5 detik tercapai
+        HITUNG --> RESPON_ISTIRAHAT: nilai valid
+        RESPON_ISTIRAHAT --> [*]: tombol ditekan (NEXT)
     }
 
-    SiklusPercobaan --> Error: interrupt - HX711 gagal / ADC saturasi / nilai di luar rentang (kegagalan sensor SAJA)
-    Error --> SiklusPercobaan: tombol ditekan-tahan 1-2 detik (pengawas)
+    SiklusPengukuran --> Error: interrupt - HX711 gagal / ADC saturasi / nilai di luar rentang (kegagalan sensor, untuk didokumentasikan di CSV error log)
+    Error --> SiklusPengukuran: tombol ditekan & tahan 1-2 detik (RESTART)
 
-    SiklusPercobaan --> SiklusPercobaan: percobaan < 3 (siklus baru dari SIAP)
-    SiklusPercobaan --> Ringkasan: percobaan = 3
+    SiklusPengukuran --> SiklusPengukuran: percobaan < 3 (siklus baru dimulai dari SIAP)
+    SiklusPengukuran --> RINGKASAN: percobaan = 3
 
-    Ringkasan --> [*]: kirim berhasil, tombol ditekan - sesi baru dimulai
-    Ringkasan --> GagalKirim: kirim gagal - WiFi terputus
-    GagalKirim --> [*]: tombol ditekan (tap biasa) - sesi baru dimulai
+    RINGKASAN --> [*]: kirim berhasil, tombol ditekan (RESTART) - sesi baru dimulai
+    RINGKASAN --> GagalKirim: kirim gagal - WiFi terputus
+    GagalKirim --> [*]: tombol ditekan (RESTART) - sesi baru dimulai
 ```
 
 *`Error` dan `GagalKirim` memakai pola yang sama (tahan layar, live/tidak berubah sampai pengawas selesai mencatat manual) - cukup diimplementasikan sebagai satu fungsi/modul kode yang dipanggil dari dua titik berbeda di firmware, meski keduanya tetap dua state FSM terpisah karena tujuan keluarnya berbeda.*
@@ -250,7 +253,7 @@ stateDiagram-v2
 | HITUNG | Simpan `ref` ke slot percobaan ke-n. **Tidak ada tampilan LCD.** Validasi rentang (0<ref≤100kg) terjadi di TITIK MASUK RESPON+ISTIRAHAT, bukan di sini. | `ref` (float presisi penuh), `percobaanKe` | → RESPON+ISTIRAHAT (kalau valid). Invalid → ERROR (kategori kegagalan sensor, didokumentasikan) | Non-blocking, one-shot | G1, M5, V3 | Angka ambang pasti (selain placeholder 100kg) masih pending fisik |
 | RESPON+ISTIRAHAT | Satu state, 3 sub-fase: (1) tampilkan hasil + "lepaskan genggaman" (exit: force<thresholdOnset, reuse simetris). (2) countdown 60 detik (refresh 100ms). (3) tampilkan hasil lagi + "tekan NEXT" (tunggu tombol). | `startTime`, reuse `thresholdOnset`, hasil percobaan | Sub-fase 1→2→3 berurutan. Tombol NEXT di sub-fase 3 → percobaan<3: SIAP (siklus baru); percobaan=3: RINGKASAN | Non-blocking sepanjang (threshold check, timer, tombol) | V1 | Closed - menggabungkan fungsi ISTIRAHAT lama + tampilan hasil |
 | RINGKASAN | **Satu kali saja, setelah percobaan ke-3.** Hitung rata-rata 3 percobaan, ambil riwayat sesi lalu (sumber belum ditentukan), kirim ke cloud. | `rataRata`, `riwayatSesiLalu` | Kirim berhasil → tampilkan Peak/Avg, tunggu **tombol RESTART** (manual, bukan otomatis - koreksi dari draf sebelumnya) → sesi baru. Kirim gagal → tulis CSV (pesan "Dituliskan ke CSV", murni kenyamanan psikologis) → GAGALKIRIM (tunggu restart manual) | Kirim: BELUM DITENTUKAN (blocking/async) | V2 | Mekanisme kirim dan sumber riwayat masih open |
-| ERROR | Tampilkan jenis error (4 kondisi: HX711 timeout, ADC saturasi, nilai di luar rentang, dilepas <3 detik) + ADC mentah live. Tunggu tombol restart. | `jenisError`, waktu masuk (T+mm:ss) | Tombol restart → SIAP (counter percobaan TIDAK berubah) | Interrupt masuk (4 sumber), non-blocking menunggu restart | W2 | Closed secara pola; sengaja tanpa counter otomatis |
+| ERROR | Tampilkan jenis error (3 kondisi: HX711 timeout, ADC saturasi, nilai di luar rentang - kegagalan sensor SAJA, dilepas <3 detik BUKAN di sini lagi sejak v17) + ADC mentah live. Tunggu tombol RESTART (tekan-tahan 1-2 detik, khusus pengawas). Dicatat otomatis ke CSV. | `jenisError`, waktu masuk (T+mm:ss) | Tombol RESTART (hold) → SIAP (counter percobaan TIDAK berubah) | Interrupt masuk (3 sumber), non-blocking menunggu restart | W2 | Closed secara pola |
 | GAGALKIRIM | Tampilkan data gagal kirim, live/tahan. Pola sama ERROR (reuse modul). | `dataGagalKirim` | Tombol restart → selesai (langsung akhir sesi, beda dari ERROR) | Sama seperti ERROR | W2 | Closed secara pola; bergantung RINGKASAN yang masih open |
 
 ### 6.3 Diagram blok komponen (pin-out belum lengkap - lihat Bagian 9)
