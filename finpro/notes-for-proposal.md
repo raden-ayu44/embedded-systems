@@ -3,7 +3,7 @@ title: Catatan Riset & Perencanaan - Hand Grip Dynamometer
 
 ---
 
-# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v18)
+# Catatan Riset & Perencanaan - Hand Grip Dynamometer (v19)
 **Final Project - Embedded Systems Course**
 
 > Dokumen ini BUKAN proposal. Ini adalah wadah (vessel) yang menyimpan semua informasi, rujukan, dan keputusan yang sudah diambil sejauh ini, agar penyusunan proposal G1 nanti tinggal menyusun ulang isi dokumen ini ke dalam format yang diminta.
@@ -222,17 +222,19 @@ stateDiagram-v2
     }
 
     SiklusPercobaan --> Error: interrupt - HX711 gagal / ADC saturasi / nilai di luar rentang (kegagalan sensor SAJA)
-    Error --> SiklusPercobaan: tombol restart (dedicated, ditekan pengawas)
+    Error --> SiklusPercobaan: tombol ditekan-tahan 1-2 detik (pengawas)
 
     SiklusPercobaan --> SiklusPercobaan: percobaan < 3 (siklus baru dari SIAP)
     SiklusPercobaan --> Ringkasan: percobaan = 3
 
-    Ringkasan --> [*]: kirim berhasil - sesi baru dimulai
+    Ringkasan --> [*]: kirim berhasil, tombol ditekan - sesi baru dimulai
     Ringkasan --> GagalKirim: kirim gagal - WiFi terputus
-    GagalKirim --> [*]: tombol restart (dedicated) - sesi baru dimulai
+    GagalKirim --> [*]: tombol ditekan (tap biasa) - sesi baru dimulai
 ```
 
-*`Error` dan `GagalKirim` memakai pola yang sama (tahan layar, live/tidak berubah sampai pengawas selesai mencatat manual, keluar lewat tombol restart yang sama) - cukup diimplementasikan sebagai satu fungsi/modul kode yang dipanggil dari dua titik berbeda di firmware, meski keduanya tetap dua state FSM terpisah karena tujuan keluarnya berbeda.*
+*`Error` dan `GagalKirim` memakai pola yang sama (tahan layar, live/tidak berubah sampai pengawas selesai mencatat manual) - cukup diimplementasikan sebagai satu fungsi/modul kode yang dipanggil dari dua titik berbeda di firmware, meski keduanya tetap dua state FSM terpisah karena tujuan keluarnya berbeda.*
+
+*Satu tombol fisik untuk SEMUA transisi di diagram ini (mulai, next, restart) - lihat Bagian 6.1. Cara tekannya yang beda: tap biasa di semua tempat, KECUALI keluar dari `Error` yang butuh tekan-tahan 1-2 detik (tentatif, subject to change). Kalau ada label "tombol X ditekan" di panah manapun, itu selalu tombol fisik yang sama - bukan tombol terpisah per state.*
 
 *Render otomatis di GitHub. Untuk versi draw.io (proposal Word/PDF), gunakan shape UML State Machine dengan composite state untuk `SiklusPercobaan` dan guard condition `[percobaan < 3]` / `[percobaan = 3]` pada label transisi keluar.*
 
