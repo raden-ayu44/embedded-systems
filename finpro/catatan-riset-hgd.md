@@ -3,7 +3,7 @@ title: Catatan Proyek - Hand Grip Dynamometer
 
 ---
 
-# Catatan Proyek - Hand Grip Dynamometer (v26)
+# Catatan Proyek - Hand Grip Dynamometer (v29)
 **Final Project - Embedded Systems Course**
 
 > Catatan kerja proyek akhir mata kuliah embedded system (biomedik): keputusan desain beserta alasannya, rujukan, data ukur, dan hal yang masih terbuka. Ditulis supaya bisa dibaca sendiri (offline) tanpa konteks tambahan dari luar catatan ini. Proposal G1 sudah dikumpulkan; catatan ini sekarang dipakai untuk G2-G4, makalah akhir, dan demo. Bagian 13 merekam isi Bagian 2-3 proposal G1 sebagaimana dikumpulkan, Bagian 14 memuat desain housing, dan Bagian 15 memuat tabel pengukuran dengan jangka sorong.
@@ -337,9 +337,9 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 | Deteksi "data tidak tersimpan" (GAGALSIMPAN) | Terbuka | Protokol ACK dipilih (Bagian 6.1): modifikasi `logger.py`, nilai timeout ACK, uji baris hilang atau terpotong |
 | Sumber riwayat sesi sebelumnya | Terbuka | RINGKASAN dan proposal 3.5 menyebut perbandingan dengan sesi sebelumnya, tetapi CSV berada di laptop, bukan di ESP32. Pilihan: (a) ESP32 menyimpan ringkasan sesi terakhir di flash (NVS), (b) `logger.py` mengirim riwayat kembali, (c) perbandingan dilakukan di analisis pasca-pengukuran dan layar hanya menampilkan sesi berjalan. Perlu diputuskan, termasuk menyelaraskan teks 3.5 |
 | Angka yang menunggu uji fisik | Terbuka | `thresholdOnset`, `thresholdStabilitas`, refresh rate LCD (kisaran 50-500 ms), durasi tare (sekitar 1 s), timeout HX711, ambang saturasi ADC, durasi tekan-tahan (1-2 s), timeout ACK |
-| Desain housing grip | Terbuka | Layout dipilih (Bagian 14.4); dimensi menunggu pengukuran load cell (Bagian 15, C2-C5) |
+| Desain housing grip | Terbuka | Layout dipilih (Bagian 14.4). Pelat PLA 7 mm terbukti terlalu lentur; usulan kerja pelat aluminium 10 mm dengan celah minimal 2,5 mm (Bagian 14.9), belum diputuskan. Menunggu pengukuran load cell (Bagian 15, C2-C5), tinggi penutup strain gauge, dan prototipe kardus |
 | Jadwal | Ada di proposal (Bagian 5) | Terkait konflik tenggat gerber (Bagian 3.1) |
-| Risiko | Ada di proposal (Bagian 6) | Kandidat tambahan dari desain housing: kabel load cell tertarik terbaca sebagai gaya; dua bagian PLA bersentuhan (jalur gaya paralel); creep PLA saat tahan 3-5 detik; ketersediaan beban acuan 70 kg |
+| Risiko | Ada di proposal (Bagian 6) | Kandidat tambahan dari desain housing: batang melentur menyentuh load cell atau patah (Bagian 14.9); lubang baut mengurangi penampang pelat di pangkal; kabel load cell tertarik terbaca sebagai gaya; dua bagian bersentuhan (jalur gaya paralel); arah beban kalibrasi dan keamanan menumpuk 70 kg (Bagian 14.10); pelat logam butuh akses bengkel dan anggaran (Bagian 14.11); ketersediaan beban acuan 70 kg |
 | Consent partisipan | Tidak relevan | v5 hanya menguji anggota tim sendiri (Bagian 4) |
 | Link supplier | Terbuka | Ada di proposal (Shopee), belum disalin ke catatan |
 
@@ -477,7 +477,22 @@ Temuan pada proposal G1 yang dikumpulkan (untuk revisi setelah catatan TA):
 5. GAGALSIMPAN: teks 3.5 dan S4 menyebut "penulisan CSV gagal", sedangkan mitigasi di Bagian 6 proposal memakai ACK. Konsisten secara makna, tetapi detail ACK belum ada di 3.5.
 6. Perbandingan dengan "riwayat sesi sebelumnya" di RINGKASAN (3.5) belum punya sumber data (Bagian 9).
 
-Temuan pada catatan ini yang sudah diperbaiki di v26: harga load cell (Rp115.000 menjadi Rp193.375) dan total BOM; rumusan masalah yang masih berisi hipotesis lintas-jurusan (v3) diganti versi v5; media logging di Bagian 4 dan 9 yang masih menyebut cloud sebagai jalur utama; GagalSimpan yang masih bergantung pada "CSV gagal ditulis"; narasi UX yang menyebut dashboard dan "bar terisi" (tidak dirancang); label "Opsi A" dan frasa yang merujuk ke percakapan diganti penjelasan langsung.
+Temuan pada catatan ini yang sudah diperbaiki di v26: harga load cell (Rp115.000 menjadi Rp193.375) dan total BOM; rumusan masalah yang masih berisi hipotesis lintas-jurusan (v3) diganti versi v5; media logging di Bagian 4 dan 9 yang masih menyebut cloud sebagai jalur utama; GagalSimpan yang masih bergantung pada "CSV gagal ditulis"; narasi UX yang menyebut dashboard dan "bar terisi" (tidak dirancang); label dan frasa yang merujuk ke sumber di luar catatan diganti penjelasan langsung.
+
+### Audit v27: desain housing
+
+1. Layout awal Bagian 14 (v26) mengasumsikan batang kaku tanpa menghitung kekakuan. Pemeriksaan gambar skematik menunjukkan pelat PLA 7 mm melentur puluhan mm pada 70 kgf (Bagian 14.9). Diperbaiki di v27: status bahan, tebal total, dan klaim "celah = stop overload" di 14.4.
+2. Klaim bahwa titik gantung kalibrasi melewati jalur yang sama dengan remasan salah arah (Bagian 14.10); diganti bidang tumpu.
+3. Instruksi koreksi gambar sempat menyatakan penyebaran beban menurunkan tegangan di pangkal; salah (Bagian 14.9).
+4. Proposal G1 Bagian 6 (risiko enclosure) menyebut fallback "cetak ulang dengan PETG atau bracket logam". PETG tidak menyelesaikan kekakuan karena modulusnya sebanding dengan PLA; yang relevan adalah bracket atau pelat logam.
+5. Proposal 3.6 belum memuat housing grip terpisah (sudah tercatat di Audit v26).
+
+### Audit v28: hasil gambar v4
+
+1. Bagian 14.9 menulis baja 8 mm "lolos di atas kertas". Itu hanya benar untuk penampang utuh; dengan dua lubang Ø6,5 mm tegangannya sekitar 227 MPa, hampir sama dengan luluh baja lunak. Dikoreksi di v28.
+2. Gambar v4 memenuhi instruksi: aluminium 10 mm, celah 2,5 mm sebagai celah bebas-sentuh, tanpa eyelet, bidang tumpu kalibrasi, penanda ujung jauh sekitar 133 mm, dan penjumlahan tebal total.
+3. Tebal total 52 mm melebihi kisaran 40-48 mm di draf awal; kisaran itu bukan batas dari spesifikasi, tetapi kenyamanan genggam perlu dicek dengan prototipe kardus sebelum bahan diputuskan.
+4. Setup kalibrasi v4 punya keterbatasan (Bagian 14.10) yang belum punya solusi.
 
 ### Pertanyaan terbuka
 
@@ -577,7 +592,7 @@ Mekanisme internal tiap state ada di Bagian 6.2 dan 6.2c.
 
 ## 14. DESAIN HOUSING (MEKANIK)
 
-*Status: layout dipilih, dimensi belum final (menunggu pengukuran load cell, Bagian 15). Proposal 3.6 hanya menjelaskan housing elektronik; housing grip di bawah ini adalah pengembangan setelah proposal.*
+*Status: layout dipilih, bahan batang belum final. Pelat PLA 7 mm terbukti terlalu lentur (Bagian 14.9); usulan kerja adalah pelat aluminium 10 mm dengan celah minimal 2,5 mm, belum diputuskan. Dimensi menunggu pengukuran load cell (Bagian 15). Proposal 3.6 hanya menjelaskan housing elektronik; housing grip di bawah ini adalah pengembangan setelah proposal.*
 
 ### 14.1 Keputusan: dua housing terpisah
 
@@ -618,11 +633,11 @@ Potongan memanjang (celah digambar jauh lebih besar dari aslinya):
  telapak menekan (v)
  ################################################     A: batang telapak (tetap)
  ########                                             [1] tonjolan A + baut sisi tetap
-         .......... celah ..........                  [2] ruang lentur + stop overload
+         .......... celah ..........                  [2] celah bebas-sentuh (bukan stop overload)
  ==============================                       LOAD CELL 147 mm (kiri tetap, kanan bebas)
                        ########                       [3] tonjolan B + baut sisi bebas
          .......... celah ..........                  B tidak menyentuh badan load cell di sisi kiri
- ################################################     B: batang jari (bergerak); ridge jari + titik gantung kalibrasi [4]
+ ################################################     B: batang jari (bergerak); ridge jari + bidang tumpu kalibrasi [4]
  jari menekan (^)
  kabel load cell [5]: keluar dari ujung tetap, dijepit di A, ada lengkungan sisa sebelum keluar
 ```
@@ -630,14 +645,14 @@ Potongan memanjang (celah digambar jauh lebih besar dari aslinya):
 Telapak menekan A dari satu sisi dan jari menekan B dari sisi berlawanan. Satu-satunya jalur gaya dari A ke B adalah load cell.
 
 1. Ujung tetap load cell dibaut ke tonjolan pada A. Tonjolan inilah yang membuat celah di atas sisi bebas.
-2. Celah A ke load cell di sisi bebas adalah ruang lentur sekaligus stop overload (ujung bebas membentur A bila terlalu jauh naik). Mulai dari 1-2 mm di prototipe; spesifikasi load cell tidak menyebut defleksi, jadi ukur.
+2. Celah antara tiap batang dan badan load cell harus tetap terbuka pada beban penuh. Batang A dan B ikut melentur, dan lenturannya terbesar di ujung yang berada di atas ujung load cell sebelahnya (Bagian 14.9). Celah ini bukan stop overload; stop overload belum dirancang. Ukuran: minimal 2,5 mm (usulan kerja) sampai tinggi penutup strain gauge dan lenturan load cell terukur.
 3. Ujung bebas dibaut ke tonjolan pada B dari sisi berlawanan. Di sisi kiri, B tidak boleh menyentuh badan load cell.
-4. Ridge penahan jari dan titik gantung kalibrasi berada di pusat jari. Beban kalibrasi digantung di titik itu supaya lewat jalur yang sama dengan remasan.
+4. Ridge penahan jari dan bidang tumpu kalibrasi (permukaan datar) berada di pusat jari. Beban kalibrasi ditumpuk di bidang itu dengan rakitan dibalik (A di bawah, dijepit) supaya arahnya sama dengan remasan (Bagian 14.10). Titik gantung (eyelet) tidak dipakai karena beban gantung menarik B menjauhi A, kebalikan remasan.
 5. Kabel dijepit di A (sisi tetap) dengan lengkungan sisa sebelum keluar, supaya tarikan kabel tidak terbaca sebagai gaya.
 
-Dua batang dibuat kaku. Berbeda dari referensi batang bercelah (Biopac), celah panjang tidak perlu ditiru di jalur beban: satu-satunya bagian yang boleh melentur adalah load cell. Celah atau lubang pada batang hanya di luar jalur beban (untuk menghemat filamen atau jalur kabel).
+Dua batang harus kaku: satu-satunya bagian yang boleh melentur secara berarti adalah load cell. Persyaratan ini tidak dipenuhi oleh pelat PLA 7 mm (Bagian 14.9). Berbeda dari referensi batang bercelah (Biopac), celah panjang tidak perlu ditiru di jalur beban; celah atau lubang pada batang hanya di luar jalur beban.
 
-Tebal total grip sekitar 40 mm bila sisi 22 mm load cell searah beban, atau sekitar 48 mm bila sisi 30 mm (kira-kira: tebal batang 7 mm x 2, tonjolan 2 mm x 2, ditambah sisi load cell yang searah beban). Cek kenyamanannya dengan prototipe kardus lebih dulu. Arah beban load cell harus tegak lurus panjangnya, sesuai panah di badannya; cek panah itu sebelum menentukan sisi mana yang menghadap telapak.
+Tebal total grip = 2 x tebal batang + 2 x celah + sisi load cell yang searah beban + ridge sekitar 5 mm. Dengan aluminium 10 mm dan sisi 22 mm searah beban: sekitar 50 mm (celah 1,5 mm) atau sekitar 52 mm (celah 2,5 mm); tambah 8 mm bila sisi 30 mm yang searah beban. Kisaran 40-48 mm di draf awal berasal dari pelat PLA 7 mm yang ternyata terlalu lentur, dan itu bukan batas dari spesifikasi. Cek kenyamanannya dengan prototipe kardus lebih dulu. Arah beban load cell harus tegak lurus panjangnya, sesuai panah di badannya; cek panah itu sebelum menentukan sisi mana yang menghadap telapak.
 
 ### 14.5 Dampak housing terhadap pembacaan gaya
 
@@ -646,20 +661,21 @@ Tebal total grip sekitar 40 mm bila sisi 22 mm load cell searah beban, atau seki
 | Rasio tuas (jarak tekan jari terhadap titik beban load cell) | Mengubah skala | Terserap di `calibration_factor` selama geometri tetap; kalibrasi pada rakitan jadi |
 | Posisi tekan jari bergeser antar remasan | Galat acak (rasio berubah) | Ridge atau alur penahan jari; uji dengan beban di beberapa posisi; tidak dikoreksi di firmware karena posisi jari tidak diketahui sensor |
 | Jalur gaya paralel (A dan B bersentuhan atau bergesek, kabel tertarik, baut mengenai bagian lain) | Bacaan terlalu kecil dan histeresis | Celah di semua titik selain tonjolan; kabel dijepit di sisi tetap |
-| Kelenturan atau creep PLA di jalur beban | Sedikit non-linear, mungkin drift saat tahan 3-5 detik | Cek residual kalibrasi; dinding lebih tebal; PETG bila perlu |
-| Massa bagian bergerak di ujung bebas | Offset berubah bila orientasi berubah setelah tare. Perkiraan kasar: batang PLA 170 x 30 x 7 mm berbobot sekitar 20-45 g, sebanding dengan tolerance ±36 g di S1 | Tare dan remas di orientasi yang sama; batang B seringan mungkin (rusuk, bukan massa penuh) |
+| Kelenturan batang (dan creep bila PLA) di jalur beban | Batang yang melentur menyentuh load cell (gaya lewat jalur selain elemen ukur, bacaan terlalu kecil) atau patah; creep PLA menambah drift saat tahan 3-5 detik | Batang kaku, usulan pelat aluminium (Bagian 14.9); cek residual kalibrasi. PETG bukan solusi: modulusnya sebanding dengan PLA |
+| Massa bagian bergerak di ujung bebas | Offset berubah bila orientasi berubah setelah tare. Perkiraan kasar: batang PLA 170 x 30 x 7 mm berbobot sekitar 20-45 g; batang aluminium 10 mm sekitar 138 g; baja 8 mm sekitar 320 g. Semuanya sebanding atau jauh di atas tolerance ±36 g di S1 | Tare dan remas di orientasi yang sama; batang B seringan mungkin yang masih kaku |
 | Kekakuan rangka mengubah sensitivitas sistem | `calibration_factor` tidak bisa diambil dari nilai generik atau datasheet | Kalibrasi ulang setelah rakit (FP1) |
 
 **Perlu rumus tambahan di firmware?** Tidak, selama housing kaku, geometri tetap, dan kalibrasi dilakukan pada rakitan jadi: konversi linear `(raw - offset) / scale` yang sudah ada cukup (format yang sama dengan kalibrasi pabrik Vernier: slope dan intercept, VN1). Prosedur: kalibrasi 3 titik (20/45/70 kg), fit linear di Python, hitung residual dan RMSE. Jika residual dalam tolerance, firmware tetap linear. Jika tidak, fit polinomial orde 2 atau tabel piecewise secara offline dan tempel koefisiennya ke firmware. Efek yang paling berbahaya (posisi jari, jalur gaya paralel) tidak bisa diperbaiki dengan matematika dan harus ditangani lewat desain mekanik.
 
 ### 14.6 Setup parametrik di Fusion 360
 
-1. Modify > Change Parameters, isi user parameter: `LC_L` = 147, `LC_W` = 30, `LC_H` = 22, `bar_t` (mulai 7 mm), `gap` (mulai 1,5 mm), dan placeholder `hole_pitch`, `hole_d`, `hole_edge` (tebakan dulu; belum diukur).
+1. Modify > Change Parameters, isi user parameter: `LC_L` = 147, `LC_W` = 30, `LC_H` = 22, `bar_t` (usulan kerja 10 mm, pelat aluminium), `gap` (usulan kerja 2,5 mm), `lever_arm` = 60, `grip_zone` = 90, dan placeholder `hole_pitch`, `hole_d`, `hole_edge` (tebakan dulu; belum diukur).
 2. Component `LoadCell_ref`: kotak 147 x 30 x 22 mm dengan dua lubang di tiap ujung memakai parameter di langkah 1. Hanya acuan, tidak dicetak.
 3. Component `Bar_A` dan `Bar_B` terpisah, masing-masing dengan tonjolan setinggi `gap`. Tonjolan A di ujung tetap, tonjolan B di ujung bebas dari sisi berlawanan.
 4. Rakit dengan joint, lalu Inspect > Interference: A dan B tidak boleh bersentuhan satu sama lain, dan tidak boleh menyentuh badan load cell selain di tonjolan.
 5. Lubang baut dimodelkan lebih besar dari baut asli (aturan modul: M3 menjadi 3,4 mm), chamfer 0,3-0,5 mm di tepi bawah, sisi tonjolan menjadi alas di Z = 0.
 6. Cetak kupon kecil dulu (tonjolan dan pola lubang saja) sebelum batang utuh; itu cara termurah memastikan baut dan load cell benar-benar masuk.
+7. Bila batang berupa pelat logam, modelnya hanya untuk cek kecocokan dan gambar kerja bengkel; pelat tidak dicetak. Ridge, bidang tumpu, dan jepit kabel tetap bagian cetak PLA.
 
 ### 14.7 Aturan cetak dari modul 3D printing
 
@@ -668,10 +684,89 @@ Tebal total grip sekitar 40 mm bila sisi 22 mm load cell searah beban, atau seki
 - Desain: kelonggaran 0,2-0,3 mm per sisi; lubang lewat M3 dimodelkan 3,4 mm; dinding minimal 1,2 mm (gunakan sekitar 2 mm di bagian yang menahan beban); overhang maksimal 45 derajat; chamfer 0,3-0,5 mm di tepi bawah.
 - Slicer (Bambu Studio): preset proses 0.20mm Standard, dinding 3 untuk part penahan beban, infill 15-20%, support dimatikan bila desain mengikuti aturan 45 derajat.
 - Orientasi: part FDM lebih lemah antar-layer daripada searah layer. Cetak batang rebah dengan sisi tonjolan menghadap plate, supaya layer sejajar panjang batang dan tonjolan tidak butuh support. Sumbu lubang baut vertikal.
+- Bila batang berupa pelat logam, itu bukan bagian cetak. Bagian yang tetap dicetak PLA: ridge, bidang tumpu atau lapisan genggam, jepit kabel, dan housing elektronik. Cek ke TA apakah grip hibrida masih memenuhi syarat bagian cetak (G3).
 
 ### 14.8 Hal yang harus diukur sebelum cetak
 
 Jarak pusat-ke-pusat dan diameter lubang baut di kedua ujung load cell, jarak pusat lubang dari ujung badan, arah panah beban dan sisi (22 atau 30 mm) yang searah panah, serta ujung tempat kabel keluar. Daftar lengkap pengukuran jangka sorong ada di Bagian 15.
+
+### 14.9 Temuan kekakuan batang dan usulan bahan (belum keputusan final)
+
+Masalah: tiap batang bekerja sebagai kantilever dari tonjolannya. Batang A hanya ditopang di ujung tetap load cell dan batang B hanya di ujung bebas, jadi beban genggam melenturkan batang sepanjang lengan tuas. Dua akibat yang harus dicegah: (1) batang menyentuh badan load cell, sehingga sebagian gaya lewat jalur selain elemen ukur dan bacaan terlalu rendah; (2) batang patah atau meluluh.
+
+Model (teori balok kasar). F = 686 N (70 kgf, batas atas S1), lebar batang b = 30 mm, I = b·h³/12:
+- Lenturan di titik beban: δ = F·a³ / (3·E·I), a = jarak pusat beban dari tepi tonjolan.
+- Lenturan di titik x ≥ a (ujung batang yang berada di atas ujung load cell sebelahnya): δ(x) = F·a²·(3x - a) / (6·E·I). Nilai ini yang menentukan sentuhan, bukan lenturan di titik beban.
+- Tegangan maksimum di pangkal: σ = F·a·(h/2) / I. Momen pangkal = F x a, jadi selama pusat beban tetap, penyebaran beban di zona genggam tidak menurunkannya.
+- Penampang berlubang: σ_net = σ · b / (b - n·d) untuk n lubang berdiameter d sejajar lebar; dua lubang Ø6,5 mm memberi faktor sekitar 1,76 bila lubang berada di penampang kritis.
+- Asumsi: a = 60 mm (pusat zona genggam sekitar 90 mm, dari gambar rencana), ujung load cell yang jauh x = 133 mm dari tepi tonjolan (147 mm dikurangi tonjolan sekitar 13,5 mm), tonjolan dianggap kaku, E aluminium 70 GPa, baja 200 GPa, PLA sekitar 3 GPa.
+
+Hasil untuk pelat PLA 7 mm (kantilever 120 mm, beban merata): 200 N memberi lenturan sekitar 17 mm dan tegangan sekitar 49 MPa; 400 N sekitar 34 mm dan 98 MPa; 686 N sekitar 58 mm dan 168 MPa. Agar lenturan di titik beban di bawah 0,5 mm pada 686 N dengan a = 60 mm, pelat PLA pejal perlu tebal sekitar 24 mm per batang. Celah 1,5 mm dan kekuatan PLA cetak (puluhan MPa) tidak terpenuhi.
+
+Kandidat pelat logam (F = 686 N, a = 60 mm, x = 133 mm, lebar 30 mm, celah 1,5 mm):
+
+| Pelat | Lenturan ujung jauh | Tegangan pangkal | Tegangan penampang berlubang (2 lubang Ø6,5 mm) | Berat per batang | Tebal total (celah 1,5 mm) |
+|---|---|---|---|---|---|
+| Aluminium 8 mm | 1,56 mm (melewati celah) | 129 MPa | sekitar 227 MPa | 110 g | 46 mm |
+| Baja 6 mm | 1,29 mm | 229 MPa | sekitar 404 MPa | 240 g | 42 mm |
+| Baja 8 mm | 0,55 mm | 129 MPa | sekitar 227 MPa | 320 g | 46 mm |
+| Aluminium 10 mm | 0,80 mm | 82 MPa | sekitar 145 MPa | 138 g | 50 mm |
+
+Pembacaan: aluminium 8 mm gagal di celah; baja 6 mm terlalu tipis marginnya dan tegangannya mendekati batas luluh baja lunak (sekitar 235 MPa); baja 8 mm lolos untuk penampang utuh (129 MPa) tetapi tegangan penampang berlubang sekitar 227 MPa hampir sama dengan luluh baja lunak (sekitar 235 MPa), dan beratnya 640 g untuk dua batang; aluminium 10 mm ringan dan lolos semua kriteria di atas kertas, dengan konsekuensi tebal total sekitar 50 mm. Tegangan luluh paduan aluminium bervariasi (kira-kira 200-275 MPa); grade belum diketahui.
+
+Yang belum diketahui dan mengurangi margin: tinggi penutup putih strain gauge, lenturan load cell sendiri pada 70 kgf (ujung bebasnya naik mendekati batang), diameter lubang, kekakuan tonjolan dan sambungan baut, dan grade aluminium. Anggaran celah: lenturan ujung jauh + lenturan load cell + tinggi penutup + margin.
+
+Usulan kerja (belum keputusan): pelat aluminium 10 mm (grade 6061-T6 atau 5052, tanyakan ke penjual), celah minimal 2,5 mm, tebal total sekitar 52 mm. Sebelum diputuskan: cek kenyamanan genggam dengan prototipe kardus; ukur penutup strain gauge dan lubang load cell (Bagian 15); validasi model lentur dengan uji sederhana (pelat PLA 30 x 7 mm dijepit satu ujung, beban 5 kg di jarak 120 mm; prediksi sekitar 11 mm, dan bila hasil jauh berbeda maka nilai E perlu diperbaiki). Alternatif yang tidak lolos: PLA setebal sekitar 24 mm (genggaman terlalu lebar); memperpendek lengan tuas (zona genggam sekitar 90 mm tidak muat). Proposal G1 (risiko enclosure) menyebut fallback "PETG atau bracket logam": PETG tidak menyelesaikan masalah karena modulusnya sebanding dengan PLA; yang relevan adalah bracket atau pelat logam.
+
+Celah dan stop overload: karena batang sudah mendekati badan load cell pada beban penuh, celah tidak bisa sekaligus menjadi stop overload. Proteksi overload membutuhkan fitur terpisah yang belum dirancang.
+
+### 14.10 Arah beban kalibrasi
+
+Remasan mendorong B ke arah A. Beban yang digantung pada eyelet di sisi luar B menarik B menjauhi A, jadi arahnya kebalikan remasan dan tidak menguji kontak celah pada beban tinggi. Kalibrasi sebaiknya dalam arah remasan: rakitan dibalik (A di bawah dan dijepit ke meja, B di atas), beban acuan 20/45/70 kg ditumpuk pada bidang tumpu datar di pusat zona genggam. Cara menumpuk 70 kg dengan aman dan ketersediaan beban acuan masih terbuka (ini juga risiko di proposal Bagian 6). Keterbatasan setup ini (dari gambar v4): bidang tumpu di antara dua ridge hanya selebar sekitar 22 mm sehingga tumpukan 70 kg tidak stabil dan perlu adaptor alas; A ditumpu meja sehingga lenturan A saat digenggam tidak teruji, hanya celah sisi B yang teruji pada beban tinggi; titik jepit A ke meja terbatas pada sisa batang sekitar 11,5 mm di tiap ujung. Alternatif untuk beban tinggi adalah kalibrasi komparatif terhadap timbangan referensi (FP1), yang belum dirancang. Soal orientasi: kemiringan faktor skala (slope) tidak bergantung orientasi pada pendekatan pertama, sedangkan offset berubah sekitar massa B (sekitar 138 g untuk aluminium 10 mm). Karena auto-tare terjadi di SIAP pada tiap percobaan, kalibrasi dalam orientasi terbalik tetap berlaku untuk slope; yang perlu dijaga adalah orientasi alat antara tare dan remasan.
+
+### 14.11 Pengadaan pelat logam
+
+- Kata kunci marketplace (listing Tokopedia yang ditemukan memakai ejaan beragam): `plat strip aluminium 10mm`, `plat almunium tebal 10mm lebar 30mm`, `aluminium flat bar 30x10`, tambahkan `potong custom`; untuk jasa: `jasa potong plat aluminium`, `jasa bor plat`. Untuk baja (listing belum diverifikasi): `besi strip`, `plat strip besi 30x6`, `plat besi 6mm potong`. Ukuran stok yang terlihat berlebar 40 mm; lebar 30 mm mungkin perlu dipotong.
+- Minta ukuran 170 x 30 mm (tebal sesuai keputusan), 2 pcs plus 1 cadangan, grade paduan dicantumkan, tepi di-deburr, tanpa lubang (dibor setelah jarak lubang load cell terukur).
+- Anggaran: BOM proposal Rp253.875 sebelum ongkir, sisa sekitar Rp46.125 dari batas Rp300.000; harga plat dan jasa belum diverifikasi. Tambahkan ke BOM dan simpan bukti beli.
+- Tahan pembelian sampai tebal pelat diputuskan dan lubang load cell terukur.
+
+### 14.12 Berkas gambar skematik dan catatan pernyataan AI
+
+- Gambar skematik dibuat dengan Claude (Cowork) dari instruksi tertulis, disimpan di folder `housing-grip/` pada Project: `potongan_memanjang.svg`, `exploded_isometrik.svg`, `tampak_atas.svg`, `asumsi.md` (v2); `potongan_memanjang_v3.svg`, `potongan_memanjang_v3_logam.svg`, `exploded_isometrik_v3.svg`, `exploded_isometrik_v3_logam.svg`, `tampak_atas_v3.svg`, `asumsi_v3.md` (v3); `potongan_memanjang_v4_logam.svg`, `exploded_isometrik_v4_logam.svg`, `kalibrasi_setup_v4.svg`, `asumsi_v4.md` (v4, varian aluminium 10 mm). Instruksi: `koreksi.md` (v2 ke v3) dan `koreksi_v2.md` (v3 ke v4: aluminium 10 mm, celah 2,5 mm, bidang tumpu kalibrasi). Gambar v3 dan v4 sudah ditinjau secara visual dan sesuai instruksi koreksi. Hasil v4 (aluminium 10 mm, celah 2,5 mm): lenturan ujung jauh 0,80 mm pada 686 N sehingga sisa celah minimal 1,70 mm sebelum lenturan load cell dan tinggi penutup strain gauge diketahui; tegangan penampang berlubang 130-145 MPa; tebal total 52 mm melebihi kisaran 40-48 mm; aluminium 8 mm dengan celah 2,5 mm lolos celah tetapi gagal tegangan (203-227 MPa).
+- Untuk Pernyataan Penggunaan AI (Lampiran C), kolom "anything the tool got wrong" yang ditekankan Panduan G1: (1) layout awal mengasumsikan batang kaku tanpa menghitung kekakuan, ditemukan lewat pemeriksaan asumsi Cowork; (2) instruksi koreksi menyatakan penyebaran beban menurunkan tegangan baja di pangkal, salah karena momen pangkal ditentukan pusat beban; (3) titik gantung kalibrasi arahnya kebalikan remasan; (4) hitungan awal hanya melaporkan lenturan di titik beban, bukan di ujung jauh yang menentukan sentuhan; (5) `koreksi_v2.md` memuat dua instruksi yang bertentangan (catatan "stop overload belum dirancang" wajib ada, tetapi kata itu juga dilarang muncul), ditemukan oleh Cowork yang lalu mengikuti instruksi pertama.
+
+### 14.13 Alternatif dan keputusan yang dibatalkan
+
+- **Kantilever tunggal** (load cell sendirian, satu ujung tetap, pegangan di ujung bebas): konsep awal. Posisi tekan tangan mengubah momen sehingga bacaan bergantung titik genggam, dan bentuk pegangan belum jelas. Digantikan layout dua batang (14.4), yang memberi satu jalur gaya dan posisi tangan yang bisa dikendalikan dengan ridge.
+- **Dua batang paralel dengan load cell berdampingan** (usulan pengguna forum, FP1): lebih tidak peka terhadap posisi genggam, tetapi butuh beberapa elemen sejajar dengan presisi, lebih rumit dicetak dan dirakit. Tidak dipilih untuk cakupan proyek, dan belum dicoba.
+- **Sensor sentuh kapasitif TTP223 di titik tumpu ibu jari** untuk memvalidasi posisi jari sebagai syarat mulai: dibatalkan oleh tim, alasan tidak dicatat. Pertimbangan yang sempat muncul: logika deteksinya tersembunyi di dalam modul sehingga kurang bisa dijelaskan saat penilaian, dan sensor ini tidak menambah cakupan Sub-CPMK. Akibatnya teknik genggam hanya dijaga lewat instruksi verbal (Bagian 13.2).
+- **Pelat PLA 7 mm** sebagai batang (14.9), **celah sebagai stop overload** (14.9), dan **titik gantung kalibrasi** (14.10): dibatalkan.
+- **Elektronik di dalam pegangan** (tombol, LED, LCD di grip): dibatalkan, sejak keputusan dua housing terpisah (14.1).
+
+### 14.14 Urutan prototipe: kardus sampai cetak
+
+- **Kardus** menguji geometri dan ergonomi: posisi tangan, tebal total sekitar 52 mm, panjang sekitar 170 mm, jangkauan zona genggam, dan titik keluar kabel. Load cell asli bisa ditempel pada prototipe kardus untuk cek penyaluran gaya. Kardus tidak menguji kekuatan, kekakuan, toleransi lubang, atau pas baut, dan melentur jauh lebih besar dari pelat sungguhan.
+- **Urutan:** prototipe kardus, ukur load cell (Bagian 15), model parametrik di Fusion (14.6), kupon uji pas cetak (tonjolan dan pola lubang), uji lentur pelat (14.9), rakit, lalu kalibrasi (14.10).
+- Kekakuan hanya bisa divalidasi lewat hitungan (14.9) dan uji lentur, bukan lewat kardus.
+
+### 14.15 Mockup modul 3D printing
+
+- Mockup 3D untuk modul 3D printing dikerjakan dengan bantuan Copilot (bukan Claude); catat di Pernyataan Penggunaan AI. Berkas dan isinya tidak tercatat di catatan ini.
+- Acuan dari modul 3D printing: pelat dasar Modul 4 berupa grid 8 x 5 lubang Ø3,4 mm dengan pitch 20 mm pada pelat 170 x 110 x 4 mm; bagian modul harus tersekrup ke pelat itu lewat dua lubang M3 yang jatuh pada kelipatan 20 mm (jarak 20, 40, atau 60 mm); lubang M3 dimodelkan 3,4 mm. Aturan ini berlaku untuk bagian modul, bukan otomatis untuk housing grip proyek.
+
+### 14.16 Cowork: cara kerja dan brief awal
+
+- **Kemampuan** (Help Center Claude, "Can Claude produce images?" dan "Custom visuals in chat and Cowork"): Claude tidak membuat foto atau ilustrasi realistis; yang bisa dibuat adalah diagram, grafik, dan visual interaktif berbasis HTML dan SVG. Hal ini berlaku juga di Cowork; hasilnya bisa diunduh sebagai `.svg` atau `.html`, dan model yang lebih kuat disarankan untuk visual kompleks. Render realistis diperoleh dari Render workspace di Fusion setelah modelnya jadi.
+- **Cara kerja Cowork:** ia bekerja pada folder yang diizinkan, bukan attachment per pesan; ia bisa membaca gambar (.png, .jpg, .svg). Isi folder yang disarankan: foto load cell asli (kedua sisi, panah beban, lubang baut, tempat kabel keluar), tangkapan layar model Fusion, dan gambar referensi gaya. Jangan memasukkan seluruh catatan proyek.
+- **Alur yang dipakai:** brief awal (di bawah), gambar v2, `koreksi.md`, v3, `koreksi_v2.md`, v4.
+- **Brief awal (ringkas):** gambar teknis skematik (bukan foto) untuk housing grip yang hanya berisi load cell. Dua batang A (telapak, tetap) dan B (jari, bergerak) dengan load cell di antaranya; ujung tetap load cell dibaut ke tonjolan A, ujung bebas dibaut ke tonjolan B dari sisi berlawanan; celah antar bagian dan jalur gaya tunggal lewat load cell; ridge dan titik beban kalibrasi di sisi luar B; kabel keluar dari ujung tetap dan dijepit di A; nilai yang belum diukur ditulis "TBD" dan tidak diisi angka; keluaran tiga SVG (potongan, exploded, tampak atas) dan daftar asumsi.
+
+### 14.17 Rujukan untuk memodel di Fusion
+
+- **Dipakai:** `potongan_memanjang_v4_logam.svg` (layout dan dimensi), `exploded_isometrik_v4_logam.svg` (arah baut, pola lubang, urutan rakit), `asumsi_v4.md` (angka yang pasti dan yang TBD, hitungan kekakuan), catatan ini (14.6 parameter, 14.7 aturan cetak, Bagian 15 pengukuran), dan `kalibrasi_setup_v4.svg` hanya untuk merancang fixture kalibrasi.
+- **Tidak dipakai:** semua file v2 dan v3 (digantikan), `koreksi.md` dan `koreksi_v2.md` (instruksi untuk Cowork), dan `referensi_layout.png` (sketsa konsep lama).
+- Gambar tidak berskala, jadi jangan di-import sebagai sketsa; ambil hanya angka yang tertulis. Parameter awal: `bar_t` = 10, `gap` = 2,5, `lever_arm` = 60, `grip_zone` = 90. Yang dimodelkan: load cell sebagai acuan (tidak dicetak), Bar_A dan Bar_B sebagai pelat aluminium (model untuk cek kecocokan dan gambar kerja bengkel, bukan dicetak), dan bagian cetak PLA (ridge, bidang tumpu, jepit kabel).
 
 ---
 
@@ -744,6 +839,7 @@ Cara mengukur:
 | F4 | Kabel USB (micro-USB) | Lebar x tinggi cangkang plug dan panjang plug | L | [Housing] cutout USB | - | |
 | F5 | Konektor jumper (Dupont) | Lebar x tinggi housing konektor | L | [Housing] ruang dan rute kabel | - | |
 | P1 | Part hasil cetak | Diameter lubang, lebar slot, dan tebal dinding hasil cetak dibanding nilai CAD | D atau L | [Cetak] tabel dimensi CAD vs hasil ukur untuk laporan modul; koreksi kelonggaran | - | |
+| P2 | Pelat logam batang A dan B (setelah dibeli) | Tebal, lebar, panjang, kerataan di 3 titik | L | [Grip] cek terhadap parameter `bar_t`, lebar 30 mm, panjang 170 mm | Sesuai pesanan; ukur | |
 
 Nilai resistansi resistor tidak bisa diukur dengan jangka sorong; gunakan multimeter atau kode warna.
 
