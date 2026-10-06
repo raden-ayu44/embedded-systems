@@ -3,7 +3,7 @@ title: Catatan Proyek - Hand Grip Dynamometer
 
 ---
 
-# Catatan Proyek - Hand Grip Dynamometer (v29)
+# Catatan Proyek - Hand Grip Dynamometer (v30)
 **Final Project - Embedded Systems Course**
 
 > Catatan kerja proyek akhir mata kuliah embedded system (biomedik): keputusan desain beserta alasannya, rujukan, data ukur, dan hal yang masih terbuka. Ditulis supaya bisa dibaca sendiri (offline) tanpa konteks tambahan dari luar catatan ini. Proposal G1 sudah dikumpulkan; catatan ini sekarang dipakai untuk G2-G4, makalah akhir, dan demo. Bagian 13 merekam isi Bagian 2-3 proposal G1 sebagaimana dikumpulkan, Bagian 14 memuat desain housing, dan Bagian 15 memuat tabel pengukuran dengan jangka sorong.
@@ -669,7 +669,7 @@ Tebal total grip = 2 x tebal batang + 2 x celah + sisi load cell yang searah beb
 
 ### 14.6 Setup parametrik di Fusion 360
 
-1. Modify > Change Parameters, isi user parameter: `LC_L` = 147, `LC_W` = 30, `LC_H` = 22, `bar_t` (usulan kerja 10 mm, pelat aluminium), `gap` (usulan kerja 2,5 mm), `lever_arm` = 60, `grip_zone` = 90, dan placeholder `hole_pitch`, `hole_d`, `hole_edge` (tebakan dulu; belum diukur).
+1. Buka Change Parameters (Design > Solid > Modify), lalu tambah user parameter lewat Add User Parameter (satu dialog per parameter). Cara cepat: impor `fusion_parameters_housing_grip.csv` lewat Import Parameters; format kolom Name, Unit, Expression, Value, Comments, Favorite (contoh format ada di halaman bantuan "Parameters in Fusion"). Tulis satuan di dalam ekspresi (misalnya `147 mm`), pilih satuan mm sejak awal (mengganti satuan parameter yang sudah dipakai bisa bermasalah), dan cek kolom Value setelah memasukkan angka desimal karena pemisah desimal mengikuti pengaturan regional. Parameter: `LC_L` = 147, `LC_W` = 30, `LC_H` = 22, `bar_t` (usulan kerja 10 mm, pelat aluminium), `gap` (usulan kerja 2,5 mm), `lever_arm` = 60, `grip_zone` = 90, dan placeholder `hole_pitch`, `hole_d`, `hole_edge` (tebakan dulu; belum diukur).
 2. Component `LoadCell_ref`: kotak 147 x 30 x 22 mm dengan dua lubang di tiap ujung memakai parameter di langkah 1. Hanya acuan, tidak dicetak.
 3. Component `Bar_A` dan `Bar_B` terpisah, masing-masing dengan tonjolan setinggi `gap`. Tonjolan A di ujung tetap, tonjolan B di ujung bebas dari sisi berlawanan.
 4. Rakit dengan joint, lalu Inspect > Interference: A dan B tidak boleh bersentuhan satu sama lain, dan tidak boleh menyentuh badan load cell selain di tonjolan.
