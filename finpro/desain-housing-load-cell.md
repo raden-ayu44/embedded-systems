@@ -1,7 +1,7 @@
-# Desain Housing Load Cell (v3)
+# Desain Housing Load Cell (v4)
 **Final Project - Embedded Systems Course**
 
-> Dokumen ini memuat seluruh desain housing grip yang berisi load cell: layout dua batang, dampak ke pembacaan gaya, temuan kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v4 (Lampiran A). Dipisah dari [catatan proyek](catatan-proyek-hgd.md) (v33) supaya catatan proyek tidak melebar. Housing elektronik (ESP32, LCD, HX711, tombol, LED) akan ada di dokumen terpisah: [desain-housing-elektronik.md](desain-housing-elektronik.md) (rencana, belum dibuat).
+> Dokumen ini memuat seluruh desain housing grip yang berisi load cell: layout dua batang, dampak ke pembacaan gaya, temuan kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v4 (Lampiran A). Dipisah dari [catatan proyek](catatan-proyek-hgd.md) (v34) supaya catatan proyek tidak melebar. Housing elektronik (ESP32, LCD, HX711, tombol, LED) akan ada di dokumen terpisah: [desain-housing-elektronik.md](desain-housing-elektronik.md) (rencana, belum dibuat).
 
 Tautan balik: [catatan proyek](catatan-proyek-hgd.md) · tabel pengukuran jangka sorong: [Bagian 15 di catatan proyek](catatan-proyek-hgd.md#15-tabel-pengukuran-dengan-jangka-sorong) · spesifikasi S1-S5: [Bagian 13.1](catatan-proyek-hgd.md#131-tabel-spesifikasi-table-1-proposal-21)
 
@@ -99,7 +99,7 @@ Tebal total grip = 2 x tebal batang + 2 x celah + sisi load cell yang searah beb
 
 ## HL6. Setup parametrik di Fusion 360
 
-1. Buka Change Parameters (Design > Solid > Modify), lalu tambah user parameter lewat Add User Parameter (satu dialog per parameter). Cara cepat: impor `fusion_parameters_housing_grip.csv` lewat Import Parameters; format kolom Name, Unit, Expression, Value, Comments, Favorite (contoh format ada di halaman bantuan "Parameters in Fusion"). Tulis satuan di dalam ekspresi (misalnya `147 mm`), pilih satuan mm sejak awal (mengganti satuan parameter yang sudah dipakai bisa bermasalah), dan cek kolom Value setelah memasukkan angka desimal karena pemisah desimal mengikuti pengaturan regional. Parameter: `LC_L` = 147, `LC_W` = 30, `LC_H` = 22, `bar_t` (usulan kerja 10 mm, pelat aluminium), `gap` (usulan kerja 2,5 mm), `lever_arm` = 60, `grip_zone` = 90, dan placeholder `hole_pitch`, `hole_d`, `hole_edge` (tebakan dulu; belum diukur).
+1. Buka Change Parameters (Design > Solid > Modify), lalu tambah user parameter lewat Add User Parameter (satu dialog per parameter). Cara cepat: impor [`fusion_parameters_housing_grip.csv`](fusion/fusion_parameters_housing_grip.csv) lewat Import Parameters; format kolom Name, Unit, Expression, Value, Comments, Favorite (contoh format ada di halaman bantuan "Parameters in Fusion"). Tulis satuan di dalam ekspresi (misalnya `147 mm`), pilih satuan mm sejak awal (mengganti satuan parameter yang sudah dipakai bisa bermasalah), dan cek kolom Value setelah memasukkan angka desimal karena pemisah desimal mengikuti pengaturan regional. Parameter: `LC_L` = 147, `LC_W` = 30, `LC_H` = 22, `bar_t` (usulan kerja 10 mm, pelat aluminium), `gap` (usulan kerja 2,5 mm), `lever_arm` = 60, `grip_zone` = 90, dan placeholder `hole_pitch`, `hole_d`, `hole_edge` (tebakan dulu; belum diukur).
 2. Component `LoadCell_ref`: kotak 147 x 30 x 22 mm dengan dua lubang di tiap ujung memakai parameter di langkah 1. Hanya acuan, tidak dicetak.
 3. Component `Bar_A` dan `Bar_B` terpisah, masing-masing dengan tonjolan setinggi `gap`. Tonjolan A di ujung tetap, tonjolan B di ujung bebas dari sisi berlawanan.
 4. Rakit dengan joint, lalu Inspect > Interference: A dan B tidak boleh bersentuhan satu sama lain, dan tidak boleh menyentuh badan load cell selain di tonjolan.
@@ -217,6 +217,8 @@ Remasan mendorong B ke arah A. Beban yang digantung pada eyelet di sisi luar B m
 - **Dipakai:** `potongan_memanjang_v4_logam.svg` (layout dan dimensi), `exploded_isometrik_v4_logam.svg` (arah baut, pola lubang, urutan rakit), `asumsi_v4.md` (angka yang pasti dan yang TBD, hitungan kekakuan), catatan ini (HL6 parameter, HL7 aturan cetak, [Bagian 15 di catatan proyek](catatan-proyek-hgd.md#15-tabel-pengukuran-dengan-jangka-sorong) pengukuran), dan `kalibrasi_setup_v4.svg` hanya untuk merancang fixture kalibrasi.
 - **Tidak dipakai:** semua file v2 dan v3 (digantikan), `koreksi.md` dan `koreksi_v2.md` (instruksi untuk Cowork), dan `referensi_layout.png` (sketsa konsep lama).
 - Gambar tidak berskala, jadi jangan di-import sebagai sketsa; ambil hanya angka yang tertulis. Parameter awal: `bar_t` = 10, `gap` = 2,5, `lever_arm` = 60, `grip_zone` = 90. Yang dimodelkan: load cell sebagai acuan (tidak dicetak), Bar_A dan Bar_B sebagai pelat aluminium (model untuk cek kecocokan dan gambar kerja bengkel, bukan dicetak), dan bagian cetak PLA (ridge, bidang tumpu, jepit kabel).
+- **Langkah kerja dan parameter siap impor** (folder `fusion/` di samping dokumen ini): [work_instructions_fusion_housing_grip.md](fusion/work_instructions_fusion_housing_grip.md) berisi langkah modelling di Fusion fase demi fase, dan [fusion_parameters_housing_grip.csv](fusion/fusion_parameters_housing_grip.csv) berisi 15 user parameter (impor belum diuji di Fusion).
+
 ## HL18. Sumber rujukan housing (bukan peer-review)
 
 ### HL18.1 Dokumentasi alat komersial (dokumen pabrikan dan penjual, BUKAN peer-review)
@@ -243,6 +245,7 @@ Remasan mendorong B ke arah A. Beban yang digantung pada eyelet di sisi luar B m
 
 - v1: dipisah dari catatan proyek (v31); asumsi gambar skematik v4 digabung sebagai Lampiran A.
 - v2: diagram ASCII di HL4 diganti SVG mandiri (konsep, nomor callout 1-5).
+- v4: tautan ke langkah kerja Fusion dan CSV parameter di folder `fusion/` ditambahkan (HL6, HL17).
 - v3: diagram konsep itu diganti gambar Cowork v4: potongan dan exploded di HL4, setup kalibrasi di HL10; daftar HL4 merujuk ke nomor callout gambar v4. Gambar konsep `hl4-layout.svg` tidak dipakai lagi.
 
 ### Audit v27: desain housing
