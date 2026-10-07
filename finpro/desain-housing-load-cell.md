@@ -1,7 +1,7 @@
-# Desain Housing Load Cell (v1)
+# Desain Housing Load Cell (v3)
 **Final Project - Embedded Systems Course**
 
-> Dokumen ini memuat seluruh desain housing grip yang berisi load cell: layout dua batang, dampak ke pembacaan gaya, temuan kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v4 (Lampiran A). Dipisah dari [catatan proyek](catatan-proyek-hgd.md) (v31) supaya catatan proyek tidak melebar. Housing elektronik (ESP32, LCD, HX711, tombol, LED) akan ada di dokumen terpisah: [desain-housing-elektronik.md](desain-housing-elektronik.md) (rencana, belum dibuat).
+> Dokumen ini memuat seluruh desain housing grip yang berisi load cell: layout dua batang, dampak ke pembacaan gaya, temuan kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v4 (Lampiran A). Dipisah dari [catatan proyek](catatan-proyek-hgd.md) (v33) supaya catatan proyek tidak melebar. Housing elektronik (ESP32, LCD, HX711, tombol, LED) akan ada di dokumen terpisah: [desain-housing-elektronik.md](desain-housing-elektronik.md) (rencana, belum dibuat).
 
 Tautan balik: [catatan proyek](catatan-proyek-hgd.md) · tabel pengukuran jangka sorong: [Bagian 15 di catatan proyek](catatan-proyek-hgd.md#15-tabel-pengukuran-dengan-jangka-sorong) · spesifikasi S1-S5: [Bagian 13.1](catatan-proyek-hgd.md#131-tabel-spesifikasi-table-1-proposal-21)
 
@@ -66,28 +66,19 @@ Pola: pembaca di kepala dan grip di bawah; kabel keluar dari ujung bawah; dua ke
 
 ## HL4. Tata letak terpilih: dua batang dengan load cell di antaranya
 
-Potongan memanjang (celah digambar jauh lebih besar dari aslinya):
+Potongan memanjang dan exploded isometrik (skematik dari Cowork, tidak berskala; celah digambar diperbesar). Nomor callout mengikuti legenda di dalam gambar; angka dalam kurung di daftar bawah merujuk ke callout itu.
 
-```
- telapak menekan (v)
- ################################################     A: batang telapak (tetap)
- ########                                             [1] tonjolan A + baut sisi tetap
-         .......... celah ..........                  [2] celah bebas-sentuh (bukan stop overload)
- ==============================                       LOAD CELL 147 mm (kiri tetap, kanan bebas)
-                       ########                       [3] tonjolan B + baut sisi bebas
-         .......... celah ..........                  B tidak menyentuh badan load cell di sisi kiri
- ################################################     B: batang jari (bergerak); ridge jari + bidang tumpu kalibrasi [4]
- jari menekan (^)
- kabel load cell [5]: keluar dari ujung tetap, dijepit di A, ada lengkungan sisa sebelum keluar
-```
+![Potongan memanjang housing grip, pelat aluminium 10 mm](img/potongan_memanjang_v4_logam.svg)
+
+![Exploded isometrik housing grip, pelat aluminium 10 mm](img/exploded_isometrik_v4_logam.svg)
 
 Telapak menekan A dari satu sisi dan jari menekan B dari sisi berlawanan. Satu-satunya jalur gaya dari A ke B adalah load cell.
 
-1. Ujung tetap load cell dibaut ke tonjolan pada A. Tonjolan inilah yang membuat celah di atas sisi bebas.
-2. Celah antara tiap batang dan badan load cell harus tetap terbuka pada beban penuh. Batang A dan B ikut melentur, dan lenturannya terbesar di ujung yang berada di atas ujung load cell sebelahnya (HL9). Celah ini bukan stop overload; stop overload belum dirancang. Ukuran: minimal 2,5 mm (usulan kerja) sampai tinggi penutup strain gauge dan lenturan load cell terukur.
-3. Ujung bebas dibaut ke tonjolan pada B dari sisi berlawanan. Di sisi kiri, B tidak boleh menyentuh badan load cell.
-4. Ridge penahan jari dan bidang tumpu kalibrasi (permukaan datar) berada di pusat jari. Beban kalibrasi ditumpuk di bidang itu dengan rakitan dibalik (A di bawah, dijepit) supaya arahnya sama dengan remasan (HL10). Titik gantung (eyelet) tidak dipakai karena beban gantung menarik B menjauhi A, kebalikan remasan.
-5. Kabel dijepit di A (sisi tetap) dengan lengkungan sisa sebelum keluar, supaya tarikan kabel tidak terbaca sebagai gaya.
+1. (callout 4 dan 6) Ujung tetap load cell dibaut ke tonjolan pada A. Tonjolan inilah yang membuat celah di atas sisi bebas.
+2. (callout 8 dan 15) Celah antara tiap batang dan badan load cell harus tetap terbuka pada beban penuh. Batang A dan B ikut melentur, dan lenturannya terbesar di ujung yang berada di atas ujung load cell sebelahnya (HL9). Celah ini bukan stop overload; stop overload belum dirancang. Ukuran: minimal 2,5 mm (usulan kerja) sampai tinggi penutup strain gauge dan lenturan load cell terukur.
+3. (callout 5 dan 7) Ujung bebas dibaut ke tonjolan pada B dari sisi berlawanan. Di sisi kiri, B tidak boleh menyentuh badan load cell.
+4. (callout 10 dan 11) Ridge penahan jari dan bidang tumpu kalibrasi (permukaan datar) berada di pusat jari. Beban kalibrasi ditumpuk di bidang itu dengan rakitan dibalik (A di bawah, dijepit) supaya arahnya sama dengan remasan (HL10). Titik gantung (eyelet) tidak dipakai karena beban gantung menarik B menjauhi A, kebalikan remasan.
+5. (callout 12 sampai 14) Kabel dijepit di A (sisi tetap) dengan lengkungan sisa sebelum keluar, supaya tarikan kabel tidak terbaca sebagai gaya.
 
 Dua batang harus kaku: satu-satunya bagian yang boleh melentur secara berarti adalah load cell. Persyaratan ini tidak dipenuhi oleh pelat PLA 7 mm (HL9). Berbeda dari referensi batang bercelah (Biopac), celah panjang tidak perlu ditiru di jalur beban; celah atau lubang pada batang hanya di luar jalur beban.
 
@@ -177,6 +168,8 @@ Kesimpulan: bahan non-logam tidak menyelesaikan masalah pada tebal yang tersedia
 
 Remasan mendorong B ke arah A. Beban yang digantung pada eyelet di sisi luar B menarik B menjauhi A, jadi arahnya kebalikan remasan dan tidak menguji kontak celah pada beban tinggi. Kalibrasi sebaiknya dalam arah remasan: rakitan dibalik (A di bawah dan dijepit ke meja, B di atas), beban acuan 20/45/70 kg ditumpuk pada bidang tumpu datar di pusat zona genggam. Cara menumpuk 70 kg dengan aman dan ketersediaan beban acuan masih terbuka (ini juga risiko di Bagian 6 proposal G1). Keterbatasan setup ini (dari gambar v4): bidang tumpu di antara dua ridge hanya selebar sekitar 22 mm sehingga tumpukan 70 kg tidak stabil dan perlu adaptor alas; A ditumpu meja sehingga lenturan A saat digenggam tidak teruji, hanya celah sisi B yang teruji pada beban tinggi; titik jepit A ke meja terbatas pada sisa batang sekitar 11,5 mm di tiap ujung. Alternatif untuk beban tinggi adalah kalibrasi komparatif terhadap timbangan referensi (FP1), yang belum dirancang. Soal orientasi: kemiringan faktor skala (slope) tidak bergantung orientasi pada pendekatan pertama, sedangkan offset berubah sekitar massa B (sekitar 138 g untuk aluminium 10 mm). Karena auto-tare terjadi di SIAP pada tiap percobaan, kalibrasi dalam orientasi terbalik tetap berlaku untuk slope; yang perlu dijaga adalah orientasi alat antara tare dan remasan.
 
+![Setup kalibrasi dalam arah remasan: rakitan dibalik, A dijepit, beban ditumpuk di bidang tumpu](img/kalibrasi_setup_v4.svg)
+
 ## HL11. Pengadaan pelat logam
 
 - Kata kunci marketplace (listing Tokopedia yang ditemukan memakai ejaan beragam): `plat strip aluminium 10mm`, `plat almunium tebal 10mm lebar 30mm`, `aluminium flat bar 30x10`, tambahkan `potong custom`; untuk jasa: `jasa potong plat aluminium`, `jasa bor plat`. Untuk baja (listing belum diverifikasi): `besi strip`, `plat strip besi 30x6`, `plat besi 6mm potong`. Ukuran stok yang terlihat berlebar 40 mm; lebar 30 mm mungkin perlu dipotong.
@@ -190,7 +183,7 @@ Remasan mendorong B ke arah A. Beban yang digantung pada eyelet di sisi luar B m
 
 ## HL12. Berkas gambar skematik dan catatan pernyataan AI
 
-- Gambar skematik dibuat dengan Claude (Cowork) dari instruksi tertulis, disimpan di folder `housing-grip/` pada Project: `potongan_memanjang.svg`, `exploded_isometrik.svg`, `tampak_atas.svg`, `asumsi.md` (v2); `potongan_memanjang_v3.svg`, `potongan_memanjang_v3_logam.svg`, `exploded_isometrik_v3.svg`, `exploded_isometrik_v3_logam.svg`, `tampak_atas_v3.svg`, `asumsi_v3.md` (v3); `potongan_memanjang_v4_logam.svg`, `exploded_isometrik_v4_logam.svg`, `kalibrasi_setup_v4.svg`, `asumsi_v4.md` (v4, varian aluminium 10 mm). Instruksi: `koreksi.md` (v2 ke v3) dan `koreksi_v2.md` (v3 ke v4: aluminium 10 mm, celah 2,5 mm, bidang tumpu kalibrasi). Gambar v3 dan v4 sudah ditinjau secara visual dan sesuai instruksi koreksi. Hasil v4 (aluminium 10 mm, celah 2,5 mm): lenturan ujung jauh 0,80 mm pada 686 N sehingga sisa celah minimal 1,70 mm sebelum lenturan load cell dan tinggi penutup strain gauge diketahui; tegangan penampang berlubang 130-145 MPa; tebal total 52 mm melebihi kisaran 40-48 mm; aluminium 8 mm dengan celah 2,5 mm lolos celah tetapi gagal tegangan (203-227 MPa).
+- Gambar yang dipasang di dokumen ini (salin ke folder `img/` di samping dokumen): `potongan_memanjang_v4_logam.svg` dan `exploded_isometrik_v4_logam.svg` (HL4), `kalibrasi_setup_v4.svg` (HL10). Semua gambar skematik dibuat dengan Claude (Cowork) dari instruksi tertulis, disimpan di folder `housing-grip/` pada Project: `potongan_memanjang.svg`, `exploded_isometrik.svg`, `tampak_atas.svg`, `asumsi.md` (v2); `potongan_memanjang_v3.svg`, `potongan_memanjang_v3_logam.svg`, `exploded_isometrik_v3.svg`, `exploded_isometrik_v3_logam.svg`, `tampak_atas_v3.svg`, `asumsi_v3.md` (v3); `potongan_memanjang_v4_logam.svg`, `exploded_isometrik_v4_logam.svg`, `kalibrasi_setup_v4.svg`, `asumsi_v4.md` (v4, varian aluminium 10 mm). Instruksi: `koreksi.md` (v2 ke v3) dan `koreksi_v2.md` (v3 ke v4: aluminium 10 mm, celah 2,5 mm, bidang tumpu kalibrasi). Gambar v3 dan v4 sudah ditinjau secara visual dan sesuai instruksi koreksi. Hasil v4 (aluminium 10 mm, celah 2,5 mm): lenturan ujung jauh 0,80 mm pada 686 N sehingga sisa celah minimal 1,70 mm sebelum lenturan load cell dan tinggi penutup strain gauge diketahui; tegangan penampang berlubang 130-145 MPa; tebal total 52 mm melebihi kisaran 40-48 mm; aluminium 8 mm dengan celah 2,5 mm lolos celah tetapi gagal tegangan (203-227 MPa).
 - Untuk Pernyataan Penggunaan AI (Lampiran C), kolom "anything the tool got wrong" yang ditekankan Panduan G1: (1) layout awal mengasumsikan batang kaku tanpa menghitung kekakuan, ditemukan lewat pemeriksaan asumsi Cowork; (2) instruksi koreksi menyatakan penyebaran beban menurunkan tegangan baja di pangkal, salah karena momen pangkal ditentukan pusat beban; (3) titik gantung kalibrasi arahnya kebalikan remasan; (4) hitungan awal hanya melaporkan lenturan di titik beban, bukan di ujung jauh yang menentukan sentuhan; (5) `koreksi_v2.md` memuat dua instruksi yang bertentangan (catatan "stop overload belum dirancang" wajib ada, tetapi kata itu juga dilarang muncul), ditemukan oleh Cowork yang lalu mengikuti instruksi pertama.
 
 ## HL13. Alternatif dan keputusan yang dibatalkan
@@ -248,7 +241,9 @@ Remasan mendorong B ke arah A. Beban yang digantung pada eyelet di sisi luar B m
 
 ## HL19. Riwayat koreksi dan audit
 
-- v1 (dokumen ini): dipisah dari catatan proyek (v31); asumsi gambar skematik v4 digabung sebagai Lampiran A.
+- v1: dipisah dari catatan proyek (v31); asumsi gambar skematik v4 digabung sebagai Lampiran A.
+- v2: diagram ASCII di HL4 diganti SVG mandiri (konsep, nomor callout 1-5).
+- v3: diagram konsep itu diganti gambar Cowork v4: potongan dan exploded di HL4, setup kalibrasi di HL10; daftar HL4 merujuk ke nomor callout gambar v4. Gambar konsep `hl4-layout.svg` tidak dipakai lagi.
 
 ### Audit v27: desain housing
 
