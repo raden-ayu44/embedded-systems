@@ -3,7 +3,7 @@ title: Catatan Proyek - Hand Grip Dynamometer
 
 ---
 
-# Catatan Proyek - Hand Grip Dynamometer (v33)
+# Catatan Proyek - Hand Grip Dynamometer (v34)
 **Final Project - Embedded Systems Course**
 
 > Catatan kerja proyek akhir mata kuliah embedded system (biomedik): keputusan desain beserta alasannya, rujukan, data ukur, dan hal yang masih terbuka. Ditulis supaya bisa dibaca sendiri (offline) tanpa konteks tambahan selain dokumen yang ditautkan. Proposal G1 sudah dikumpulkan; catatan ini sekarang dipakai untuk G2-G4, makalah akhir, dan demo. Bagian 13 merekam isi Bagian 2-3 proposal G1 sebagaimana dikumpulkan, Bagian 14 merangkum desain housing dan menautkan ke dokumen housing yang terpisah, dan Bagian 15 memuat tabel pengukuran dengan jangka sorong.
@@ -12,7 +12,7 @@ title: Catatan Proyek - Hand Grip Dynamometer
 
 | Dokumen | Isi | Status |
 |---|---|---|
-| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Desain housing grip load cell: layout dua batang, kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v4 | Ada (v3) |
+| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Desain housing grip load cell: layout dua batang, kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v4 | Ada (v4) |
 | [desain-housing-elektronik.md](desain-housing-elektronik.md) | Desain housing elektronik (PCB, ESP32, LCD, HX711, tombol, LED; proposal 3.6) | Rencana, belum dibuat |
 
 ---
@@ -456,6 +456,7 @@ Rujukan desain housing grip (dokumentasi alat komersial KG1, GA1, VN1, BP1, PP1,
 - Tenggat gerber: konflik BRP (Minggu 7) dan Panduan G1 (Minggu 8) belum terkonfirmasi (Bagian 3.1). Proposal memakai Minggu 8.
 - Media logging: SD card hanya fasilitas opsional lab (satu unit); cloud opsional menurut Panduan; keputusan: CSV lewat USB-Serial sebagai inti (Bagian 4 dan 6.1).
 - Persyaratan format resmi: status per item di Bagian 3.3.
+- v34: dokumen housing menjadi v4 (tautan ke folder `fusion/`).
 - v33: dokumen housing menjadi v3 (gambar Cowork v4 dipasang di HL4 dan HL10).
 - v32: diagram HL4 di dokumen housing diganti SVG mandiri; dokumen housing menjadi v2.
 - v31: Bagian 14 (desain housing grip), sumber housing (11.9, 11.10), dan audit housing (v27, v28) dipisah ke dokumen housing; tabel pengukuran jangka sorong (Bagian 15) tetap di catatan ini karena dipakai bersama oleh kedua housing dan layout PCB.
@@ -579,7 +580,7 @@ Desain housing dipisah ke dokumen sendiri supaya catatan ini tidak melebar:
 
 | Dokumen | Isi | Status |
 |---|---|---|
-| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Housing grip: layout dua batang dengan load cell, kekakuan batang, kalibrasi, pengadaan pelat, rujukan, asumsi gambar skematik v4 | Ada (v3) |
+| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Housing grip: layout dua batang dengan load cell, kekakuan batang, kalibrasi, pengadaan pelat, rujukan, asumsi gambar skematik v4 | Ada (v4) |
 | [desain-housing-elektronik.md](desain-housing-elektronik.md) | Housing PCB, ESP32, LCD, HX711, tombol, LED (proposal 3.6) | Rencana, belum dibuat |
 
 Ringkasan status (rinci di dokumen housing grip):
