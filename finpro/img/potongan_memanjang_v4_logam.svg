@@ -1,0 +1,320 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1225" viewBox="0 0 1200 1225">
+<title>Potongan memanjang v4 logam</title>
+<defs>
+  <pattern id="hPLA" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <rect width="7" height="7" fill="#c9cdd2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#7d848d" stroke-width="1"/>
+  </pattern>
+  <pattern id="hMET" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <rect width="6" height="6" fill="#a9b0b8"/><line x1="0" y1="0" x2="0" y2="6" stroke="#4d545c" stroke-width="1"/><line x1="0" y1="0" x2="6" y2="0" stroke="#4d545c" stroke-width="0.7"/>
+  </pattern>
+  <pattern id="hLC" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+    <rect width="9" height="9" fill="#8fb6dd"/><line x1="0" y1="0" x2="0" y2="9" stroke="#4f7fb0" stroke-width="0.9"/>
+  </pattern>
+</defs>
+<rect x="0" y="0" width="1200" height="1225" fill="#ffffff"/>
+<text class="lbl" x="30.0" y="40.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="20" text-anchor="start" font-weight="bold" fill="#1f2328">Potongan Memanjang v4 — Pelat Aluminium 10 mm (usulan kerja)</text>
+<text class="lbl" x="30.0" y="62.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12.5" text-anchor="start" font-weight="normal" fill="#5b6169">A (telapak, tetap) di atas · B (jari, bergerak) di bawah · potongan melalui satu baris lubang (pola 2×2 per ujung)</text>
+<line x1="30.0" y1="74.0" x2="1170.0" y2="74.0" stroke="#9aa1aa" stroke-width="1" />
+<text class="lbl" x="1170.0" y="40.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="13" text-anchor="end" font-weight="bold" fill="#1f2328">TIDAK BERSKALA</text>
+<text class="lbl" x="1170.0" y="60.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="end" font-weight="normal" fill="#5b6169">Skematik — dimensi dalam mm, angka awal</text>
+<path d="M150,315 H898.0000000000001 V275 H256.6 V285 H232.6 V275 H227.6 V285 H203.6 V275 H150 Z" fill="url(#hMET)" stroke="#4a5058" stroke-width="1.6" />
+<rect x="200.6" y="315.0" width="59.4" height="22.0" fill="url(#hMET)" stroke="#4a5058" stroke-width="1.4" />
+<path d="M150,447 H898.0000000000001 V487 H844.0 V477 H820.0 V487 H815.0 V477 H791.0 V487 H150 Z" fill="url(#hMET)" stroke="#4a5058" stroke-width="1.6" />
+<rect x="788.0" y="425.0" width="59.4" height="22.0" fill="url(#hMET)" stroke="#4a5058" stroke-width="1.4" />
+<path d="M453.0,487 L457.0,507 H471.0 L475.0,487 Z" fill="#e2ddd2" stroke="#4a5058" stroke-width="1.3" />
+<path d="M573.0,487 L577.0,507 H591.0 L595.0,487 Z" fill="#e2ddd2" stroke="#4a5058" stroke-width="1.3" />
+<rect x="475.0" y="487.0" width="98.0" height="4.0" fill="#e2ddd2" stroke="#4a5058" stroke-width="1.0" stroke-dasharray="4 2"/>
+<rect x="200.6" y="337.0" width="646.8" height="88.0" fill="url(#hLC)" stroke="#2f5f8f" stroke-width="1.6" />
+<path d="M504.0,364.0 H544.0 A17,17 0 0 1 544.0,398.0 H504.0 A17,17 0 0 1 504.0,364.0 Z" fill="#f3f6fa" stroke="#2f5f8f" stroke-width="1.3" />
+<rect x="510.0" y="340.0" width="10.0" height="4.0" fill="#2f5f8f" stroke="#2f5f8f" stroke-width="0.5" />
+<rect x="510.0" y="418.0" width="10.0" height="4.0" fill="#2f5f8f" stroke="#2f5f8f" stroke-width="0.5" />
+<rect x="528.0" y="340.0" width="10.0" height="4.0" fill="#2f5f8f" stroke="#2f5f8f" stroke-width="0.5" />
+<rect x="528.0" y="418.0" width="10.0" height="4.0" fill="#2f5f8f" stroke="#2f5f8f" stroke-width="0.5" />
+<rect x="418.4" y="334.0" width="211.2" height="3.0" fill="#f4f4f2" stroke="#2f5f8f" stroke-width="1.1" />
+<line x1="209.6" y1="337.0" x2="209.6" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<line x1="221.6" y1="337.0" x2="221.6" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<line x1="238.6" y1="337.0" x2="238.6" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<line x1="250.6" y1="337.0" x2="250.6" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<line x1="797.0" y1="337.0" x2="797.0" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<line x1="809.0" y1="337.0" x2="809.0" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<line x1="826.0" y1="337.0" x2="826.0" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<line x1="838.0" y1="337.0" x2="838.0" y2="425.0" stroke="#2f5f8f" stroke-width="0.9" stroke-dasharray="4 3" />
+<rect x="204.6" y="276.0" width="22.0" height="9.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<rect x="209.6" y="285.0" width="12.0" height="92.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<line x1="215.6" y1="271.0" x2="215.6" y2="381.0" stroke="#2b2e33" stroke-width="0.7" stroke-dasharray="8 3 2 3" />
+<rect x="233.6" y="276.0" width="22.0" height="9.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<rect x="238.6" y="285.0" width="12.0" height="92.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<line x1="244.6" y1="271.0" x2="244.6" y2="381.0" stroke="#2b2e33" stroke-width="0.7" stroke-dasharray="8 3 2 3" />
+<rect x="792.0" y="477.0" width="22.0" height="9.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<rect x="797.0" y="385.0" width="12.0" height="92.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<line x1="803.0" y1="381.0" x2="803.0" y2="491.0" stroke="#2b2e33" stroke-width="0.7" stroke-dasharray="8 3 2 3" />
+<rect x="821.0" y="477.0" width="22.0" height="9.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<rect x="826.0" y="385.0" width="12.0" height="92.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<line x1="832.0" y1="381.0" x2="832.0" y2="491.0" stroke="#2b2e33" stroke-width="0.7" stroke-dasharray="8 3 2 3" />
+<path d="M200.6,381 C186.6,381 194.6,323 190,322 H156 C130,322 120,355 95,355 C65,355 65,323 88,325 C110,327 95,375 90,405 V640" fill="none" stroke="#3b3f45" stroke-width="4.2" stroke-linecap="round"/>
+<line x1="90.0" y1="630.0" x2="90.0" y2="660.0" stroke="#3b3f45" stroke-width="4.2" />
+<path d="M90.0,660.0 L85.3,648.9 L94.7,648.9 Z" fill="#3b3f45" stroke="#3b3f45" stroke-width="1" />
+<text class="lbl" x="30.0" y="684.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">kabel 1 m ke housing elektronik</text>
+<rect x="156.0" y="315.0" width="34.0" height="12.0" fill="url(#hPLA)" stroke="#4a5058" stroke-width="1.2" />
+<rect x="159.0" y="318.0" width="28.0" height="6.0" fill="#e9ecef" stroke="#4a5058" stroke-width="0.6" />
+<path d="M474.0,295.0 H230.1 V403 H817.5 V467.0 H584.0" fill="none" stroke="#c46a2b" stroke-width="2.2" stroke-dasharray="7 4" stroke-linejoin="round"/>
+<line x1="434.0" y1="295.0" x2="414.0" y2="295.0" stroke="#c46a2b" stroke-width="2.2" />
+<path d="M414.0,295.0 L421.4,291.9 L421.4,298.1 Z" fill="#c46a2b" stroke="#c46a2b" stroke-width="1" />
+<line x1="230.1" y1="359.0" x2="230.1" y2="373.0" stroke="#c46a2b" stroke-width="2.2" />
+<path d="M230.1,373.0 L227.0,365.6 L233.2,365.6 Z" fill="#c46a2b" stroke="#c46a2b" stroke-width="1" />
+<line x1="594.0" y1="403.0" x2="612.0" y2="403.0" stroke="#c46a2b" stroke-width="2.2" />
+<path d="M612.0,403.0 L604.6,406.1 L604.6,399.9 Z" fill="#c46a2b" stroke="#c46a2b" stroke-width="1" />
+<line x1="817.5" y1="428.0" x2="817.5" y2="435.0" stroke="#c46a2b" stroke-width="2.2" />
+<path d="M817.5,435.0 L814.4,427.6 L820.6,427.6 Z" fill="#c46a2b" stroke="#c46a2b" stroke-width="1" />
+<line x1="767.5" y1="467.0" x2="749.5" y2="467.0" stroke="#c46a2b" stroke-width="2.2" />
+<path d="M749.5,467.0 L756.9,463.9 L756.9,470.1 Z" fill="#c46a2b" stroke="#c46a2b" stroke-width="1" />
+<text class="lbl" x="524.0" y="112.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f2328" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">telapak menekan (F)</text>
+<line x1="524.0" y1="122.0" x2="524.0" y2="270.0" stroke="#1f2328" stroke-width="2.6" />
+<path d="M524.0,270.0 L519.7,259.9 L528.3,259.9 Z" fill="#1f2328" stroke="#1f2328" stroke-width="1" />
+<line x1="524.0" y1="655.0" x2="524.0" y2="495.0" stroke="#1f2328" stroke-width="2.6" />
+<path d="M524.0,495.0 L528.3,505.1 L519.7,505.1 Z" fill="#1f2328" stroke="#1f2328" stroke-width="1" />
+<text class="lbl" x="536.0" y="672.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" font-weight="bold" fill="#1f2328" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">jari menekan (F)</text>
+<line x1="326.0" y1="180.0" x2="722.0" y2="180.0" stroke="#1f2328" stroke-width="1.3" />
+<line x1="326.0" y1="174.0" x2="326.0" y2="186.0" stroke="#1f2328" stroke-width="1.3" />
+<line x1="326.0" y1="186.0" x2="326.0" y2="273.0" stroke="#5b6169" stroke-width="0.7" stroke-dasharray="3 4" />
+<line x1="722.0" y1="174.0" x2="722.0" y2="186.0" stroke="#1f2328" stroke-width="1.3" />
+<line x1="722.0" y1="186.0" x2="722.0" y2="273.0" stroke="#5b6169" stroke-width="0.7" stroke-dasharray="3 4" />
+<text class="lbl" x="732.0" y="184.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="bold" fill="#1f2328" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">zona genggam ≈90 (asumsi, lebar tangan)</text>
+<line x1="260.0" y1="317.0" x2="260.0" y2="210.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="524.0" y1="317.0" x2="524.0" y2="210.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="260.0" y1="214.0" x2="524.0" y2="214.0" stroke="#5b6169" stroke-width="1" />
+<path d="M260.0,214.0 L267.0,211.4 L267.0,216.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M524.0,214.0 L517.0,211.4 L517.0,216.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="392.0" y="209.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">lengan tuas A ≈60 (asumsi)</text>
+<line x1="260.0" y1="317.0" x2="260.0" y2="244.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="847.4" y1="317.0" x2="847.4" y2="244.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="260.0" y1="248.0" x2="847.4" y2="248.0" stroke="#5b6169" stroke-width="1" />
+<path d="M260.0,248.0 L267.0,245.4 L267.0,250.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M847.4,248.0 L840.4,245.4 L840.4,250.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="553.7" y="243.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"></text>
+<text class="lbl" x="600.0" y="243.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">ujung jauh LC ≈133 dari tonjolan A</text>
+<line x1="524.0" y1="427.0" x2="524.0" y2="531.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="788.0" y1="427.0" x2="788.0" y2="531.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="524.0" y1="527.0" x2="788.0" y2="527.0" stroke="#5b6169" stroke-width="1" />
+<path d="M524.0,527.0 L531.0,524.4 L531.0,529.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M788.0,527.0 L781.0,524.4 L781.0,529.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="656.0" y="541.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">lengan tuas B ≈60 (asumsi)</text>
+<line x1="200.6" y1="427.0" x2="200.6" y2="567.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="788.0" y1="427.0" x2="788.0" y2="567.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="200.6" y1="563.0" x2="788.0" y2="563.0" stroke="#5b6169" stroke-width="1" />
+<path d="M200.6,563.0 L207.6,560.4 L207.6,565.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M788.0,563.0 L781.0,560.4 L781.0,565.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="494.3" y="577.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"></text>
+<text class="lbl" x="545.0" y="578.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">ujung jauh LC ≈133 dari tonjolan B</text>
+<line x1="902.0" y1="275.0" x2="932.0" y2="275.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="902.0" y1="315.0" x2="932.0" y2="315.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="928.0" y1="275.0" x2="928.0" y2="315.0" stroke="#5b6169" stroke-width="1" />
+<path d="M928.0,275.0 L925.4,282.0 L930.6,282.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M928.0,315.0 L925.4,308.0 L930.6,308.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="938.0" y="299.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">A ≈10 (TBD)</text>
+<line x1="851.4" y1="315.0" x2="932.0" y2="315.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="851.4" y1="337.0" x2="932.0" y2="337.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="928.0" y1="315.0" x2="928.0" y2="337.0" stroke="#5b6169" stroke-width="1" />
+<path d="M928.0,315.0 L925.4,322.0 L930.6,322.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M928.0,337.0 L925.4,330.0 L930.6,330.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="938.0" y="330.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">celah 2,5 *</text>
+<line x1="851.4" y1="337.0" x2="932.0" y2="337.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="851.4" y1="425.0" x2="932.0" y2="425.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="928.0" y1="337.0" x2="928.0" y2="425.0" stroke="#5b6169" stroke-width="1" />
+<path d="M928.0,337.0 L925.4,344.0 L930.6,344.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M928.0,425.0 L925.4,418.0 L930.6,418.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="938.0" y="385.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">LC 22</text>
+<line x1="851.4" y1="425.0" x2="932.0" y2="425.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="851.4" y1="447.0" x2="932.0" y2="447.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="928.0" y1="425.0" x2="928.0" y2="447.0" stroke="#5b6169" stroke-width="1" />
+<path d="M928.0,425.0 L925.4,432.0 L930.6,432.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M928.0,447.0 L925.4,440.0 L930.6,440.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="938.0" y="440.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">celah 2,5 *</text>
+<line x1="902.0" y1="447.0" x2="932.0" y2="447.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="902.0" y1="487.0" x2="932.0" y2="487.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="928.0" y1="447.0" x2="928.0" y2="487.0" stroke="#5b6169" stroke-width="1" />
+<path d="M928.0,447.0 L925.4,454.0 L930.6,454.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M928.0,487.0 L925.4,480.0 L930.6,480.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="938.0" y="471.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">B ≈10 (TBD)</text>
+<line x1="598.0" y1="487.0" x2="932.0" y2="487.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="598.0" y1="507.0" x2="932.0" y2="507.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="928.0" y1="487.0" x2="928.0" y2="507.0" stroke="#5b6169" stroke-width="1" />
+<path d="M928.0,487.0 L925.4,494.0 L930.6,494.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M928.0,507.0 L925.4,500.0 L930.6,500.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="938.0" y="501.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="start" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">ridge ≈5 (asumsi)</text>
+<line x1="934.0" y1="275.0" x2="1072.0" y2="275.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="934.0" y1="507.0" x2="1072.0" y2="507.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="1068.0" y1="275.0" x2="1068.0" y2="507.0" stroke="#5b6169" stroke-width="1" />
+<path d="M1068.0,275.0 L1065.4,282.0 L1070.6,282.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M1068.0,507.0 L1065.4,500.0 L1070.6,500.0 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="1086.0" y="391.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round" transform="rotate(-90 1086.0 391.0)">total ≈52 (&gt; anggaran awal 40–48)</text>
+<line x1="200.6" y1="419.0" x2="215.6" y2="419.0" stroke="#5b6169" stroke-width="1" />
+<path d="M200.6,419.0 L207.6,416.4 L207.6,421.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M215.6,419.0 L208.6,416.4 L208.6,421.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="208.1" y="414.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"></text>
+<line x1="215.6" y1="419.0" x2="244.6" y2="419.0" stroke="#5b6169" stroke-width="1" />
+<path d="M215.6,419.0 L222.6,416.4 L222.6,421.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M244.6,419.0 L237.6,416.4 L237.6,421.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="230.1" y="414.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"></text>
+<line x1="803.0" y1="353.0" x2="832.0" y2="353.0" stroke="#5b6169" stroke-width="1" />
+<path d="M803.0,353.0 L810.0,350.4 L810.0,355.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M832.0,353.0 L825.0,350.4 L825.0,355.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="817.5" y="348.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"></text>
+<line x1="832.0" y1="353.0" x2="847.4" y2="353.0" stroke="#5b6169" stroke-width="1" />
+<path d="M832.0,353.0 L839.0,350.4 L839.0,355.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M847.4,353.0 L840.4,350.4 L840.4,355.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="839.7" y="348.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"></text>
+<text class="lbl" x="222.6" y="414.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">TBD</text>
+<text class="lbl" x="825.2" y="367.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">TBD</text>
+<line x1="150.0" y1="491.0" x2="150.0" y2="734.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="898.0" y1="491.0" x2="898.0" y2="734.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="150.0" y1="730.0" x2="898.0" y2="730.0" stroke="#5b6169" stroke-width="1" />
+<path d="M150.0,730.0 L157.0,727.4 L157.0,732.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M898.0,730.0 L891.0,727.4 L891.0,732.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="524.0" y="725.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">≈170 (angka awal)</text>
+<line x1="200.6" y1="427.0" x2="200.6" y2="762.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="847.4" y1="427.0" x2="847.4" y2="762.0" stroke="#5b6169" stroke-width="0.8" />
+<line x1="200.6" y1="758.0" x2="847.4" y2="758.0" stroke="#5b6169" stroke-width="1" />
+<path d="M200.6,758.0 L207.6,755.4 L207.6,760.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<path d="M847.4,758.0 L840.4,755.4 L840.4,760.6 Z" fill="#5b6169" stroke="#5b6169" stroke-width="0.5" />
+<text class="lbl" x="524.0" y="753.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#5b6169" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">147 (load cell)</text>
+<line x1="197.2" y1="150.9" x2="215.6" y2="279.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="215.6" cy="279.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="195.6" cy="140.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="195.6" y="144.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">6</text>
+<line x1="280.2" y1="150.9" x2="252.0" y2="322.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="252.0" cy="322.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="282.0" cy="140.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="282.0" y="144.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">4</text>
+<line x1="581.2" y1="151.0" x2="581.2" y2="335.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="581.2" cy="335.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="581.2" cy="140.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="581.2" y="144.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">17</text>
+<line x1="862.8" y1="151.0" x2="862.8" y2="295.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="862.8" cy="295.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="862.8" cy="140.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="862.8" y="144.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">1</text>
+<line x1="145.5" y1="150.1" x2="206.6" y2="295.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="206.6" cy="295.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="141.2" cy="140.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="141.2" y="144.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">18</text>
+<line x1="114.7" y1="219.9" x2="162.0" y2="319.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="162.0" cy="319.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="110.0" cy="210.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="110.0" y="214.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">13</text>
+<circle cx="304.0" cy="371.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="304.0" y="375.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">3</text>
+<circle cx="524.0" cy="381.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="524.0" y="385.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">9</text>
+<circle cx="678.0" cy="367.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="678.0" y="371.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">16</text>
+<circle cx="872.7" cy="381.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="872.7" y="385.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">15</text>
+<line x1="135.8" y1="394.9" x2="192.6" y2="384.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="192.6" cy="384.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="125.0" cy="397.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="125.0" y="401.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">12</text>
+<line x1="37.4" y1="376.8" x2="68.0" y2="343.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="68.0" cy="343.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="30.0" cy="385.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="30.0" y="389.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">14</text>
+<line x1="418.2" y1="601.8" x2="460.0" y2="501.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="460.0" cy="501.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="414.0" cy="612.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="414.0" y="616.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">10</text>
+<line x1="494.3" y1="601.0" x2="497.0" y2="490.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="497.0" cy="490.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="494.0" cy="612.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="494.0" y="616.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">11</text>
+<line x1="327.3" y1="601.1" x2="348.0" y2="432.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="348.0" cy="432.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="326.0" cy="612.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="326.0" y="616.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">8</text>
+<circle cx="634.0" cy="467.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="634.0" y="471.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">2</text>
+<line x1="809.1" y1="601.0" x2="796.0" y2="432.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="796.0" cy="432.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="810.0" cy="612.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="810.0" y="616.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">5</text>
+<line x1="872.6" y1="601.5" x2="834.0" y2="483.0" stroke="#1f2328" stroke-width="1" />
+<circle cx="834.0" cy="483.0" r="2.3" fill="#1f2328" stroke="#1f2328" stroke-width="0.5"/>
+<circle cx="876.0" cy="612.0" r="11.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="876.0" y="616.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">7</text>
+<rect x="30.0" y="780.0" width="1140.0" height="72.0" fill="#eef2f6" stroke="#4d545c" stroke-width="1.4" rx="4"/>
+<text class="lbl" x="46.0" y="802.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" font-weight="bold" fill="#1f2328">Tebal total ≈52 mm = pelat A 10 + celah 2,5 + LC 22 + celah 2,5 + pelat B 10 + ridge ≈5  (melebihi anggaran awal 40–48)</text>
+<text class="lbl" x="46.0" y="822.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Pelat aluminium 10 mm, paduan TBD — usulan kerja, bukan keputusan final. Celah 2,5 = celah bebas-sentuh.</text>
+<text class="lbl" x="46.0" y="840.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="bold" fill="#1f2328">Stop overload belum dirancang.</text>
+<text class="lbl" x="30.0" y="880.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" font-weight="bold" fill="#1f2328">Catatan</text>
+<text class="lbl" x="30.0" y="902.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">* Celah bebas-sentuh 2,5 mm (A–LC dan B–LC) DIGAMBAR DIPERBESAR. Satu-satunya jalur gaya A → B adalah load cell (garis jingga, 16).</text>
+<text class="lbl" x="30.0" y="920.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">• Kabel hanya terikat ke A dan ujung tetap LC. Ujung baut tidak boleh menembus permukaan LC di seberangnya.</text>
+<text class="lbl" x="30.0" y="938.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">• Zona genggam ≈90 &amp; lengan tuas ≈60: asumsi. Lenturan terbesar ada di ujung jauh LC (≈133 dari tonjolan), bukan di titik tekan (lihat asumsi_v4.md).</text>
+<text class="lbl" x="30.0" y="956.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">• Lubang baut di pangkal mengurangi penampang pelat (lihat hitungan). Ø lubang TBD. Panjang tonjolan: TBD, mengikuti panjang pola lubang.</text>
+<text class="lbl" x="30.0" y="974.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">• TBD: ulir, Ø &amp; jarak lubang, jarak dari ujung, tembus/buta (C6), sisi LC searah beban, ujung keluar kabel.</text>
+<text class="lbl" x="30.0" y="992.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">• Hanya A dan B berganti bahan; load cell tetap alum. alloy 147×30×22. Pelat dipotong &amp; dibor (bengkel). Elektronik tidak digambar.</text>
+<text class="lbl" x="30.0" y="1025.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" font-weight="bold" fill="#1f2328" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">Legenda</text>
+<circle cx="41.0" cy="1043.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1047.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">1</text>
+<text class="lbl" x="58.0" y="1047.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Batang A — telapak, tetap (pelat alum. 10, paduan TBD)</text>
+<circle cx="41.0" cy="1061.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1065.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">2</text>
+<text class="lbl" x="58.0" y="1065.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Batang B — jari, bergerak (pelat alum. 10, paduan TBD)</text>
+<circle cx="41.0" cy="1079.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1083.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">3</text>
+<text class="lbl" x="58.0" y="1083.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Load cell 180 kg, 147×30×22 (alum. alloy)</text>
+<circle cx="41.0" cy="1097.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1101.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">4</text>
+<text class="lbl" x="58.0" y="1101.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Tonjolan A 2,5 — panjang TBD (ikut pola lubang)</text>
+<circle cx="41.0" cy="1115.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1119.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">5</text>
+<text class="lbl" x="58.0" y="1119.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Tonjolan B 2,5 — panjang TBD (ikut pola lubang)</text>
+<circle cx="41.0" cy="1133.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1137.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">6</text>
+<text class="lbl" x="58.0" y="1137.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Baut ujung tetap, dari sisi A (TBD)</text>
+<circle cx="41.0" cy="1151.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1155.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">7</text>
+<text class="lbl" x="58.0" y="1155.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Baut ujung bebas, dari sisi B (TBD)</text>
+<circle cx="41.0" cy="1169.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1173.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">8</text>
+<text class="lbl" x="58.0" y="1173.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Celah bebas-sentuh 2,5 (diperbesar)</text>
+<circle cx="41.0" cy="1187.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="41.0" y="1191.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">9</text>
+<text class="lbl" x="58.0" y="1191.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Area elemen ukur — tidak boleh tersentuh</text>
+<circle cx="451.0" cy="1043.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1047.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">10</text>
+<text class="lbl" x="468.0" y="1047.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Ridge penahan jari (bahan TBD)</text>
+<circle cx="451.0" cy="1061.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1065.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">11</text>
+<text class="lbl" x="468.0" y="1065.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Bidang tumpu kalibrasi, datar (bahan TBD)</text>
+<circle cx="451.0" cy="1079.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1083.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">12</text>
+<text class="lbl" x="468.0" y="1083.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Kabel 110 cm, keluar dari ujung tetap (TBD)</text>
+<circle cx="451.0" cy="1097.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1101.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">13</text>
+<text class="lbl" x="468.0" y="1101.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Penjepit kabel pada A (PLA)</text>
+<circle cx="451.0" cy="1115.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1119.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">14</text>
+<text class="lbl" x="468.0" y="1119.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Lengkungan sisa kabel</text>
+<circle cx="451.0" cy="1133.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1137.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">15</text>
+<text class="lbl" x="468.0" y="1137.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Celah ujung A–B, tanpa sambungan</text>
+<circle cx="451.0" cy="1151.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1155.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">16</text>
+<text class="lbl" x="468.0" y="1155.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Jalur gaya tunggal (A → LC → B)</text>
+<circle cx="451.0" cy="1169.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1173.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">17</text>
+<text class="lbl" x="468.0" y="1173.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Penutup putih area strain gauge (tinggi TBD)</text>
+<circle cx="451.0" cy="1187.0" r="10.0" fill="#ffffff" stroke="#1f2328" stroke-width="1.4"/>
+<text class="num" x="451.0" y="1191.3" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2328">18</text>
+<text class="lbl" x="468.0" y="1191.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Lubang baut di pangkal pelat (Ø TBD)</text>
+<text class="lbl" x="850.0" y="1025.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="14" text-anchor="start" font-weight="bold" fill="#1f2328">Arsiran</text>
+<rect x="850.0" y="1039.0" width="34.0" height="18.0" fill="url(#hMET)" stroke="#4a5058" stroke-width="1.2" />
+<text class="lbl" x="894.0" y="1053.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Pelat aluminium A/B</text>
+<rect x="850.0" y="1065.0" width="34.0" height="18.0" fill="url(#hPLA)" stroke="#4a5058" stroke-width="1.2" />
+<text class="lbl" x="894.0" y="1079.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">PLA (bagian cetak)</text>
+<rect x="850.0" y="1091.0" width="34.0" height="18.0" fill="url(#hLC)" stroke="#2f5f8f" stroke-width="1.2" />
+<text class="lbl" x="894.0" y="1105.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Load cell (aluminium alloy)</text>
+<rect x="850.0" y="1117.0" width="34.0" height="18.0" fill="#e2ddd2" stroke="#4a5058" stroke-width="1.2" />
+<text class="lbl" x="894.0" y="1131.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Ridge / bidang tumpu (TBD)</text>
+<rect x="850.0" y="1143.0" width="34.0" height="18.0" fill="#5a5f66" stroke="#2b2e33" stroke-width="1.2" />
+<text class="lbl" x="894.0" y="1157.0" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#1f2328">Baut (tidak diarsir)</text>
+</svg>
