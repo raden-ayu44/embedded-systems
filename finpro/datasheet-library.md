@@ -39,7 +39,6 @@ Rak ini menampung sumber tingkat komponen. Rak teori dan literatur (buku dan pap
 | S2 | Avia Semiconductor, *HX711 24-Bit Analog-to-Digital Converter (ADC) for Weigh Scales* (datasheet resmi, chip) [2]. Tautan: https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf (salinan di SparkFun; pabrikan Avia) |
 | S3 | *HX711: 24-bit Delta Sigma ADC interface for weight scale*, PSoC Creator Component datasheet, v0.0.b, Rev. *B, 30 Maret 2020 (pihak ketiga, bukan pabrikan; berisi manual pemakaian dan catatan pengamatan) [3]. Tautan: https://community.infineon.com/gfawx74859/attachments/gfawx74859/CodeExamples/546/7/HX711_v0_0_B.pdf (tanggal akses: **ISI**). Dokumen ini sendiri merujuk S2 pada alamat SparkFun yang sama. |
 | Bukti bahwa S3 membahas papan yang sama | Gambar 1 di S3 menunjukkan papan hijau bertanda XFW-HX711 dengan label pin yang sama dengan foto listing S1 (E+, E-, A-, A+, B-, B+ dan GND, DT, SCK, VCC) dan penanda 80Hz/10Hz di sisi atas. Foto S1 menunjukkan tanda "10Hz" di posisi yang sama. |
-| Pendukung (bukan sumber utama) | Halaman produk e-Gizmo (Filipina) yang menyalin deskripsi Avia dan menampilkan papan yang sama |
 | Catatan | Avia adalah pabrikan **chip**, bukan papan modul. Papan XFW-HX711 adalah desain pihak ketiga. Bagian papan (transistor regulator, filter RC input, resistor pemilih rate) tidak tercakup dalam S2. |
 
 ### Tabel A: spesifikasi vendor (S1), pemeriksaan silang ke S2, dan catatan S3
@@ -119,9 +118,3 @@ Nomor [1]-[3] mengikuti urutan kemunculan di tabel Identitas. Seperti kode lokal
 [2] Avia Semiconductor, "HX711: 24-bit analog-to-digital converter (ADC) for weigh scales," datasheet, n.d. [Online]. Available: https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf (diakses 8 Okt. 2026).
 
 [3] "HX711: 24-bit delta sigma ADC interface for weight scale," PSoC Creator Component Datasheet, v0.0.b, Rev. *B, Infineon Developer Community, Code Examples, Mar. 30, 2020. [Online]. Available: https://community.infineon.com/gfawx74859/attachments/gfawx74859/CodeExamples/546/7/HX711_v0_0_B.pdf (diakses 8 Okt. 2026).
-
-**Catatan sitasi (hapus setelah dicek):**
-- [1]: nama toko "CNC STORE BANDUNG" sudah dicocokkan dengan tangkapan layar halaman toko pada tautan yang sama (8 Okt. 2026). Judul diambil dari bagian URL; samakan dengan judul di halaman produk. Ganti tanggal akses bila Anda membukanya di tanggal lain. Parameter pelacak (`?xptdk=...`) pada tautan asli sengaja dibuang.
-- [2]: dokumen tidak mencantumkan tanggal atau revisi pada halamannya ("n.d."); tautan adalah salinan yang di-hosting SparkFun, bukan situs Avia.
-- [3]: penulis tidak tertulis di halaman dokumen (metadata PDF menyebut nama "Irina", tetapi itu bukan data yang dicetak, jadi tidak dipakai sebagai penulis). Tautan adalah lampiran komunitas, bukan dokumen resmi pabrikan.
-- Halaman e-Gizmo (pendukung) tidak diberi nomor karena bukan sumber utama.
