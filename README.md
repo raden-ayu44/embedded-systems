@@ -1,6 +1,6 @@
 # Embedded Systems
 
-Personal archive for the Biomedical Embedded Systems course (ENBM605026): Arduino/ESP32 sketches, notes, wiring diagrams, video links, and the final project documentation.
+Personal archive for an embedded system course: Arduino/ESP32 sketches, notes, wiring diagrams, video links, and the final project documentation.
 
 ## Structure
 
@@ -21,12 +21,12 @@ finpro/     → final project: hand grip dynamometer (design docs, drawings, cal
 
 ## Final project: hand grip dynamometer (`finpro/`)
 
-A hand grip strength meter (Kelompok 01). Two plates are squeezed, a load cell between them measures the force, an HX711 digitizes it, and an ESP32 shows the result on an LCD and logs it to CSV over USB serial.
+A hand grip strength meter (group project). Two plates are squeezed, a load cell between them measures the force, an HX711 digitizes it, and an ESP32 shows the result on an LCD and logs it to CSV over USB serial.
 
 - Target range: 20 to 70 kgf.
 - Parts: ESP32 DevKit V1, HX711 module, CZL 601 80 kg bending-beam load cell, 16×2 I2C LCD, push button, LED.
 - Housing: two plain aluminium plates (170 × 30 × 10 mm) with PLA spacers (28 × 28 × 2.5 mm), joined to the load cell with M6 × 25 bolts.
-- Budget: maximum Rp300.000 per group.
+- Budget: maximum Rp300.000 per team.
 
 **Status:** design and documentation stage. The ESP32 and its six project pins have been tested; the housing, the wiring, and the calibration are still proposals. There is no measurement data from the load cell yet, and nothing in `finpro/` has been verified on hardware.
 
