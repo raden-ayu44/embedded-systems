@@ -3,7 +3,7 @@ title: Catatan Proyek - Hand Grip Dynamometer
 
 ---
 
-# Catatan Proyek - Hand Grip Dynamometer (v34)
+# Catatan Proyek - Hand Grip Dynamometer (v37)
 **Final Project - Embedded Systems Course**
 
 > Catatan kerja proyek akhir mata kuliah embedded system (biomedik): keputusan desain beserta alasannya, rujukan, data ukur, dan hal yang masih terbuka. Ditulis supaya bisa dibaca sendiri (offline) tanpa konteks tambahan selain dokumen yang ditautkan. Proposal G1 sudah dikumpulkan; catatan ini sekarang dipakai untuk G2-G4, makalah akhir, dan demo. Bagian 13 merekam isi Bagian 2-3 proposal G1 sebagaimana dikumpulkan, Bagian 14 merangkum desain housing dan menautkan ke dokumen housing yang terpisah, dan Bagian 15 memuat tabel pengukuran dengan jangka sorong.
@@ -12,7 +12,7 @@ title: Catatan Proyek - Hand Grip Dynamometer
 
 | Dokumen | Isi | Status |
 |---|---|---|
-| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Desain housing grip load cell: layout dua batang, kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v4 | Ada (v4) |
+| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Desain housing grip load cell: layout dua batang, kekakuan batang, kalibrasi, pengadaan pelat, rujukan, dan asumsi gambar skematik v5 | Ada (v7) |
 | [desain-housing-elektronik.md](desain-housing-elektronik.md) | Desain housing elektronik (PCB, ESP32, LCD, HX711, tombol, LED; proposal 3.6) | Rencana, belum dibuat |
 
 ---
@@ -344,9 +344,9 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 | Deteksi "data tidak tersimpan" (GAGALSIMPAN) | Terbuka | Protokol ACK dipilih (Bagian 6.1): modifikasi `logger.py`, nilai timeout ACK, uji baris hilang atau terpotong |
 | Sumber riwayat sesi sebelumnya | Terbuka | RINGKASAN dan proposal 3.5 menyebut perbandingan dengan sesi sebelumnya, tetapi CSV berada di laptop, bukan di ESP32. Pilihan: (a) ESP32 menyimpan ringkasan sesi terakhir di flash (NVS), (b) `logger.py` mengirim riwayat kembali, (c) perbandingan dilakukan di analisis pasca-pengukuran dan layar hanya menampilkan sesi berjalan. Perlu diputuskan, termasuk menyelaraskan teks 3.5 |
 | Angka yang menunggu uji fisik | Terbuka | `thresholdOnset`, `thresholdStabilitas`, refresh rate LCD (kisaran 50-500 ms), durasi tare (sekitar 1 s), timeout HX711, ambang saturasi ADC, durasi tekan-tahan (1-2 s), timeout ACK |
-| Desain housing grip | Terbuka | Layout dipilih ([HL4](desain-housing-load-cell.md#hl4-tata-letak-terpilih-dua-batang-dengan-load-cell-di-antaranya)). Pelat PLA 7 mm terbukti terlalu lentur; usulan kerja pelat aluminium 10 mm dengan celah minimal 2,5 mm ([HL9](desain-housing-load-cell.md#hl9-temuan-kekakuan-batang-dan-usulan-bahan)), belum diputuskan. Menunggu pengukuran load cell (Bagian 15, C2-C5), tinggi penutup strain gauge, dan prototipe kardus |
+| Desain housing grip | Terbuka | Layout dipilih ([HL4](desain-housing-load-cell.md#hl4-tata-letak-terpilih-dua-batang-dengan-load-cell-di-antaranya)). Pelat PLA 7 mm terbukti terlalu lentur; pelat aluminium polos 10 mm diputuskan, celah 2,5 mm, spacer PLA terpisah 28 x 28 x 2,5 mm, baut M6 x 25, untuk load cell CZL 601 80 kg (130 x 28 x 22 mm menurut gambar penjual; [HL9](desain-housing-load-cell.md#hl9-temuan-kekakuan-batang-dan-usulan-bahan)). Menunggu pengukuran load cell (Bagian 15, C1-C7: lebar, ulir tembus atau buta, ujung kabel, diameter dan panjang kabel), tinggi penutup strain gauge, dan prototipe kardus |
 | Jadwal | Ada di proposal (Bagian 5) | Terkait konflik tenggat gerber (Bagian 3.1) |
-| Risiko | Ada di proposal (Bagian 6) | Kandidat tambahan dari desain housing: batang melentur menyentuh load cell atau patah ([HL9](desain-housing-load-cell.md#hl9-temuan-kekakuan-batang-dan-usulan-bahan)); lubang baut mengurangi penampang pelat di pangkal; kabel load cell tertarik terbaca sebagai gaya; dua bagian bersentuhan (jalur gaya paralel); arah beban kalibrasi dan keamanan menumpuk 70 kg ([HL10](desain-housing-load-cell.md#hl10-arah-beban-kalibrasi)); pelat logam butuh akses bengkel dan anggaran ([HL11](desain-housing-load-cell.md#hl11-pengadaan-pelat-logam)); ketersediaan beban acuan 70 kg |
+| Risiko | Ada di proposal (Bagian 6) | Kandidat tambahan dari desain housing: batang melentur menyentuh load cell atau patah ([HL9](desain-housing-load-cell.md#hl9-temuan-kekakuan-batang-dan-usulan-bahan)); lubang baut mengurangi penampang pelat di pangkal; kabel load cell tertarik terbaca sebagai gaya; dua bagian bersentuhan (jalur gaya paralel); arah beban kalibrasi, kalibrasi hanya sampai 42 kg dengan ekstrapolasi ke 70 kgf, dan A yang bertumpu pada kepala baut saat kalibrasi ([HL10](desain-housing-load-cell.md#hl10-kalibrasi-dan-arah-beban)); kabel load cell pendek (sekitar 28-42 cm) dan diameternya belum diukur ([HL4](desain-housing-load-cell.md#hl4-tata-letak-terpilih-dua-batang-dengan-load-cell-di-antaranya)); pelat logam butuh akses bengkel dan anggaran ([HL11](desain-housing-load-cell.md#hl11-pengadaan-pelat-logam)); ketersediaan beban acuan (dumbbell berpasangan sampai 42 kg milik anggota) |
 | Consent partisipan | Tidak relevan | v5 hanya menguji anggota tim sendiri (Bagian 4) |
 | Link supplier | Terbuka | Ada di proposal (Shopee), belum disalin ke catatan |
 
@@ -354,7 +354,7 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 
 | No | Komponen | Part number | Qty | Sumber | Harga satuan | Subtotal | Catatan |
 |---|---|---|---|---|---|---|---|
-| 1 | ESP32 DevKit | ESP32-WROOM-32 | 1 | Lab | - | - | Disediakan lab. Cek varian fisik (WROOM atau WROVER) sebelum pin dikunci: GPIO 16/17 dipakai PSRAM di WROVER, sedangkan GPIO 18/19 aman di keduanya |
+| 1 | ESP32 DevKit | ESP32-WROOM-32 | 1 | Lab | - | - | Disediakan lab (kelompok sudah memiliki papan DevKit V1). Cek varian fisik (WROOM atau WROVER) sebelum pin dikunci: GPIO 16/17 dipakai PSRAM di WROVER, sedangkan GPIO 18/19 aman di keduanya. Uji 8 Okt. 2026 (DS-ESP1 di `ds-library.md`): chip ESP32-D0WD-V3 rev v3.1, flash 4 MB, tanpa PSRAM; pin 18, 19, 21, 22, 25, 27 lolos loopback; akhiran modul (WROOM-32D atau -32E) belum dipastikan |
 | 2 | Load cell straight-bar 180 kg (4 kabel, kabel 110 cm, shield) | Generik ("Nankai/YZC-133", tanpa P/N pabrikan) | 1 | Beli (Shopee) | Rp193.375 | Rp193.375 | Rated output 2,0±0,2 mV/V, non-linearity 0,02% FS, kelas C3, creep 0,0016% FS (30 menit), overload aman 150% FS, destruktif 200% FS, eksitasi 4-12 VDC (maks 15 V), IP67, aluminium, 147 x 30 x 22 mm. Harga naik dari estimasi awal Rp115.000 |
 | 3 | Modul HX711 | HX711 | 1 | Beli | Rp8.500 | Rp8.500 | Channel A saja; daya 2,7-5 V dari ESP32 |
 | 4 | LCD 16x2 + backpack I2C | LCD1602 (HD44780) + PCF8574T | 1 | Beli | Rp39.500 | Rp39.500 | Dicatu 3,3 V. Datasheet penjual menyebut tegangan kerja 3 V dan 5 V, jadi aman dari jalur 3V3 ESP32. Alamat I2C 0x27 atau 0x3f |
@@ -363,6 +363,13 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 | | Total pembelian | | | | | **Rp253.875** + ongkir | Batas Rp300.000. Proposal menulis 253.375 (selisih Rp500 dari penjumlahan baris) |
 
 Resistor pembatas LED termasuk komponen pasif lab (BRP D.5) dan tidak dibeli. Breadboard dan kabel jumper juga disediakan lab.
+
+#### 9.1.1 Perubahan setelah proposal (v37)
+
+Tabel di atas merekam BOM proposal G1 apa adanya. Perubahan sesudahnya:
+- **Load cell diganti.** Yang dibeli adalah CZL 601 80 kg (listing Automa-88, Shopee; DS-LC1 di `ds-library.md`), bukan load cell generik 180 kg pada baris 2. Spesifikasi di baris 2 (2,0 mV/V, overload 150%, kabel 110 cm, 147 x 30 x 22 mm) tidak berlaku lagi. Nilai baru dari DS-LC1: 130 x 28 x 22 mm (gambar penjual; GJ Impex menulis lebar 30 mm), sensitivitas 2,0±0,2 mV/V (vendor), error gabungan ±0,03 %RO (sekitar ±24 g, sekitar ±34 g bila digabung dengan suhu dan drift HX711), overload yang dipakai desain 120% / 150% (96 / 120 kgf), kabel sekitar 28 cm (listing) atau 0,42 m (GJ Impex). Harga pembelian tidak tercatat di catatan ini: isi dari bukti beli, lalu hitung ulang total dan sisa anggaran (Rp253.875 di atas masih memuat Rp193.375 untuk load cell lama).
+- **Komponen housing grip yang belum ada di BOM** ([HL11](desain-housing-load-cell.md#hl11-pengadaan-pelat-logam)): pelat aluminium 170 x 30 x 10 mm (2 pcs + 1 cadangan; grade dicantumkan) dan jasa potong atau bor, baut M6 x 25 dan washer logam (4 buah, lebih satu set cadangan), filamen PLA untuk spacer 28 x 28 x 2,5 mm dan penjepit kabel (printer lab), serta kabel sambungan load cell (shielded, 4 inti, panjang TBD) bila housing elektronik tidak berada dalam jangkauan kabel 28-42 cm. Harga belum diverifikasi.
+- Anggota kelompok sudah memiliki ESP32 DevKit V1, LED 5 mm, tombol, resistor, breadboard, dan kabel jumper; LCD, modul HX711, dan load cell sudah dibeli. Daftar komponen yang diminta dari lab disusun terpisah (tab Kelompok 01).
 
 ---
 
@@ -456,6 +463,9 @@ Rujukan desain housing grip (dokumentasi alat komersial KG1, GA1, VN1, BP1, PP1,
 - Tenggat gerber: konflik BRP (Minggu 7) dan Panduan G1 (Minggu 8) belum terkonfirmasi (Bagian 3.1). Proposal memakai Minggu 8.
 - Media logging: SD card hanya fasilitas opsional lab (satu unit); cloud opsional menurut Panduan; keputusan: CSV lewat USB-Serial sebagai inti (Bagian 4 dan 6.1).
 - Persyaratan format resmi: status per item di Bagian 3.3.
+- v37: dokumen housing menjadi v7: disesuaikan dengan load cell CZL 601 80 kg (130 x 28 x 22 mm), gambar v5 (spacer 28 mm, a = 37 mm, pelat aluminium 10 mm diputuskan, baut M6 x 25, kabel Ø5 mm asumsi), dan metode kalibrasi dumbbell (HL10); Bagian 9, 9.1.1, 14, 15 diperbarui; Bagian 13 tetap sebagai proposal yang dikumpulkan.
+- v36: dokumen housing menjadi v6 (parameter posisi spacer).
+- v35: dokumen housing menjadi v5 (spacer PLA terpisah 30 x 30 mm; hitungan kekakuan diperbarui).
 - v34: dokumen housing menjadi v4 (tautan ke folder `fusion/`).
 - v33: dokumen housing menjadi v3 (gambar Cowork v4 dipasang di HL4 dan HL10).
 - v32: diagram HL4 di dokumen housing diganti SVG mandiri; dokumen housing menjadi v2.
@@ -486,6 +496,8 @@ Audit v27 dan v28 (kekakuan batang, arah beban kalibrasi, hasil gambar v4) dipin
 ---
 
 ## 13. ISI PROPOSAL G1 BAGIAN 2-3 (SEBAGAIMANA DIKUMPULKAN)
+
+> Catatan v37: bagian ini merekam proposal apa adanya dan tidak diubah. Load cell yang ditulis di sini (generik 180 kg, 2,0 mV/V, non-linearity 0,02% FS, tolerance ±0,036 kg, headroom besar di atas 70 kg) sudah diganti CZL 601 80 kg (Bagian 9.1.1). Akibatnya: error gabungan load cell sekitar ±24 g (±34 g dengan suhu dan drift HX711), bukan ±36 g dari satu komponen; 70 kgf adalah 87,5% kapasitas, jadi "headroom besar" tidak lagi benar; eksitasi dan penguatan HX711 perlu dicek terhadap DS-LC1 dan DS-HX1. Tinjau ulang S1 dan Bagian 13.5 sebelum dipakai di laporan akhir.
 
 *Salinan ringkas untuk referensi offline. Teks asli ada di berkas proposal. Jika ada beda dengan Bagian 4-9 catatan ini, versi catatan yang lebih baru berlaku untuk pekerjaan berikutnya, dan beda itu dicatat di Bagian 12.*
 
@@ -580,15 +592,15 @@ Desain housing dipisah ke dokumen sendiri supaya catatan ini tidak melebar:
 
 | Dokumen | Isi | Status |
 |---|---|---|
-| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Housing grip: layout dua batang dengan load cell, kekakuan batang, kalibrasi, pengadaan pelat, rujukan, asumsi gambar skematik v4 | Ada (v4) |
+| [desain-housing-load-cell.md](desain-housing-load-cell.md) | Housing grip: layout dua batang dengan load cell, kekakuan batang, kalibrasi (protokol dumbbell), pengadaan pelat, rujukan, asumsi gambar skematik v5 | Ada (v7) |
 | [desain-housing-elektronik.md](desain-housing-elektronik.md) | Housing PCB, ESP32, LCD, HX711, tombol, LED (proposal 3.6) | Rencana, belum dibuat |
 
 Ringkasan status (rinci di dokumen housing grip):
 - Dua housing terpisah: grip hanya berisi load cell, elektronik di housing sendiri ([HL1](desain-housing-load-cell.md#hl1-keputusan-dua-housing-terpisah)).
 - Layout grip: batang A (telapak, tetap) dan batang B (jari, bergerak) dengan load cell di antaranya ([HL4](desain-housing-load-cell.md#hl4-tata-letak-terpilih-dua-batang-dengan-load-cell-di-antaranya)).
-- Pelat PLA 7 mm terbukti terlalu lentur. Usulan kerja: pelat aluminium 10 mm, celah minimal 2,5 mm, tebal total sekitar 52 mm; belum diputuskan ([HL9](desain-housing-load-cell.md#hl9-temuan-kekakuan-batang-dan-usulan-bahan)).
+- Pelat PLA 7 mm terbukti terlalu lentur. Diputuskan: pelat polos aluminium 10 mm (tebal total sekitar 52 mm tanpa kepala baut) dengan celah 2,5 mm dan spacer PLA terpisah 28 x 28 x 2,5 mm untuk load cell CZL 601; lenturan ujung jauh 0,24 mm pada 70 kgf, sisa celah minimal 2,26 mm ([HL9](desain-housing-load-cell.md#hl9-temuan-kekakuan-batang-dan-usulan-bahan)). Paduan aluminium, lebar load cell, diameter lubang, ulir tembus atau buta, dan kabel masih TBD.
 - Menunggu: pengukuran load cell (Bagian 15), jawaban dosen atau TA dan konsultasi teknik mesin ([HL20](desain-housing-load-cell.md#hl20-pertanyaan-terbuka-untuk-dosen-atau-ta-dan-konsultasi-teknik-mesin)), serta prototipe kardus ([HL14](desain-housing-load-cell.md#hl14-urutan-prototipe-kardus-sampai-cetak)).
-- Cara memberi beban kalibrasi 70 kg belum diputuskan ([HL10](desain-housing-load-cell.md#hl10-arah-beban-kalibrasi)).
+- Kalibrasi memakai protokol dumbbell sampai 42 kg ([protokol-kalibrasi-hgd.md](protokol-kalibrasi-hgd.md), [HL10](desain-housing-load-cell.md#hl10-kalibrasi-dan-arah-beban)); 42 sampai 70 kgf adalah ekstrapolasi, dan protokol belum diuji.
 
 Tabel pengukuran jangka sorong (Bagian 15) tetap di catatan ini karena dipakai bersama oleh kedua housing dan layout PCB.
 
@@ -611,7 +623,7 @@ Cara mengukur:
 
 | ID | Komponen | Dimensi yang diukur | Rahang | Dipakai untuk | Nominal atau sumber | Hasil (mm) |
 |---|---|---|---|---|---|---|
-| E1 | ESP32 DevKit (ESP32-WROOM-32) | Panjang papan PCB (tanpa pin) | L | [Housing] outline dan ruang | Bervariasi antar merek; ukur | |
+| E1 | ESP32 DevKit V1 (modul WROOM-32, chip D0WD-V3) | Panjang papan PCB (tanpa pin) | L | [Housing] outline dan ruang | Bervariasi antar merek; ukur | |
 | E2 | | Lebar papan PCB | L | [Housing] outline dan ruang | Idem | |
 | E3 | | Tebal PCB saja | L | [Housing] slot atau penahan | - | |
 | E4 | | Tinggi total (PCB + modul WROOM + konektor USB, tanpa pin bawah) | L atau K | [Housing] kedalaman ruang di bawah lid | - | |
@@ -649,17 +661,17 @@ Cara mengukur:
 | D4 | | Diameter dan jarak antar lubang mounting | D | [Housing] tiang mounting | Umumnya sekitar 75 x 31 mm; ukur | |
 | D5 | | Tinggi backpack I2C di belakang PCB | K | [Housing] clearance | - | |
 | D6 | | Posisi dan pitch header 4 pin (GND, VCC, SDA, SCL) dari tepi | L | [PCB] footprint | 2,54 mm (umum) | |
-| C1 | Load cell 180 kg | Panjang x lebar x tinggi | L | [Grip] verifikasi spesifikasi | 147 x 30 x 22 mm (spesifikasi) | |
-| C2 | | Diameter lubang baut di ujung tetap dan ujung bebas (KRITIS) | D | [Grip] lubang baut di tonjolan A dan B | - | |
-| C3 | | Jarak pusat-ke-pusat antar lubang di tiap ujung (KRITIS) | L atau D | [Grip] pola lubang | - | |
-| C4 | | Jarak pusat lubang dari ujung badan | K atau L | [Grip] posisi tonjolan | - | |
-| C5 | | Arah panah beban dan sisi (22 atau 30 mm) yang searah panah (KRITIS; catat, bukan ukur) | - | [Grip] sisi yang menghadap telapak, tebal total grip | - | |
+| C1 | Load cell CZL 601 80 kg | Panjang x lebar x tinggi | L | [Grip] verifikasi spesifikasi | 130 x 28 x 22 mm (gambar penjual; GJ Impex menulis lebar 30 mm) | |
+| C2 | | Diameter lubang baut di ujung tetap dan ujung bebas (KRITIS) | D | [Grip] lubang baut di pelat dan spacer A dan B | Ulir M6 (gambar penjual) | |
+| C3 | | Jarak pusat-ke-pusat antar lubang di tiap ujung (KRITIS) | L atau D | [Grip] pola lubang | 106 mm antar pasangan, 15 mm melintang (gambar penjual) | |
+| C4 | | Jarak pusat lubang dari ujung badan | K atau L | [Grip] posisi dan panjang spacer | 12 mm (gambar penjual) | |
+| C5 | | Arah panah beban dan sisi (22 atau 28 mm) yang searah panah (KRITIS; catat, bukan ukur) | - | [Grip] sisi yang menghadap telapak, tebal total grip | - | |
 | C6 | | Lubang tembus atau buta, polos atau berulir; kedalaman | K atau D | [Grip] jenis dan panjang baut | - | |
-| C7 | | Posisi keluar kabel dan diameter kabel | L | [Grip] jepit kabel | Panjang kabel 110 cm (ukur dengan meteran) | |
+| C7 | | Posisi keluar kabel dan diameter kabel | L | [Grip] jepit kabel dan jangkauan housing elektronik | Panjang kabel sekitar 28 cm (listing) atau 0,42 m (GJ Impex), ukur dengan meteran; diameter 4 mm (GJ Impex), asumsi kerja 5 mm, ukur | |
 | C8 | | Slot atau lubang di tengah badan (diameter, posisi), jika ada | D | [Grip] petunjuk tipe elemen dan kepekaan titik tekan | - | |
-| F1 | Baut yang dipakai | Diameter ulir dan panjang di bawah kepala | L | [Grip] [Cetak] lubang dan panjang baut | M3 x 10 mm (modul 3D printing) | |
-| F2 | | Diameter kepala dan tinggi kepala | L atau K | [Grip] counterbore | - | |
-| F3 | Mur | Lebar antar sisi (across flats) dan tebal | L | [Grip] kantong heksagonal | - | |
+| F1 | Baut yang dipakai | Diameter ulir dan panjang di bawah kepala | L | [Grip] [Cetak] lubang dan panjang baut | Grip: M6 x 25 (washer logam). M3 x 10 mm untuk bagian modul 3D printing | |
+| F2 | | Diameter kepala dan tinggi kepala | L atau K | [Grip] tonjolan di luar pelat (tanpa counterbore) | - | |
+| F3 | Mur | Lebar antar sisi (across flats) dan tebal | L | [Cetak] kantong heksagonal (bagian modul; grip memakai ulir load cell, tanpa mur) | - | |
 | F4 | Kabel USB (micro-USB) | Lebar x tinggi cangkang plug dan panjang plug | L | [Housing] cutout USB | - | |
 | F5 | Konektor jumper (Dupont) | Lebar x tinggi housing konektor | L | [Housing] ruang dan rute kabel | - | |
 | P1 | Part hasil cetak | Diameter lubang, lebar slot, dan tebal dinding hasil cetak dibanding nilai CAD | D atau L | [Cetak] tabel dimensi CAD vs hasil ukur untuk laporan modul; koreksi kelonggaran | - | |
