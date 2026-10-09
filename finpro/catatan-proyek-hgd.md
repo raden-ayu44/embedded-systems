@@ -6,7 +6,7 @@ title: Catatan Proyek - Hand Grip Dynamometer
 # Catatan Proyek - Hand Grip Dynamometer (v37)
 **Final Project - Embedded Systems Course**
 
-> Catatan kerja proyek akhir mata kuliah embedded system (biomedik): keputusan desain beserta alasannya, rujukan, data ukur, dan hal yang masih terbuka. Ditulis supaya bisa dibaca sendiri (offline) tanpa konteks tambahan selain dokumen yang ditautkan. Proposal G1 sudah dikumpulkan; catatan ini sekarang dipakai untuk G2-G4, makalah akhir, dan demo. Bagian 13 merekam isi Bagian 2-3 proposal G1 sebagaimana dikumpulkan, Bagian 14 merangkum desain housing dan menautkan ke dokumen housing yang terpisah, dan Bagian 15 memuat tabel pengukuran dengan jangka sorong.
+> Catatan kerja proyek akhir mata kuliah embedded system: keputusan desain beserta alasannya, rujukan, data ukur, dan hal yang masih terbuka. Ditulis supaya bisa dibaca sendiri (offline) tanpa konteks tambahan selain dokumen yang ditautkan. Proposal sudah dikumpulkan; catatan ini sekarang dipakai untuk G2-G4, makalah akhir, dan demo. Bagian 13 merekam isi Bagian 2-3 proposal sebagaimana dikumpulkan, Bagian 14 merangkum desain housing dan menautkan ke dokumen housing yang terpisah, dan Bagian 15 memuat tabel pengukuran dengan jangka sorong.
 
 ## Dokumen terkait
 
@@ -21,11 +21,11 @@ title: Catatan Proyek - Hand Grip Dynamometer
 
 | Item | Detail |
 |------|--------|
-| Mata kuliah | Mata kuliah embedded system (biomedik), proyek akhir berkelompok (3 orang) |
-| Posisi saat ini | G1 (proposal + design review) sudah dikumpulkan. Berikutnya G2: jalur penginderaan dan aktuasi hidup di breadboard, PCB dipesan kolektif |
+| Mata kuliah | Mata kuliah embedded system, proyek akhir berkelompok (3 orang) |
+| Posisi saat ini | Proposal dan design review sudah dikumpulkan. Berikutnya tahap prototipe: jalur penginderaan dan aktuasi hidup di breadboard, PCB dipesan kolektif |
 | Pembagian kerja | Pemilik catatan ini memegang Bagian 2 (spesifikasi) dan Bagian 3 (desain sistem) proposal, serta peran sensing, kalibrasi, power budget, skema dan layout PCB (spesifikasi S1 dan S3). Dua anggota lain: firmware dan antarmuka pengguna (state machine, LCD, LED; S2 dan S5), serta jalur logging, enclosure, BOM, dan dokumentasi (S4) |
 | Platform wajib | ESP32 (Arduino IDE) |
-| Anggaran komponen | Maksimum Rp300.000 per kelompok, dengan bukti pembelian |
+| Anggaran komponen | Maksimum Rp300.000 per tim, dengan bukti pembelian |
 | Filosofi cakupan | Menguji keterampilan teknis mahasiswa - BUKAN prototipe siap produksi massal |
 | Perangkat | Hand grip dynamometer |
 
@@ -42,35 +42,35 @@ https://drive.google.com/drive/folders/1nbT_B_snksXwBb6IFAcCBsopwRYrQzlZ?usp=sha
 | Chang & Chen 2015 (Bio-Med Mat & Eng, Taiwan) | Dynamometer + NI DAQ + LabView, data normatif Taiwan berdasarkan usia/tinggi/berat/panjang telapak | Referensi metodologi korelasi (tinggi, berat, panjang tangan vs kekuatan genggam) - platform (NI DAQ) TIDAK relevan untuk ESP32 |
 | Vaishya et al. 2024 (J Health Pop & Nutrition) | Narrative review: HGS sebagai vital sign baru, cutoff per populasi, asosiasi dengan T2D/CVD/mortalitas/sarcopenia, protokol pengukuran (Box 1) | Sumber argumen medis utama proposal + protokol pengukuran standar (duduk, siku 90 derajat, tahan 3-5 detik, 3 kali percobaan, istirahat 1 menit antar percobaan) + konsep relative HGS (HGS/BMI) |
 | Marwedel, *Embedded System Design* (ed. 4) | Buku teks embedded system - teori state machine, evaluasi, dependability | §2.4 StateCharts (formalisasi hierarki 2 lapisan, Bagian 6), §5.3 Quality Metrics (RMSE/MAE, Bagian 9), §5.6.5 FMEA/FTA (daftar risiko, Bagian 9), Bab 1 Tabel 1.2 (justifikasi ESP32, Bagian 8) |
-| White, *Making Embedded Systems* (ed. 1, 2011) - dirujuk BRP sebagai [3] | Buku teks embedded system - praktik implementasi C untuk mikrokontroler | Bab 4 (debounce tombol, PWM), Bab 5 (table-driven state machine, watchdog), Bab 6 (circular buffer, event vs data-driven), Bab 3 (pola "Error Handling Library"), Bab 9 (taking an average) - lihat §6.4 untuk rincian per keputusan |
-| Russell, *Introduction to Embedded Systems Using ANSI C and the Arduino Development Environment* (2010) - dirujuk BRP sebagai [1] | Buku teks embedded system - dasar C, arsitektur ATmega328P, GPIO/timer/interrupt/ADC | §9.1.2 ISR and Main Task Communication (kebenaran teknis komunikasi ISR-loop utama, Bagian 6.2 SIAP), §6.2.2 Internal Pull-up Resistor (justifikasi hindari floating pin, Bagian 6.2 SIAP) |
+| White, *Making Embedded Systems* (ed. 1, 2011) - dirujuk panduan sebagai [3] | Buku teks embedded system - praktik implementasi C untuk mikrokontroler | Bab 4 (debounce tombol, PWM), Bab 5 (table-driven state machine, watchdog), Bab 6 (circular buffer, event vs data-driven), Bab 3 (pola "Error Handling Library"), Bab 9 (taking an average) - lihat §6.4 untuk rincian per keputusan |
+| Russell, *Introduction to Embedded Systems Using ANSI C and the Arduino Development Environment* (2010) - dirujuk panduan sebagai [1] | Buku teks embedded system - dasar C, arsitektur ATmega328P, GPIO/timer/interrupt/ADC | §9.1.2 ISR and Main Task Communication (kebenaran teknis komunikasi ISR-loop utama, Bagian 6.2 SIAP), §6.2.2 Internal Pull-up Resistor (justifikasi hindari floating pin, Bagian 6.2 SIAP) |
 | Dokumentasi alat komersial: Kinvent K-Grip, GripAble, Vernier HD-BTA, Biopac SS25LA (dokumen pabrikan dan penjual, bukan peer-review) | Bentuk, rentang, dan ergonomi hand dynamometer komersial | Pembanding desain housing grip ([HL2](desain-housing-load-cell.md#hl2-pembanding-alat-komersial-dokumen-pabrikan-bukan-peer-review)). Bukan bukti ilmiah; jangan disitasi sebagai sumber akademik. Rincian dan URL di [HL18 dokumen housing](desain-housing-load-cell.md#hl18-sumber-rujukan-housing-bukan-peer-review) |
 | Diskusi komunitas: Arduino Forum, "calibrating a straight-bar load cell" (bukan sumber akademik) | Kapasitas load cell untuk grip, rig kalibrasi, efek kekakuan rangka | Kalibrasi setelah rakit ([HL5](desain-housing-load-cell.md#hl5-dampak-housing-terhadap-pembacaan-gaya)). Rincian di [HL18 dokumen housing](desain-housing-load-cell.md#hl18-sumber-rujukan-housing-bukan-peer-review) |
 
 ---
 
-## 3. KEBUTUHAN DARI BRP DAN PANDUAN G1
+## 3. KEBUTUHAN DARI PANDUAN MATA KULIAH
 
 ### 3.1 Gerbang proyek dan tenggat waktu
 
 | Minggu | Tonggak |
 |--------|---------|
-| 5-6 | Proposal + Design Review (**G1**): proposal sudah dikumpulkan; revisi sesuai catatan TA saat design review (Minggu 6); skema rangkaian sendiri (Modul 5) |
-| 7 | Layout PCB dan gerber (Modul 6) |
-| 7 ATAU 8 | Tenggat berkas gerber: **konflik antar dokumen resmi**, lihat catatan di bawah (proposal G1 memakai Minggu 8) |
-| 9 | **G2**: satu jalur penginderaan dan satu jalur aktuasi hidup di breadboard; PCB dipesan kolektif |
+| 5-6 | Proposal + Design Review (**proposal**): proposal sudah dikumpulkan; revisi sesuai catatan TA saat design review (Minggu 6); skema rangkaian sendiri (modul praktikum) |
+| 7 | Layout PCB dan gerber (modul praktikum) |
+| 7 ATAU 8 | Tenggat berkas gerber: **konflik antar dokumen resmi**, lihat catatan di bawah (proposal memakai Minggu 8) |
+| 9 | **Tahap prototipe**: satu jalur penginderaan dan satu jalur aktuasi hidup di breadboard; PCB dipesan kolektif |
 | 10-11 | Modul Raspberry Pi dan Edge AI; sertifikasi cetak 3D wajib selesai paling lambat Minggu 11 |
 | 11-12 | PCB diterima (sekitar dua minggu setelah pesanan) |
-| 12 | **G3**: PCB dirakit dan lolos uji dasar |
+| 12 | **Tahap akhir**: PCB dirakit dan lolos uji dasar |
 | 14 | **G4**: purwarupa terintegrasi lolos uji mandiri |
 | 15 | Evaluasi sejawat rahasia |
 | 16 | UAS: demo expo, makalah akhir, viva individu |
 
-> Konflik yang belum terkonfirmasi: BRP menyebut tenggat gerber Minggu ke-7 di dua tempat (Modul Praktikum 6, dan Bagian D.5: berkas gerber yang melewati tenggat Minggu ke-7 tidak ikut batch fabrikasi). Panduan Proposal G1 menyebut Minggu 8 ("Gerber files due - no extension", pada baris UTS, terpisah dari baris layout PCB di Minggu 7). Jadwal proposal G1 yang dikumpulkan mengikuti Minggu 8 dan menargetkan gerber dikumpulkan lebih awal. Sampai TA mengonfirmasi, jangan menulis salah satu minggu sebagai final di dokumen resmi berikutnya.
+> Konflik yang belum terkonfirmasi: panduan mata kuliah menyebut tenggat gerber Minggu ke-7 di dua tempat (modul praktikum, dan Bagian D.5: berkas gerber yang melewati tenggat Minggu ke-7 tidak ikut batch fabrikasi). Panduan proposal menyebut Minggu 8 ("Gerber files due - no extension", pada baris UTS, terpisah dari baris layout PCB di Minggu 7). Jadwal proposal yang dikumpulkan mengikuti Minggu 8 dan menargetkan gerber dikumpulkan lebih awal. Sampai TA mengonfirmasi, jangan menulis salah satu minggu sebagai final di dokumen resmi berikutnya.
 
 ### 3.2 Checklist internal (bukan rubrik skor resmi)
 
-> Rubrik skor G1 yang sebenarnya hanya punya **4 kriteria** (perumusan masalah medis; spesifikasi terukur; kelayakan teknis + arsitektur + BOM digabung; jadwal + risiko digabung), masing-masing 0-100, G1 = rata-rata keempatnya. Tabel di bawah adalah checklist internal yang lebih granular (6 baris); jangan disamakan dengan struktur rubrik resmi saat presentasi design review.
+> Rubrik skor proposal yang sebenarnya hanya punya **4 kriteria** (perumusan masalah medis; spesifikasi terukur; kelayakan teknis + arsitektur + BOM digabung; jadwal + risiko digabung), masing-masing 0-100, skor = rata-rata keempatnya. Tabel di bawah adalah checklist internal yang lebih granular (6 baris); jangan disamakan dengan struktur rubrik resmi saat presentasi design review.
 
 | Bagian wajib (checklist internal) | Status |
 |---|---|
@@ -81,13 +81,13 @@ https://drive.google.com/drive/folders/1nbT_B_snksXwBb6IFAcCBsopwRYrQzlZ?usp=sha
 | Jadwal selaras dengan gerbang proyek | Sudah di proposal Bagian 5 (ditulis anggota lain); ringkasan di Bagian 13.9. Terkait konflik tenggat gerber di 3.1 |
 | Daftar risiko dan mitigasi | Sudah di proposal Bagian 6 (6 risiko, masing-masing dengan tanda peringatan dini, mitigasi, dan fallback); ringkasan di Bagian 13.9 |
 
-### 3.3 Persyaratan format resmi (dari Panduan dan Template G1)
+### 3.3 Persyaratan format resmi (dari Panduan dan template proposal)
 
 | Persyaratan | Sumber | Status |
 |---|---|---|
 | Body maksimal 8 halaman (Bagian 1-6; cover, referensi, lampiran tidak dihitung) | Template | **Perlu dicek**: pada PDF yang dikumpulkan, Bagian 1-6 menempati halaman 2 sampai 16 (sekitar 15 halaman) |
 | Pakai Template resmi apa adanya, urutan bagian tidak boleh diubah | Panduan | Dipenuhi (urutan bagian 1-7 sesuai template) |
-| Nama file `G1_Kelompok-XX_Proposal.pdf` | Panduan | Dipenuhi (XX diisi nomor kelompok) |
+| Format nama berkas proposal | Panduan | Dipenuhi (XX diisi nomor tim) |
 | Tiap komponen BOM yang dibeli wajib punya link supplier riil | Template §4 | Kolom Supplier link terisi (Shopee) di proposal; URL lengkapnya tidak dicatat di catatan ini |
 | Tiap risiko wajib 3 bagian: tanda peringatan dini + mitigasi + fallback | Template §6 | Dipenuhi di proposal Bagian 6 |
 | Tabel alokasi pin: tidak ada pin dobel, pin input-only dan strapping ESP32 tidak disalahgunakan | Template §3.4 | Ada, tetapi **SDA tertulis GPIO 22 (sama dengan SCL)**; yang benar GPIO 21. Perbaiki di revisi |
@@ -104,20 +104,20 @@ Keputusan populasi target berubah beberapa kali selama penyusunan proposal - dic
 | Versi | Populasi target | Alasan ditolak/direvisi |
 |-------|------------------|--------------------------|
 | **v1 (motivasi medis dasar - lihat catatan di bawah)** | Pasien pasca-stroke | Terlalu besar skopnya untuk proyek satu semester; butuh proses rekrutmen populasi rentan yang lebih rumit dari yang bisa ditangani jadwal kelas. **TIDAK dibuang** - dipakai kembali di v5 sebagai rujukan kebutuhan klinis, bukan sebagai populasi yang diuji |
-| v2 | Mahasiswa teknik, argumen berbasis tugas okupasional (mengetik/coding, menyolder, menggambar manual) | Lebih kuat, tapi populasinya (lintas fakultas) masih sulit direkrut secara realistis |
-| v3 (superseded oleh v5) | Mahasiswa Teknik Elektro, Teknik Biomedik, dan Teknik Komputer (satu departemen di fakultas teknik) | Sempat dipilih karena: (1) tidak mudah ditebak arah hasilnya; (2) populasi realistis direkrut karena satu departemen; (3) penulis sendiri mahasiswa Teknik Biomedik. **Dibatalkan**: tetap merupakan pengujian pada orang di luar anggota tim (lintas jurusan), yang menurut Panduan G1 ("Testing on patients or on anyone outside your team") perlu persetujuan tertulis dosen sebelum proposal diajukan - risiko approval tidak turun tepat waktu sebelum tenggat Minggu 5 dianggap terlalu tinggi |
-| v4 (superseded oleh v5) | Mahasiswa Teknik Biomedik saja (satu jurusan) | Sempat dicatat sebagai fallback kalau rekrutmen 3 jurusan (v3) tidak realistis. **Dibatalkan untuk alasan yang sama seperti v3**: tetap pengujian di luar anggota tim, tetap butuh persetujuan yang sama, cuma skalanya lebih kecil - tidak menyelesaikan masalah kepatuhan, cuma mengecilkannya |
-| **v5 (final)** | **Hanya anggota kelompok sendiri** - tidak ada pengujian ke pasien maupun ke mahasiswa/pihak lain di luar tim | Dipilih karena sesuai persis dengan batas yang diizinkan Panduan G1: *"Non-invasive, low-voltage measurements on team members are fine"* - dynamometry genggam tangan non-invasif dan tegangan rendah, jadi seluruh pengukuran validasi (kalibrasi, MVC, protokol V1) bisa dijalankan tanpa perlu persetujuan tertulis dosen sama sekali. Pertanyaan "apakah jurusan berkorelasi dengan kekuatan genggam" (inti v3) **tidak lagi jadi tujuan proyek** - dicatat sebagai future work/di luar cakupan mata kuliah, bukan sesuatu yang diklaim sudah dijawab. Motivasi klinis proyek tetap dari v1 (lihat catatan di bawah), dan celah yang diisi proyek berubah dari "pertanyaan lintas-jurusan" menjadi "logging otomatis yang tidak dimiliki alat komersial" (lihat catatan di bawah) |
+| v2 | Mahasiswa teknik, argumen berbasis tugas okupasional (mengetik/coding, menyolder, menggambar manual) | Lebih kuat, tapi populasinya (lintas program studi) masih sulit direkrut secara realistis |
+| v3 (superseded oleh v5) | Mahasiswa dari tiga program studi serumpun (satu departemen) | Sempat dipilih karena: (1) tidak mudah ditebak arah hasilnya; (2) populasi realistis direkrut karena satu departemen; (3) penulis sendiri bagian dari populasi tersebut. **Dibatalkan**: tetap merupakan pengujian pada orang di luar anggota tim (lintas jurusan), yang menurut panduan tugas ("Testing on patients or on anyone outside your team") perlu persetujuan tertulis dosen sebelum proposal diajukan - risiko approval tidak turun tepat waktu sebelum tenggat Minggu 5 dianggap terlalu tinggi |
+| v4 (superseded oleh v5) | Mahasiswa satu program studi saja | Sempat dicatat sebagai fallback kalau rekrutmen 3 jurusan (v3) tidak realistis. **Dibatalkan untuk alasan yang sama seperti v3**: tetap pengujian di luar anggota tim, tetap butuh persetujuan yang sama, cuma skalanya lebih kecil - tidak menyelesaikan masalah kepatuhan, cuma mengecilkannya |
+| **v5 (final)** | **Hanya anggota tim sendiri** - tidak ada pengujian ke pasien maupun ke mahasiswa/pihak lain di luar tim | Dipilih karena sesuai persis dengan batas yang diizinkan panduan tugas: *"Non-invasive, low-voltage measurements on team members are fine"* - dynamometry genggam tangan non-invasif dan tegangan rendah, jadi seluruh pengukuran validasi (kalibrasi, MVC, protokol V1) bisa dijalankan tanpa perlu persetujuan tertulis dosen sama sekali. Pertanyaan "apakah jurusan berkorelasi dengan kekuatan genggam" (inti v3) **tidak lagi jadi tujuan proyek** - dicatat sebagai future work/di luar cakupan mata kuliah, bukan sesuatu yang diklaim sudah dijawab. Motivasi klinis proyek tetap dari v1 (lihat catatan di bawah), dan celah yang diisi proyek berubah dari "pertanyaan lintas-jurusan" menjadi "logging otomatis yang tidak dimiliki alat komersial" (lihat catatan di bawah) |
 
-*v5 adalah rencana final untuk proposal G1. v1-v4 tetap didokumentasikan di sini supaya jejak alasan penolakan tiap versi tidak hilang - terutama v1, yang isinya (motivasi medis) tetap dipakai lagi di v5 walau populasi ujinya tidak.*
+*v5 adalah rencana final untuk proposal. v1-v4 tetap didokumentasikan di sini supaya jejak alasan penolakan tiap versi tidak hilang - terutama v1, yang isinya (motivasi medis) tetap dipakai lagi di v5 walau populasi ujinya tidak.*
 
-> **v1 sebagai motivasi medis dasar (bukan populasi uji).** Kebutuhan klinis yang memotivasi proyek ini tetap argumen v1: pasien pasca-stroke dan populasi dengan penurunan kekuatan genggam adalah alasan HGS penting diukur dan dipantau secara klinis (R1 - Ramadhani et al. memakai populasi ini langsung; V1/V2/V4 - Vaishya et al. mendokumentasikan HGS sebagai vital sign dan ambang klinisnya). Proposal G1 memakai v1 di Bagian 1 (Perumusan Masalah Medis) sebagai *rujukan kebutuhan klinis*, bukan sebagai populasi yang direkrut - device dirancang mengikuti protokol dan rentang yang relevan untuk populasi tersebut, tapi pengujian aktual di course ini (Minggu 5-14) hanya dilakukan pada anggota tim, sesuai v5.
+> **v1 sebagai motivasi medis dasar (bukan populasi uji).** Kebutuhan klinis yang memotivasi proyek ini tetap argumen v1: pasien pasca-stroke dan populasi dengan penurunan kekuatan genggam adalah alasan HGS penting diukur dan dipantau secara klinis (R1 - Ramadhani et al. memakai populasi ini langsung; V1/V2/V4 - Vaishya et al. mendokumentasikan HGS sebagai vital sign dan ambang klinisnya). Proposal memakai v1 di Bagian 1 (Perumusan Masalah Medis) sebagai *rujukan kebutuhan klinis*, bukan sebagai populasi yang direkrut - device dirancang mengikuti protokol dan rentang yang relevan untuk populasi tersebut, tapi pengujian aktual di mata kuliah ini (Minggu 5-14) hanya dilakukan pada anggota tim, sesuai v5.
 
 > **Celah yang diisi proyek (pengganti pertanyaan lintas-jurusan v3): logging.** Kebanyakan hand grip dynamometer komersial (termasuk model analog klasik seperti JAMAR) tidak punya pencatatan data otomatis - pencatat harus menyalin nilai secara manual satu per satu, yang rawan human error dan kehilangan data (C2 - Chang & Chen 2015 secara eksplisit menyebut ini sebagai kelemahan dynamometer tradisional yang coba diatasi versi digital-terintegrasi). Argumen v2 dari Vaishya (nilai klinis HGS datang dari pengukuran serial dari waktu ke waktu, bukan sekali baca) berarti logging bukan fitur tambahan - itu bagian dari kenapa alat ini punya nilai dibanding alat manual. Kontribusi proyek: menambahkan logging otomatis yang tidak dimiliki alat pembanding.
 
 > **Standar keberhasilan proyek disederhanakan jadi dua hal saja (menggantikan daftar 5-6 fitur "wajib" di Bagian 5 sebagai kriteria sukses utama):**
 > 1. **Measurement** - pengukuran sesuai protokol standar V1 (duduk, siku ditekuk 90°, tahan 3-5 detik, 3 kali percobaan, istirahat ~1 menit antar percobaan), diverifikasi dengan RMSE/MAE terhadap beban referensi (M5).
-> 2. **Logging** - data setiap sesi tersimpan otomatis (tidak hilang, tidak perlu disalin manual) ke berkas CSV di laptop host lewat USB-Serial. ESP32 mengirim baris CSV dengan `Serial.print()`, dan skrip Python `logger.py` berbasis pyserial di laptop yang menulis berkas dan melakukan flush tiap baris (pola Modul 3 Guided Example 4: *"Logging in Guided Example 4 now goes to a CSV file on your own laptop over the USB serial link"*). Cloud logging bukan requirement: Panduan G1 mengelompokkannya sejajar Raspberry Pi sebagai tambahan opsional (*"may be added where the problem needs them; say why in the proposal"*), jadi masuk 2.3 Stretch goals. SD card tidak dipakai karena lab hanya punya satu modul SD sebagai stasiun opsional (risiko rebutan). Trade-off yang dinyatakan di 2.2 proposal: logging membutuhkan laptop host tersambung selama sesi.
+> 2. **Logging** - data setiap sesi tersimpan otomatis (tidak hilang, tidak perlu disalin manual) ke berkas CSV di laptop host lewat USB-Serial. ESP32 mengirim baris CSV dengan `Serial.print()`, dan skrip Python `logger.py` berbasis pyserial di laptop yang menulis berkas dan melakukan flush tiap baris (pola modul praktikum: *"Logging in Guided Example 4 now goes to a CSV file on your own laptop over the USB serial link"*). Cloud logging bukan requirement: panduan tugas mengelompokkannya sejajar Raspberry Pi sebagai tambahan opsional (*"may be added where the problem needs them; say why in the proposal"*), jadi masuk 2.3 Stretch goals. SD card tidak dipakai karena lab hanya punya satu modul SD sebagai stasiun opsional (risiko rebutan). Trade-off yang dinyatakan di 2.2 proposal: logging membutuhkan laptop host tersambung selama sesi.
 
 > **Rumusan masalah (draf kerja, versi v5):**
 > Kekuatan genggam (HGS) makin diakui sebagai indikator kesehatan, dan nilai klinisnya terutama datang dari pengukuran berulang dari waktu ke waktu (V2). Dynamometer komersial umumnya menampilkan angka tanpa pencatatan otomatis sehingga nilai disalin manual (C2). Proyek ini membuat dynamometer genggam digital berbasis ESP32 dan load cell yang mengikuti protokol pengukuran standar (V1: tiga percobaan, tahan 3-5 detik, istirahat sekitar satu menit) dan mencatat tiap sesi secara otomatis ke CSV. Alat hanya divalidasi pada anggota tim sendiri (v5); pertanyaan perbandingan antar-jurusan dari v3 tidak dikerjakan (future work). Catatan: Bagian 1 proposal ditulis anggota lain, jadi teks ini draf kerja dari catatan, bukan kutipan proposal.
@@ -126,13 +126,13 @@ Keputusan populasi target berubah beberapa kali selama penyusunan proposal - dic
 
 ## 5. FUNGSI PERANGKAT (Keputusan Skop)
 
-| # | Fungsi | Sub-CPMK terkait | Sumber ide | Status |
+| # | Fungsi | Topik kuliah terkait | Sumber ide | Status |
 |---|--------|-------------------|------------|--------|
-| 1 | Pembacaan gaya real-time (kg/N) | Sub-CPMK 4 (ADC) | Semua paper referensi | Wajib |
-| 2 | Penangkapan gaya puncak per percobaan (MVC) | Sub-CPMK 4 | Ramadhani (R1), Gotthelf (G1), protokol Vaishya (V1) | Wajib |
-| 3 | Tampilan hasil (LCD/serial) | Sub-CPMK 4 | Semua paper referensi | Wajib |
-| 4 | Umpan balik aktuator (LED, menyala selama proses genggam) | Sub-CPMK 5 (aktuator) | Tidak ada di paper - ditambahkan agar Sub-CPMK 5 punya tempat wajar di perangkat ini | Wajib |
-| 5 | Pencatatan data lintas-sesi (CSV lokal - inti; cloud - stretch goal, lihat Bagian 2.3 proposal) | Sub-CPMK 7 (IoT, dipelajari generik di Modul 7) | Argumen utama Vaishya: nilai klinis HGS datang dari **pengukuran serial**, bukan sekali baca (V2). Status cloud direvisi setelah dicek ke Panduan G1: *"cloud logging... may be added where the problem needs them"* - dikelompokkan eksplisit sejajar dengan Raspberry Pi sebagai opsional, bukan requirement inti | Wajib (CSV) / Opsional (cloud) |
+| 1 | Pembacaan gaya real-time (kg/N) | ADC | Semua paper referensi | Wajib |
+| 2 | Penangkapan gaya puncak per percobaan (MVC) | topik kuliah | Ramadhani (R1), Gotthelf (G1), protokol Vaishya (V1) | Wajib |
+| 3 | Tampilan hasil (LCD/serial) | topik kuliah | Semua paper referensi | Wajib |
+| 4 | Umpan balik aktuator (LED, menyala selama proses genggam) | aktuator | Tidak ada di paper - ditambahkan agar topik kuliah punya tempat wajar di perangkat ini | Wajib |
+| 5 | Pencatatan data lintas-sesi (CSV lokal - inti; cloud - stretch goal, lihat Bagian 2.3 proposal) | IoT, dipelajari generik di modul praktikum | Argumen utama Vaishya: nilai klinis HGS datang dari **pengukuran serial**, bukan sekali baca (V2). Status cloud direvisi setelah dicek ke panduan tugas: *"cloud logging... may be added where the problem needs them"* - dikelompokkan eksplisit sejajar dengan Raspberry Pi sebagai opsional, bukan requirement inti | Wajib (CSV) / Opsional (cloud) |
 | 6 | Rata-rata 3 percobaan + timer istirahat | - | Protokol standar Box 1, Vaishya (V1): 3 percobaan per tangan, istirahat ~1 menit | Opsional (murah, hanya logika software) |
 
 **Sengaja TIDAK dimasukkan** (di luar skop "uji keterampilan teknis"):
@@ -167,15 +167,15 @@ Ada satu **interrupt transition** yang berlaku untuk seluruh isi kotak `SiklusPe
 - **Satu tombol fisik untuk semua fungsi** (START, NEXT, RESTART - label beda secara fungsional/dokumentasi, tombol fisik sama) - keputusan direvisi dari draf lama yang sempat pakai 2 tombol terpisah. Alasan: di v5 (Bagian 4), yang menggenggam alat cuma anggota tim sendiri, jadi pembedaan "partisipan awam vs pengawas" yang jadi alasan 2-tombol dulu sudah tidak relevan. **`GagalSimpan` dan `Error` sama-sama dilabeli "RESTART" dan sama-sama butuh tekan-tahan ~1-2 detik** - direvisi dari rencana awal (`GagalSimpan` sempat cukup tap biasa dengan alasan "data sudah aman sebelum titik ini"). Itu **tidak lagi berlaku** sejak CSV jadi mekanisme logging inti (bukan cloud, lihat `Ringkasan` di bawah) - kalau CSV gagal ditulis, data **belum** aman, profil risikonya sama dengan `Error`.
   - **Teknik implementasi tekan-tahan**: perpanjangan dari mekanisme debounce (W1) - sampling berkala + counter, ambang durasinya diperpanjang dari orde puluhan-ratusan ms (filter noise listrik) ke 1-2 detik (konfirmasi kesengajaan). Tidak ada sitasi buku spesifik untuk pola ini - sudah dicek ke Marwedel dan White, tidak dibahas eksplisit di keduanya. **Angka 1-2 detik masih tentatif (subject to change)** - perlu diuji fisik dulu. Sengaja tidak ditampilkan caranya di LCD - pengetahuan pengawas, bukan instruksi ke layar.
 - **Disiplin reset flag**: `tombolDitekan` (dan variabel durasi tekan terkait) wajib di-reset tiap masuk state yang akan menunggu tombol (`Siap`, `Error`, `GagalSimpan`, sub-fase 2 `Respon+Istirahat`) - supaya tekanan "nyasar" dari state lain tidak tersimpan diam-diam lalu tiba-tiba terkonsumsi di state lain yang sedang menunggu. Generalisasi dari RU1 (`volatile`).
-- **Ringkasan**: terjadi satu kali saja, setelah percobaan ke-3. Hitung rata-rata 3 percobaan, ambil riwayat sesi lalu (sumbernya belum ditentukan, lihat Bagian 9), lalu kirim hasil sebagai baris CSV lewat USB-Serial. Pembagian peran: ESP32 hanya `Serial.print()` baris CSV, sedangkan skrip Python `logger.py` (pyserial, modul `csv` bawaan, `f.flush()` tiap baris; Modul 3 Guided Example 4) di laptop yang benar-benar menulis berkas. Cloud bukan requirement (stretch goal, asinkron, Bagian 2.3 proposal).
+- **Ringkasan**: terjadi satu kali saja, setelah percobaan ke-3. Hitung rata-rata 3 percobaan, ambil riwayat sesi lalu (sumbernya belum ditentukan, lihat Bagian 9), lalu kirim hasil sebagai baris CSV lewat USB-Serial. Pembagian peran: ESP32 hanya `Serial.print()` baris CSV, sedangkan skrip Python `logger.py` (pyserial, modul `csv` bawaan, `f.flush()` tiap baris; modul praktikum) di laptop yang benar-benar menulis berkas. Cloud bukan requirement (stretch goal, asinkron, Bagian 2.3 proposal).
   - **Data tertulis**: tampilkan Peak HGS dan Avg HGS, tunggu tombol RESTART (tap biasa) untuk sesi baru.
   - **Data tidak terkonfirmasi tersimpan**: kondisi merugikan (data pengukuran berisiko hilang), jadi memicu pola Error Handling Library (W2) dan masuk state `GagalSimpan`: hold, tampilan live, keluar dengan tekan-tahan 1-2 detik. Nilai selalu juga dicetak ke Serial Monitor sehingga pengawas bisa menyalinnya manual sebelum keluar. `GagalSimpan` langsung ke akhir sesi (data pengukurannya sendiri benar, hanya tidak tersimpan; setelah diselamatkan manual tidak perlu mengulang sesi).
-  - **Cara mendeteksi "tidak tersimpan": protokol acknowledgement (ACK).** Masalahnya, ESP32 tidak punya cara tahu apakah baris benar-benar tertulis di laptop. Dua opsi yang ditimbang: (A) hanya mendeteksi USB-Serial terputus. Sederhana, tetapi tidak mendeteksi skrip host yang mati atau lupa dijalankan, dan pada ESP32 DevKit dengan chip jembatan USB-UART status koneksi host kemungkinan tidak tersedia dari `Serial` (perlu diverifikasi di hardware). (B) `logger.py` membalas "ACK" per baris setelah tulis dan flush, dan ESP32 masuk `GagalSimpan` bila ACK tidak datang dalam batas waktu. Opsi A dipilih lebih dulu, lalu digantikan opsi B: Bagian 6 (Risks) proposal G1 yang dikumpulkan menetapkan mitigasi ACK. Konsekuensi: `logger.py` perlu dimodifikasi dari contoh modul (tambah balasan ACK), firmware perlu timeout ACK (nilainya belum ditentukan, uji fisik), dan teks 3.5 proposal ("penulisan CSV gagal") tetap benar secara makna karena ACK tidak diterima berarti penulisan tidak terkonfirmasi.
+  - **Cara mendeteksi "tidak tersimpan": protokol acknowledgement (ACK).** Masalahnya, ESP32 tidak punya cara tahu apakah baris benar-benar tertulis di laptop. Dua opsi yang ditimbang: (A) hanya mendeteksi USB-Serial terputus. Sederhana, tetapi tidak mendeteksi skrip host yang mati atau lupa dijalankan, dan pada ESP32 DevKit dengan chip jembatan USB-UART status koneksi host kemungkinan tidak tersedia dari `Serial` (perlu diverifikasi di hardware). (B) `logger.py` membalas "ACK" per baris setelah tulis dan flush, dan ESP32 masuk `GagalSimpan` bila ACK tidak datang dalam batas waktu. Opsi A dipilih lebih dulu, lalu digantikan opsi B: Bagian 6 (Risks) proposal yang dikumpulkan menetapkan mitigasi ACK. Konsekuensi: `logger.py` perlu dimodifikasi dari contoh modul (tambah balasan ACK), firmware perlu timeout ACK (nilainya belum ditentukan, uji fisik), dan teks 3.5 proposal ("penulisan CSV gagal") tetap benar secara makna karena ACK tidak diterima berarti penulisan tidak terkonfirmasi.
 
 ### 6.2 Lapisan dalam (satu siklus percobaan): SIAP -> GENGGAM -> HITUNG
 
 **[SIAP]**
-- Menunggu interrupt tombol (bukan polling `digitalRead()`), agar tetap non-blocking (Sub-CPMK 3). Debounce **software** - abaikan re-trigger < ~50ms sejak interrupt terakhir (dicek di dalam ISR pakai `millis()`), teknik dari (W1) - dikonfirmasi juga di Modul Praktikum 1.
+- Menunggu interrupt tombol (bukan polling `digitalRead()`), agar tetap non-blocking (topik kuliah). Debounce **software** - abaikan re-trigger < ~50ms sejak interrupt terakhir (dicek di dalam ISR pakai `millis()`), teknik dari (W1) - dikonfirmasi juga di modul praktikum.
 - **Pin tombol wajib pakai pull-up** (internal `INPUT_PULLUP`, bukan dibiarkan floating) - kalau pin input tidak disambung ke apapun saat tidak ditekan, sinyalnya "mengambang" dan bisa memicu interrupt palsu secara acak (RU2).
 - **Variabel yang diubah di dalam ISR (misal flag "tombol ditekan") wajib dideklarasikan `volatile`** - tanpa ini, compiler bisa meng-optimasi pembacaan variabel itu di loop utama seolah nilainya tidak pernah berubah dari luar, dan state machine bisa macet permanen di `Siap` walau tombol sudah ditekan (RU1). Kalau nanti ada variabel multi-byte (misal timestamp `unsigned long`) yang dibaca ISR **dan** loop utama sekaligus, perlu hati-hati juga terhadap risiko "setengah lama-setengah baru" saat interrupt terjadi persis di tengah pembacaan (RU1) - untuk desain sekarang risiko ini belum relevan karena variabel debounce cuma diakses di dalam ISR sendiri, tapi perlu diingat kalau nanti ada variabel baru yang dishare ke loop utama.
 - Auto-tare, dijalankan tiap masuk state ini (termasuk setelah kembali dari siklus sebelumnya) - **keputusan desain kami sendiri** (bukan dari sumber eksternal manapun - tidak ada satupun dari 5 paper referensi yang membahas auto-tare per percobaan), diputuskan karena kami membandingkan 3 percobaan dalam satu sesi untuk dirata-ratakan, jadi konsistensi titik nol antar percobaan penting untuk validitas data. Dua langkah berurutan dalam state yang sama: (1) tampilkan `"Menyesuaikan nol..."` di LCD, jalankan fungsi `tare()` (**blocking, diputuskan eksplisit** - dan ini bukan pilihan independen: `tare()` secara internal memanggil fungsi baca library HX711 yang sama dengan `get_units()` untuk menentukan offset nol, jadi blocking-nya adalah konsekuensi langsung dari memakai library HX711, sama seperti di GENGGAM - bukan dua keputusan terpisah, satu akar sebab yang sama. Diterima karena durasinya singkat dan tare cuma terjadi sekali per siklus, bukan berulang tiap iterasi loop); (2) begitu selesai (~1 detik, angka pasti menunggu pengujian fisik), ganti tampilan jadi `"Siap - tekan tombol"`. Tidak perlu animasi/state terpisah - durasi tare cukup singkat untuk cukup ditandai teks statis.
@@ -185,7 +185,7 @@ Ada satu **interrupt transition** yang berlaku untuk seluruh isi kotak `SiklusPe
 
 *Fase 1 - Menunggu mulai:* begitu masuk dari SIAP, timer 3-5 detik **belum jalan**. LED menyala (lihat rasional LED di bawah), LCD menampilkan `"Menunggu genggaman"`. Sistem cuma menunggu fluktuasi gaya pertama melewati **threshold onset** (nilai pasti menunggu eksperimen - sama metodologi dengan threshold kestabilan: ukur noise alami load cell diam, threshold di atas itu).
 
-*Fase 2 - Menghitung:* begitu threshold onset terlampaui, timer 3-5 detik mulai, LCD ganti jadi `"Tahan selama 3-5 detik"` (teks berbeda dari Fase 1 supaya pengguna tahu timer sudah berjalan). Baca ADC dari HX711, terapkan `calibration_factor`. HX711 `get_units()` bersifat blocking (~100ms pada 10Hz) - **diterima apa adanya**, sudah dibahas Modul Praktikum 2 soal kapan delay masih acceptable. **Smoothing + deteksi plateau** (circular buffer, W5+W6): simpan 5 pembacaan terakhir dalam buffer melingkar, bandingkan selisih (tertinggi-terendah) terhadap threshold kestabilan. Konsep "tunggu sampai plateau" sejalan dengan protokol Box 1 (V1): *"squeeze... until I say stop (when the needle stops rising)"*.
+*Fase 2 - Menghitung:* begitu threshold onset terlampaui, timer 3-5 detik mulai, LCD ganti jadi `"Tahan selama 3-5 detik"` (teks berbeda dari Fase 1 supaya pengguna tahu timer sudah berjalan). Baca ADC dari HX711, terapkan `calibration_factor`. HX711 `get_units()` bersifat blocking (~100ms pada 10Hz) - **diterima apa adanya**, sudah dibahas modul praktikum soal kapan delay masih acceptable. **Smoothing + deteksi plateau** (circular buffer, W5+W6): simpan 5 pembacaan terakhir dalam buffer melingkar, bandingkan selisih (tertinggi-terendah) terhadap threshold kestabilan. Konsep "tunggu sampai plateau" sejalan dengan protokol Box 1 (V1): *"squeeze... until I say stop (when the needle stops rising)"*.
 
 **Threshold onset dan threshold "dilepas terlalu awal" adalah nilai yang SAMA, dicek dua arah** - naik melewati threshold saat Fase 1 = mulai (masuk Fase 2); turun kembali di bawah threshold itu **sebelum 3 detik** = dilepas terlalu awal. Ini simplifikasi sengaja - cuma butuh satu eksperimen kalibrasi, bukan dua threshold terpisah.
 
@@ -198,7 +198,7 @@ Ada satu **interrupt transition** yang berlaku untuk seluruh isi kotak `SiklusPe
 
 Tidak ada kondisi "gaya turun ke ambang" generik lagi seperti draf sangat awal - sudah digantikan mekanisme onset/plateau/5-detik di atas (dicek juga ke R2 & G2: tidak ada satupun referensi yang pakai threshold gaya untuk deteksi akhir - tetapi onset dan early-release di sini beda kategori: threshold hanya menentukan kapan timer mulai dan kapan percobaan di-reset, sedangkan akhir genggaman tetap ditentukan oleh plateau atau batas 5 detik).
 
-Refresh rate LCD tetap dipisah dari sample rate sensor via timer terpisah (`millis()`). Metodologi penentuan angka: eksperimen langsung (tantangan Walking Light dari Modul Praktikum 1 tanpa tombol, coba delay 50-500ms) + ~20ms buffer kompensasi I2C (**estimasi teknis kami sendiri**). **Angka final masih menunggu hasil eksperimen.**
+Refresh rate LCD tetap dipisah dari sample rate sensor via timer terpisah (`millis()`). Metodologi penentuan angka: eksperimen langsung (tantangan Walking Light dari modul praktikum tanpa tombol, coba delay 50-500ms) + ~20ms buffer kompensasi I2C (**estimasi teknis kami sendiri**). **Angka final masih menunggu hasil eksperimen.**
 
 **Rasional LED (keputusan kami sendiri, bukan sitasi eksternal):** LED menyala sepanjang GENGGAM (kedua fase) sampai keluar (ke HITUNG atau ERROR). Alasannya murni aksesibilitas - refresh LCD **sengaja dilambatkan** (angka pasti belum ditentukan; kisaran uji 50-500 ms, lihat paragraf refresh rate di atas) supaya mata manusia bisa mengikuti angka yang berubah, tapi ini berarti pengguna belum tentu bisa "keep up" secara visual dengan LCD saat itu juga. LED jadi sinyal biner sederhana ("sedang aktif direkam") yang jauh lebih mudah diikuti mata dibanding membaca angka fluktuatif - pelengkap LCD, bukan pengganti.
 
@@ -310,15 +310,15 @@ Pin dan antarmuka final ada di Bagian 13.7, anggaran daya di Bagian 13.6, dan ca
 - Selesai satu percobaan (RESPON+ISTIRAHAT): LED mati; LCD menampilkan hasil dan hitung mundur istirahat 60 detik, lalu "Tekan tombol NEXT untuk lanjut".
 - Akhir sesi (RINGKASAN): "Peak HGS" dan "Avg HGS", lalu "Tekan tombol RESTART untuk memulai ulang pengukuran".
 - Antar sesi: riwayat tersimpan di berkas CSV di laptop. Inti nilai alat adalah pencatatan serial otomatis (V2: nilai klinis HGS datang dari pengukuran berulang, bukan sekali baca). Visualisasi tren (dashboard) adalah stretch goal; perbandingan "lebih kuat dari sesi lalu" di layar menunggu keputusan sumber riwayat (Bagian 9).
-- Yang dihindari: pengguna tidak melihat angka mentah yang belum terkalibrasi (dikecualikan untuk pengawas di state Error dan GagalSimpan, Bagian 6.1); kegagalan pembacaan tidak boleh senyap (rubrik BRP "ketahanan uji adversarial").
+- Yang dihindari: pengguna tidak melihat angka mentah yang belum terkalibrasi (dikecualikan untuk pengawas di state Error dan GagalSimpan, Bagian 6.1); kegagalan pembacaan tidak boleh senyap (rubrik penilaian "ketahanan uji adversarial").
 
 ---
 
 ## 8. CATATAN PLATFORM: ESP32 vs RASPBERRY PI
 
-- G1 (proposal) jatuh tempo minggu 5-6; Raspberry Pi baru diajarkan minggu 10 (Sub-CPMK 8) - artinya arsitektur inti proyek **realistisnya harus ESP32-only** saat proposal ditulis
+- Proposal jatuh tempo minggu 5-6; Raspberry Pi baru diajarkan minggu 10 (topik kuliah) - artinya arsitektur inti proyek **realistisnya harus ESP32-only** saat proposal ditulis
 - Raspberry Pi dicatat sebagai **kemungkinan ekstensi pasca-minggu 10** (mis. sebagai local data hub/dashboard), bukan kebutuhan wajib
-- Edge AI (minggu 11, Sub-CPMK 9) dinilai **tidak relevan** dipaksakan ke proyek ini - tidak ada tugas inferensi on-device yang bermakna untuk dynamometer
+- Edge AI (minggu 11, topik kuliah) dinilai **tidak relevan** dipaksakan ke proyek ini - tidak ada tugas inferensi on-device yang bermakna untuk dynamometer
 
 **Justifikasi ESP32 (M2):**
 > "Embedded systems are information processing systems embedded into enclosing products." - ESP32 di dalam alat genggam ini persis memenuhi definisi ini.
@@ -350,11 +350,11 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 | Consent partisipan | Tidak relevan | v5 hanya menguji anggota tim sendiri (Bagian 4) |
 | Link supplier | Terbuka | Ada di proposal (Shopee), belum disalin ke catatan |
 
-### 9.1 BOM (sesuai proposal G1, Bagian 4)
+### 9.1 BOM (sesuai proposal, Bagian 4)
 
 | No | Komponen | Part number | Qty | Sumber | Harga satuan | Subtotal | Catatan |
 |---|---|---|---|---|---|---|---|
-| 1 | ESP32 DevKit | ESP32-WROOM-32 | 1 | Lab | - | - | Disediakan lab (kelompok sudah memiliki papan DevKit V1). Cek varian fisik (WROOM atau WROVER) sebelum pin dikunci: GPIO 16/17 dipakai PSRAM di WROVER, sedangkan GPIO 18/19 aman di keduanya. Uji 8 Okt. 2026 (DS-ESP1 di `ds-library.md`): chip ESP32-D0WD-V3 rev v3.1, flash 4 MB, tanpa PSRAM; pin 18, 19, 21, 22, 25, 27 lolos loopback; akhiran modul (WROOM-32D atau -32E) belum dipastikan |
+| 1 | ESP32 DevKit | ESP32-WROOM-32 | 1 | Lab | - | - | Disediakan lab (tim sudah memiliki papan DevKit V1). Cek varian fisik (WROOM atau WROVER) sebelum pin dikunci: GPIO 16/17 dipakai PSRAM di WROVER, sedangkan GPIO 18/19 aman di keduanya. Uji 8 Okt. 2026 (DS-ESP1 di `datasheet-library.md`): chip ESP32-D0WD-V3 rev v3.1, flash 4 MB, tanpa PSRAM; pin 18, 19, 21, 22, 25, 27 lolos loopback; akhiran modul (WROOM-32D atau -32E) belum dipastikan |
 | 2 | Load cell straight-bar 180 kg (4 kabel, kabel 110 cm, shield) | Generik ("Nankai/YZC-133", tanpa P/N pabrikan) | 1 | Beli (Shopee) | Rp193.375 | Rp193.375 | Rated output 2,0±0,2 mV/V, non-linearity 0,02% FS, kelas C3, creep 0,0016% FS (30 menit), overload aman 150% FS, destruktif 200% FS, eksitasi 4-12 VDC (maks 15 V), IP67, aluminium, 147 x 30 x 22 mm. Harga naik dari estimasi awal Rp115.000 |
 | 3 | Modul HX711 | HX711 | 1 | Beli | Rp8.500 | Rp8.500 | Channel A saja; daya 2,7-5 V dari ESP32 |
 | 4 | LCD 16x2 + backpack I2C | LCD1602 (HD44780) + PCF8574T | 1 | Beli | Rp39.500 | Rp39.500 | Dicatu 3,3 V. Datasheet penjual menyebut tegangan kerja 3 V dan 5 V, jadi aman dari jalur 3V3 ESP32. Alamat I2C 0x27 atau 0x3f |
@@ -362,14 +362,14 @@ Argumen proposal: alat genggam butuh ukuran kompak, daya rendah, dan pewaktuan y
 | 6 | Tactile push button | 6x5x5 mm, 2-pin (BOM proposal) | 5 | Beli | Rp500 | Rp2.500 | Hanya butuh 1 (satu tombol untuk START/NEXT/RESTART); MOQ 5. Catatan lama menulis 6x6x5 mm: ukur untuk memastikan (Bagian 15) |
 | | Total pembelian | | | | | **Rp253.875** + ongkir | Batas Rp300.000. Proposal menulis 253.375 (selisih Rp500 dari penjumlahan baris) |
 
-Resistor pembatas LED termasuk komponen pasif lab (BRP D.5) dan tidak dibeli. Breadboard dan kabel jumper juga disediakan lab.
+Resistor pembatas LED termasuk komponen pasif lab (panduan D.5) dan tidak dibeli. Breadboard dan kabel jumper juga disediakan lab.
 
 #### 9.1.1 Perubahan setelah proposal (v37)
 
-Tabel di atas merekam BOM proposal G1 apa adanya. Perubahan sesudahnya:
-- **Load cell diganti.** Yang dibeli adalah CZL 601 80 kg (listing Automa-88, Shopee; DS-LC1 di `ds-library.md`), bukan load cell generik 180 kg pada baris 2. Spesifikasi di baris 2 (2,0 mV/V, overload 150%, kabel 110 cm, 147 x 30 x 22 mm) tidak berlaku lagi. Nilai baru dari DS-LC1: 130 x 28 x 22 mm (gambar penjual; GJ Impex menulis lebar 30 mm), sensitivitas 2,0±0,2 mV/V (vendor), error gabungan ±0,03 %RO (sekitar ±24 g, sekitar ±34 g bila digabung dengan suhu dan drift HX711), overload yang dipakai desain 120% / 150% (96 / 120 kgf), kabel sekitar 28 cm (listing) atau 0,42 m (GJ Impex). Harga pembelian tidak tercatat di catatan ini: isi dari bukti beli, lalu hitung ulang total dan sisa anggaran (Rp253.875 di atas masih memuat Rp193.375 untuk load cell lama).
+Tabel di atas merekam BOM proposal apa adanya. Perubahan sesudahnya:
+- **Load cell diganti.** Yang dibeli adalah CZL 601 80 kg (listing Automa-88, Shopee; DS-LC1 di `datasheet-library.md`), bukan load cell generik 180 kg pada baris 2. Spesifikasi di baris 2 (2,0 mV/V, overload 150%, kabel 110 cm, 147 x 30 x 22 mm) tidak berlaku lagi. Nilai baru dari DS-LC1: 130 x 28 x 22 mm (gambar penjual; GJ Impex menulis lebar 30 mm), sensitivitas 2,0±0,2 mV/V (vendor), error gabungan ±0,03 %RO (sekitar ±24 g, sekitar ±34 g bila digabung dengan suhu dan drift HX711), overload yang dipakai desain 120% / 150% (96 / 120 kgf), kabel sekitar 28 cm (listing) atau 0,42 m (GJ Impex). Harga pembelian tidak tercatat di catatan ini: isi dari bukti beli, lalu hitung ulang total dan sisa anggaran (Rp253.875 di atas masih memuat Rp193.375 untuk load cell lama).
 - **Komponen housing grip yang belum ada di BOM** ([HL11](desain-housing-load-cell.md#hl11-pengadaan-pelat-logam)): pelat aluminium 170 x 30 x 10 mm (2 pcs + 1 cadangan; grade dicantumkan) dan jasa potong atau bor, baut M6 x 25 dan washer logam (4 buah, lebih satu set cadangan), filamen PLA untuk spacer 28 x 28 x 2,5 mm dan penjepit kabel (printer lab), serta kabel sambungan load cell (shielded, 4 inti, panjang TBD) bila housing elektronik tidak berada dalam jangkauan kabel 28-42 cm. Harga belum diverifikasi.
-- Anggota kelompok sudah memiliki ESP32 DevKit V1, LED 5 mm, tombol, resistor, breadboard, dan kabel jumper; LCD, modul HX711, dan load cell sudah dibeli. Daftar komponen yang diminta dari lab disusun terpisah (tab Kelompok 01).
+- Anggota tim sudah memiliki ESP32 DevKit V1, LED 5 mm, tombol, resistor, breadboard, dan kabel jumper; LCD, modul HX711, dan load cell sudah dibeli. Daftar komponen yang diminta dari lab disusun terpisah (tab terpisah).
 
 ---
 
@@ -377,7 +377,7 @@ Tabel di atas merekam BOM proposal G1 apa adanya. Perubahan sesudahnya:
 
 *Parafrase setia (bukan kutipan verbatim) dari kedua buku teks, diterjemahkan ke Indonesia dengan analogi di beberapa titik. Temuan paper diinterpretasi. Cakupan dibatasi pada yang benar-benar jadi fondasi keputusan di dokumen ini - bagian buku/paper yang dibaca tapi tidak dipakai (misal fitur game Gotthelf, sensor FSR/IMU Becerra, amplifier AD627) sengaja tidak dimasukkan di sini (lihat Bagian 2 untuk catatan "TIDAK diadopsi"-nya).*
 
-**Konvensi sitasi lokal:** kode di kolom pertama tabel di bawah (M1, W1, V1, dst.) dipakai sebagai sitasi `(kode)` di sepanjang dokumen ini - ditulis menempel setelah klaim yang didukungnya, gaya IEEE. **Sistem ini TIDAK universal** - kode ini cuma berlaku di dalam catatan ini sendiri, tidak bisa dipakai/dikenali di dokumen lain (beda dari sitasi [1], [2] ala BRP yang merujuk Daftar Pustaka baku). Kalau bagian dari catatan ini disalin ke draf proposal G1 nanti, kode `(kode)` ini perlu ditulis ulang jadi sitasi format resmi (APA/IEEE sesuai ketentuan dosen) merujuk ke daftar pustaka yang sebenarnya - bukan dibiarkan sebagai kode internal ini.
+**Konvensi sitasi lokal:** kode di kolom pertama tabel di bawah (M1, W1, V1, dst.) dipakai sebagai sitasi `(kode)` di sepanjang dokumen ini - ditulis menempel setelah klaim yang didukungnya, gaya IEEE. **Sistem ini TIDAK universal** - kode ini cuma berlaku di dalam catatan ini sendiri, tidak bisa dipakai/dikenali di dokumen lain (beda dari sitasi [1], [2] ala panduan yang merujuk Daftar Pustaka baku). Kalau bagian dari catatan ini disalin ke draf proposal nanti, kode `(kode)` ini perlu ditulis ulang jadi sitasi format resmi (APA/IEEE sesuai ketentuan dosen) merujuk ke daftar pustaka yang sebenarnya - bukan dibiarkan sebagai kode internal ini.
 
 ### 11.1 Marwedel, *Embedded System Design* (ed. 4, 2021)
 
@@ -390,7 +390,7 @@ Tabel di atas merekam BOM proposal G1 apa adanya. Perubahan sesudahnya:
 | M5 | Metrik kuantitatif seberapa jauh nilai hasil pengukuran menyimpang dari nilai sebenarnya: MAE (rata-rata selisih absolut), MSE (rata-rata selisih kuadrat - menghukum error besar lebih berat), RMSE (akar dari MSE, kembali ke satuan asli sehingga mudah diinterpretasi), SNR/PSNR (rasio sinyal terhadap noise). | Bab 5, §5.3 Quality Metrics |
 | M6 | Dua metode analisis risiko formal. FMEA bekerja dari bawah ke atas: mendaftar tiap kemungkinan cara komponen gagal (mode kegagalan), efeknya ke sistem, lalu tingkat keparahan. FTA bekerja dari atas ke bawah: mulai dari satu kegagalan sistem yang tidak diinginkan, menelusuri kombinasi kegagalan komponen yang bisa menyebabkannya (pohon logika AND/OR). | Bab 5, §5.6.5 Fault Tree Analysis, Failure Mode, and Effect Analysis |
 
-### 11.2 White, *Making Embedded Systems* (ed. 1, 2011) - rujukan BRP [3]
+### 11.2 White, *Making Embedded Systems* (ed. 1, 2011) - rujukan panduan [3]
 
 | Kode | Isi (parafrase) | Asal |
 |---|---|---|
@@ -440,9 +440,9 @@ Tabel di atas merekam BOM proposal G1 apa adanya. Perubahan sesudahnya:
 | C1 | Load cell dipilih dengan kapasitas jauh di atas kekuatan genggam maksimum yang diharapkan dari populasi target (136kg untuk mengukur populasi dengan grip <100kg) - memberi margin aman tanpa risiko saturasi. | Bagian 2 (Experimental Details) |
 | C2 | Dynamometer digital terintegrasi menyimpan data pengukuran otomatis ke komputer, mengatasi kelemahan dynamometer analog tradisional (seperti JAMAR) yang mengharuskan pencatat menyalin nilai manual satu per satu - rawan human error dan kehilangan data. | Bagian 1 (Introduction) |
 
-### 11.8 Russell, *Introduction to Embedded Systems Using ANSI C and the Arduino Development Environment* (2010) - rujukan BRP [1]
+### 11.8 Russell, *Introduction to Embedded Systems Using ANSI C and the Arduino Development Environment* (2010) - rujukan panduan [1]
 
-*Catatan: sitasi BRP untuk buku ini akurat di Minggu 1-3 (Bab 1-2, 3-4-6, 9), tapi Minggu 4 (ADC) dan Minggu 5 (aktuator) sama-sama dikutip sebagai "Bab 10" padahal Bab 10 aslinya adalah Serial Communications - kemungkinan salah ketik di BRP. ADC yang benar ada di Bab 8, PWM/timer (aktuator) di Bab 7.*
+*Catatan: sitasi panduan untuk buku ini akurat di Minggu 1-3 (Bab 1-2, 3-4-6, 9), tapi Minggu 4 (ADC) dan Minggu 5 (aktuator) sama-sama dikutip sebagai "Bab 10" padahal Bab 10 aslinya adalah Serial Communications - kemungkinan salah ketik di panduan. ADC yang benar ada di Bab 8, PWM/timer (aktuator) di Bab 7.*
 
 | Kode | Isi (parafrase) | Asal |
 |---|---|---|
@@ -457,10 +457,10 @@ Rujukan desain housing grip (dokumentasi alat komersial KG1, GA1, VN1, BP1, PP1,
 
 ## 12. LOG CROSS-CHECK DAN AUDIT
 
-*Jejak pemeriksaan catatan terhadap dokumen resmi G1 (Rubrik, Panduan, Template) dan proposal yang dikumpulkan.*
+*Jejak pemeriksaan catatan terhadap dokumen resmi proposal (Rubrik, Panduan, Template) dan proposal yang dikumpulkan.*
 
-- Rubrik skor resmi: 4 kriteria (bukan 6), masing-masing 0-100, G1 = rata-rata. Sudah dikoreksi di Bagian 3.2.
-- Tenggat gerber: konflik BRP (Minggu 7) dan Panduan G1 (Minggu 8) belum terkonfirmasi (Bagian 3.1). Proposal memakai Minggu 8.
+- Rubrik skor resmi: 4 kriteria (bukan 6), masing-masing 0-100, skor = rata-rata. Sudah dikoreksi di Bagian 3.2.
+- Tenggat gerber: konflik panduan (Minggu 7) dan panduan tugas (Minggu 8) belum terkonfirmasi (Bagian 3.1). Proposal memakai Minggu 8.
 - Media logging: SD card hanya fasilitas opsional lab (satu unit); cloud opsional menurut Panduan; keputusan: CSV lewat USB-Serial sebagai inti (Bagian 4 dan 6.1).
 - Persyaratan format resmi: status per item di Bagian 3.3.
 - v37: dokumen housing menjadi v7: disesuaikan dengan load cell CZL 601 80 kg (130 x 28 x 22 mm), gambar v5 (spacer 28 mm, a = 37 mm, pelat aluminium 10 mm diputuskan, baut M6 x 25, kabel Ø5 mm asumsi), dan metode kalibrasi dumbbell (HL10); Bagian 9, 9.1.1, 14, 15 diperbarui; Bagian 13 tetap sebagai proposal yang dikumpulkan.
@@ -473,7 +473,7 @@ Rujukan desain housing grip (dokumentasi alat komersial KG1, GA1, VN1, BP1, PP1,
 
 ### Audit v26: catatan dan proposal yang dikumpulkan
 
-Temuan pada proposal G1 yang dikumpulkan (untuk revisi setelah catatan TA):
+Temuan pada proposal yang dikumpulkan (untuk revisi setelah catatan TA):
 
 1. Tabel pin 3.4: LCD SDA tertulis GPIO 22, sama dengan SCL. Yang benar SDA = GPIO 21 (jadwal di proposal Bagian 5 sudah menulis 21/22). Jika dibiarkan, ini melanggar aturan "tidak boleh ada pin dobel".
 2. BOM proposal: total tertulis "253.375 + ongkir", padahal penjumlahan baris 193.375 + 8.500 + 39.500 + 10.000 + 2.500 = 253.875.
@@ -495,7 +495,7 @@ Audit v27 dan v28 (kekakuan batang, arah beban kalibrasi, hasil gambar v4) dipin
 
 ---
 
-## 13. ISI PROPOSAL G1 BAGIAN 2-3 (SEBAGAIMANA DIKUMPULKAN)
+## 13. ISI PROPOSAL BAGIAN 2-3 (SEBAGAIMANA DIKUMPULKAN)
 
 > Catatan v37: bagian ini merekam proposal apa adanya dan tidak diubah. Load cell yang ditulis di sini (generik 180 kg, 2,0 mV/V, non-linearity 0,02% FS, tolerance ±0,036 kg, headroom besar di atas 70 kg) sudah diganti CZL 601 80 kg (Bagian 9.1.1). Akibatnya: error gabungan load cell sekitar ±24 g (±34 g dengan suhu dan drift HX711), bukan ±36 g dari satu komponen; 70 kgf adalah 87,5% kapasitas, jadi "headroom besar" tidak lagi benar; eksitasi dan penguatan HX711 perlu dicek terhadap DS-LC1 dan DS-HX1. Tinjau ulang S1 dan Bagian 13.5 sebelum dipakai di laporan akhir.
 
@@ -515,7 +515,7 @@ Audit v27 dan v28 (kekakuan batang, arah beban kalibrasi, hasil gambar v4) dipin
 
 ### 13.2 What the device will not do (proposal 2.2)
 
-- Alat tidak diuji atau divalidasi pada partisipan di luar anggota kelompok; seluruh pengukuran validasi (kalibrasi, protokol pengukuran) hanya pada anggota tim, sesuai batas non-invasif Panduan G1.
+- Alat tidak diuji atau divalidasi pada partisipan di luar anggota tim; seluruh pengukuran validasi (kalibrasi, protokol pengukuran) hanya pada anggota tim, sesuai batas non-invasif panduan tugas.
 - Alat bukan pengganti dynamometer klinis bersertifikasi (seperti JAMAR) untuk diagnosis; akurasinya diverifikasi lewat RMSE terhadap beban acuan yang diketahui, bukan standar kalibrasi klinis formal.
 - Alat tidak memvalidasi teknik genggam (posisi jari dan ibu jari) secara elektronik; kepatuhan terhadap protokol standar (duduk, siku 90 derajat, dst.) bergantung pada instruksi verbal.
 - Alat tidak mengukur kedua tangan bersamaan; tiap percobaan mengukur satu tangan secara berurutan. Nilai gaya di luar 20-70 kg tidak dijamin akurat dan ditolak sebagai kemungkinan kegagalan sensor.
@@ -538,7 +538,7 @@ Caption proposal: Diagram blok firmware dan hardware. Load cell 180 kg terhubung
 | Signal amplification + ADC | HX711 (channel A) | Rated output load cell 2,0±0,2 mV/V butuh penguatan besar sebelum terbaca ADC; ADC 24-bit internal HX711 menjadi bagian rantai pengukuran yang mendasari tolerance S1 | S1 | Instrumentation amplifier AD627 (Becerra et al.): butuh ADC eksternal terpisah |
 | Display | LCD 16x2 I2C | Interface I2C hanya butuh 2 pin (GPIO 21/22); memfasilitasi hitung mundur 100 ms di S2 | S2 | LCD 16x2 paralel: butuh 6+ pin, tanpa manfaat tambahan |
 | User feedback | LED tunggal | Menyala sinkron durasi GENGGAM (termasuk saat auto-reset internal) sesuai S5; arus sekitar 15-20 mA negligible terhadap power budget peak sekitar 540 mA (S3) | S5 | Buzzer: tidak ada spesifikasi terukur yang butuh sinyal audio, dan bobot penilaian lebih besar di firmware |
-| Data logging path | USB-Serial UART stream + skrip Python host (pyserial) | Mekanisme inti yang handal dan stabil tanpa bergantung koneksi internet; memanfaatkan jalur UART bawaan ESP32 ke laptop (pola Modul 3 Revised, Guided Example 4) | S4 | Modul SD card (lab hanya punya 1 unit, risiko rebutan) dan cloud logging (dipindah ke stretch goals sesuai Panduan G1) |
+| Data logging path | USB-Serial UART stream + skrip Python host (pyserial) | Mekanisme inti yang handal dan stabil tanpa bergantung koneksi internet; memanfaatkan jalur UART bawaan ESP32 ke laptop (pola modul praktikum) | S4 | Modul SD card (lab hanya punya 1 unit, risiko rebutan) dan cloud logging (dipindah ke stretch goals sesuai panduan tugas) |
 | User input | Push button tunggal (GPIO 25) | Satu GPIO menangani START/NEXT/RESTART lewat pembedaan durasi tekan (tap vs tahan 1-2 detik) | 3.5 (SIAP, ERROR, GAGALSIMPAN) | Dua tombol terpisah (mulai + restart): tidak dipilih demi UX lebih halus, dan restart khusus error sensor punya cara akses khusus (tekan + tahan 1-2 detik) |
 
 ### 13.6 Power budget (proposal 3.3)
@@ -682,4 +682,4 @@ Nilai resistansi resistor tidak bisa diukur dengan jangka sorong; gunakan multim
 
 ---
 
-*Catatan kerja proyek akhir mata kuliah embedded system (biomedik). Bukan dokumen yang dinilai; proposal resmi ada di berkas terpisah.*
+*Catatan kerja proyek akhir mata kuliah embedded system. Bukan dokumen yang dinilai; proposal resmi ada di berkas terpisah.*

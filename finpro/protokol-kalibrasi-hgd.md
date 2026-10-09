@@ -1,12 +1,18 @@
-# Protokol Kalibrasi Hand Grip Dynamometer (untuk Kelompok 01)
+# Protokol Kalibrasi Hand Grip Dynamometer (untuk tim proyek)
 
-Status: usulan, belum diuji. Ukuran papan, balok PLA, ridge, dan lidah masih mengikuti model Fusion dan bisa berubah. Gambar di bawah memakai dumbbell heksagonal milik Ayu (pasangan 3, 4, 5, 6 kg berbentuk heksagon; yang 2 kg dan 1 kg bentuknya sedikit berbeda, di gambar disederhanakan menjadi heksagon).
+Status: usulan, belum diuji. Ukuran papan, balok PLA, ridge, dan lidah masih mengikuti model Fusion dan bisa berubah. Gambar di bawah memakai dumbbell heksagonal milik tim (pasangan 3, 4, 5, 6 kg berbentuk heksagon; yang 2 kg dan 1 kg bentuknya sedikit berbeda, di gambar disederhanakan menjadi heksagon).
 
 ## 1. Tujuan
 
 Mencari **faktor skala** (hitungan HX711 per kg) supaya pembacaan alat bisa ditampilkan dalam kg. Nol (tare) sudah dilakukan firmware pada keadaan SIAP, jadi yang dicari hanya kemiringan garis (counts per kg). Kita juga memeriksa linearitas, histeresis (naik lawan turun), dan drift.
 
 ## 2. Gambar setup
+
+**Tahap 1 (sampai 20 kg), dengan rakitan housing v5.** Tahap ini dikerjakan lebih dulu. Gambar di bawah memakai pelat aluminium 10 mm, spacer PLA 28 x 28 x 2,5 mm, load cell CZL 601, dan baut M6 x 25. Titik ukur: nol, dumbbell tunggal 1 sampai 6 kg (seri A), pasangan 6 kg (12 kg), lalu pasangan 4 kg di atas 6 kg (20 kg), dan turun kembali. Tumpukan 20 kg sekitar 19 cm, jauh lebih rendah daripada tumpukan 42 kg. 20 kg baru sekitar 29 persen dari 70 kgf, sehingga faktor skala dari tahap ini belum cukup untuk seluruh rentang. Alas karet perlu lubang untuk kepala baut di bawah A (usulan, belum ada di model).
+
+![Setup kalibrasi tahap 1, sampai 20 kg](img/kalibrasi_setup_v5_20kg.svg)
+
+**Tahap 2 (sampai 42 kg)** memakai susunan di bawah ini, dengan gambar lama (belum diperbarui ke rakitan v5):
 
 ![Setup kalibrasi](img/kalibrasi_protokol.svg)
 
@@ -100,7 +106,7 @@ Setelah faktor skala dipasang, ukur massa yang **belum dipakai untuk fitting**, 
 - Turunkan dumbbell pelan-pelan; jangan dijatuhkan ke papan.
 - Jangan menaruh tangan atau wajah di bawah atau di antara tumpukan. Berdiri di samping.
 - Jika tumpukan mulai miring atau terdengar menyentuh pemandu, **berhenti**, angkat dari atas ke bawah.
-- Jangan melebihi 42 kg. Batas aman load cell 150% kapasitas jauh di atas ini, tetapi tumpukan tinggi tetap berbahaya.
+- Jangan melebihi 42 kg (tahap 1: 20 kg). Batas aman load cell CZL 601 80 kg dipegang konservatif di 120% kapasitas (96 kgf), jauh di atas beban kalibrasi, tetapi tumpukan tinggi tetap berbahaya. (Angka 150% berasal dari load cell 180 kg yang tidak jadi dipakai.)
 - Jangan tekan papan dengan tangan saat membaca. Tangan menambah gaya.
 - Jangan menjepit meja lab tanpa izin; tepinya tipis dan sudah ada yang gompal.
 
