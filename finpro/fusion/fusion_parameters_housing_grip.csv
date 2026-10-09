@@ -1,0 +1,19 @@
+Name,Unit,Expression,Value,Comments,Favorite
+LC_L,mm,130 mm,130 mm,"Load cell length (CZL 601 80 kg, vendor drawing Automa-88; not yet measured)",true
+LC_W,mm,28 mm,28 mm,Load cell width (vendor drawing 28 mm; GJ Impex datasheet says 30 mm - measure),true
+LC_H,mm,22 mm,22 mm,Load cell height (vendor drawing) - confirm which side is along the load (C5),true
+bar_L,mm,170 mm,170 mm,Bar length (working value),true
+bar_W,mm,30 mm,30 mm,Bar width (working value),true
+bar_t,mm,10 mm,10 mm,Bar thickness (decided: plain aluminium plate 10 mm),true
+gap,mm,2.5 mm,2.5 mm,Clearance gap A/B to load cell = PLA spacer thickness (working value),true
+lever_arm,mm,LC_L / 2 - boss_L,37 mm,Derived - grip zone centroid to spacer inner edge,true
+grip_zone,mm,85 mm,85 mm,Assumed - grip zone width (free span between spacers is 74 mm),true
+ridge_h,mm,5 mm,5 mm,Assumed - ridge height,true
+boss_L,mm,28 mm,28 mm,"Spacer length (28 mm PLA spacer; must not pass the end block into the middle area - end block about 27-28 mm is an estimate, measure)",true
+hole_d,mm,6.5 mm,6.5 mm,TBD - clearance hole for M6 bolt (calc case 6.5 mm; ISO 273 usual 6.4 / 6.6 / 7.0 mm; 5.5 mm is not possible for M6),true
+hole_pitch,mm,106 mm,106 mm,"Distance between the two hole pairs along the length, centre to centre (vendor drawing; measure)",true
+hole_cross,mm,15 mm,15 mm,"Distance between the two holes across the width, centre to centre (vendor drawing; measure)",true
+hole_edge,mm,12 mm,12 mm,Hole centre to load cell end (vendor drawing; measure),true
+total_t,mm,2 * bar_t + 2 * gap + LC_H + ridge_h,52 mm,Derived total grip thickness without bolt heads - should read 52 mm,true
+spA_c,mm,-( LC_L / 2 ) + ( boss_L / 2 ),-51 mm,Derived - Spacer_A centre along the length (load cell centred on origin; fixed end on the negative side),false
+spB_c,mm,( LC_L / 2 ) - ( boss_L / 2 ),51 mm,Derived - Spacer_B centre along the length (free end on the positive side),false
