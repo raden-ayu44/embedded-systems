@@ -23,7 +23,7 @@ Status: **Terisi** = entri sudah ada di file ini; **Punya** = dokumennya sudah a
 | 1 | DS-HX1 | Datasheet chip HX711 (Avia) | Sudah ada. Ambil juga **skema modul HX711 yang benar-benar dibeli**: papan klon yang menentukan catu, filter, dan pengaturan rate yang sebenarnya didapat. | Terisi; skema papan: Ambil |
 | 2 | DS-LC1 | Datasheet Eagle Weigh CZL 601 | Sudah ada halaman Eagle Weigh dan PDF GJ Impex (lihat entri). Ambil gambar resmi pabrikan dengan **kedalaman lubang dan posisi keluar kabel** bila diterbitkan. | Terisi; gambar resmi: Ambil |
 | 3 | DS-ESP1 | Datasheet modul ESP32-WROOM-32D (Espressif) | Modul yang dipilih tim: ESP32-WROOM-32D. | Terisi |
-| 4 | DS-ESP2 | Papan ESP32 DevKit V1 | Papan yang dipilih tim. Posisi pin, fungsi pin, regulator, dan chip USB sudah ada (dari S3); skema V1 yang dirujuk halaman S3 bisa diambil bila perlu. | Terisi, menunggu verifikasi saat barang tiba |
+| 4 | DS-ESP2 | Papan ESP32 DevKit V1 | Papan yang dipilih tim. Posisi pin, fungsi pin, regulator, dan chip USB sudah ada (dari S3); skema V1 yang dirujuk halaman S3 bisa diambil bila perlu. | Terisi; papan sudah ada. Terverifikasi sebagian (enam pin proyek, 3V3 dan VIN); sisa: cetakan modul, penanda regulator, chip USB |
 | 5 | DS-REG1 | Datasheet regulator tegangan pada papan itu | Sering AMS1117-3.3 atau setara. Penting untuk noise catu dan batas arus. | Ambil |
 
 ### Prioritas 2: elektronik lain di BOM
@@ -31,7 +31,7 @@ Status: **Terisi** = entri sudah ada di file ini; **Punya** = dokumennya sudah a
 | No | Kode | Dokumen | Yang diambil / catatan | Status |
 |---|---|---|---|---|
 | 6 | DS-LCD1 | Datasheet modul LCD HS1602A (pengontrol SPLC780, kompatibel HD44780) | Modul pada foto vendor. | Terisi, menunggu verifikasi saat barang tiba |
-| 7 | DS-I2C1 | Datasheet chip backpack I2C (PCF8574/PCF8574A) | Untuk alamat dan catu. Panduan Adafruit yang Anda unggah adalah backpack **MCP23008**, bukan PCF8574 (lihat entri). | Terisi, menunggu verifikasi chip pada backpack |
+| 7 | DS-I2C1 | Datasheet chip backpack I2C (PCF8574/PCF8574A) | Untuk alamat dan catu. Panduan Adafruit yang tersedia adalah backpack **MCP23008**, bukan PCF8574 (lihat entri). | Terisi, menunggu verifikasi chip pada backpack |
 | 8 | DS-LED1 | Datasheet LED 5 mm | Tegangan dan arus maju LED yang benar-benar dibeli. | Ambil |
 | 9 | DS-BTN1 | Datasheet tombol tactile | Arus kontak, waktu bounce, dimensi. | Ambil |
 | 10 | DS-RES1 | Datasheet resistor pembatas LED | Toleransi dan daya; hanya jika ingin disitasi. | Opsional |
@@ -42,7 +42,7 @@ Status: **Terisi** = entri sudah ada di file ini; **Punya** = dokumennya sudah a
 
 | No | Kode | Dokumen | Yang diambil / catatan | Status |
 |---|---|---|---|---|
-| 13 | DS-MAT1 | Datasheet pelat aluminium dari pemasok | Paduan dan temper, modulus E, kuat luluh. Perhitungan defleksi dan tegangan kita memakai E = 69 GPa. | Ambil |
+| 13 | DS-MAT1 | Datasheet pelat aluminium dari pemasok | Paduan dan temper, modulus E, kuat luluh. Perhitungan defleksi dan tegangan kita memakai E = 70 GPa. | Ambil |
 | 14 | DS-MAT2 | Technical data sheet filamen PLA | Modulus, suhu transisi gelas, catatan creep. | Ambil |
 | 15 | DS-MAT3 | Standar baut M6 | ISO 898-1 (kelas kekuatan) + standar dimensi ISO/DIN untuk tipe baut yang dipakai. | Ambil |
 | 16 | DS-MAT4 | Bahan alas karet/spacer | Hanya jika rig kalibrasi menyitasinya. | Opsional |
@@ -53,7 +53,7 @@ Status: **Terisi** = entri sudah ada di file ini; **Punya** = dokumennya sudah a
 |---|---|---|---|---|
 | 17 | DS-STD1 | OIML R60 | - | Punya, entri belum ditulis |
 | 18 | DS-STD2 | VPG 11864 (dokumen teknis) | - | Punya, entri belum ditulis |
-| 19 | DS-INS1 | Spesifikasi multimeter | Akurasi dan resolusi; dipakai saat memeriksa resistansi jembatan 400/350 ohm dan tegangan catu. | Ambil |
+| 19 | DS-INS1 | Spesifikasi multimeter DT9205A | Akurasi dan resolusi; dipakai saat memeriksa resistansi jembatan 350/400 ohm, tegangan catu, dan arus total. | Terisi |
 | 20 | DS-INS2 | Spesifikasi jangka sorong | Resolusi dan akurasi; dipakai untuk dimensi load cell. | Ambil |
 | 21 | DS-INS3 | Spesifikasi timbangan badan | Resolusi dan akurasi; instrumen massa acuan. **Paling berpengaruh pada ketidakpastian kalibrasi.** | Ambil |
 | 22 | DS-INS4 | Toleransi label dumbbell | Bila pabrik menyebutnya. Opsional karena kita menimbangnya sendiri. | Opsional |
@@ -62,7 +62,7 @@ Status: **Terisi** = entri sudah ada di file ini; **Punya** = dokumennya sudah a
 
 | No | Kode | Dokumen | Yang diambil / catatan | Status |
 |---|---|---|---|---|
-| 23 | DS-MFG1 | Kemampuan pabrik PCB dan persyaratan Gerber | Lebar jalur minimum, ukuran lubang, format berkas. Di sinilah konflik tenggat di catatan Anda muncul. | Ambil |
+| 23 | DS-MFG1 | Kemampuan pabrik PCB dan persyaratan Gerber | Lebar jalur minimum, ukuran lubang, format berkas. Di sinilah konflik tenggat di catatan proyek muncul. | Ambil |
 | 24 | DS-MFG2 | Pengaturan printer 3D dan slicer di lab | Hanya jika parameter cetak disitasi. | Opsional |
 
 **Tidak diperlukan:** datasheet CZL 882 dan sel generik 180 kg, karena keduanya sudah diganti. Simpan CZL 882 hanya jika laporan menjelaskan alasan penolakannya.
@@ -179,7 +179,7 @@ Nomor [1]-[3] mengikuti urutan kemunculan di tabel Identitas. Seperti kode lokal
 [3] "HX711: 24-bit delta sigma ADC interface for weight scale," PSoC Creator Component Datasheet, v0.0.b, Rev. *B, Infineon Developer Community, Code Examples, Mar. 30, 2020. [Online]. Available: https://community.infineon.com/gfawx74859/attachments/gfawx74859/CodeExamples/546/7/HX711_v0_0_B.pdf (diakses 8 Okt. 2026).
 
 **Catatan sitasi (hapus setelah dicek):**
-- [1]: nama toko "CNC STORE BANDUNG" sudah dicocokkan dengan tangkapan layar halaman toko pada tautan yang sama (8 Okt. 2026). Judul diambil dari bagian URL; samakan dengan judul di halaman produk. Ganti tanggal akses bila Anda membukanya di tanggal lain. Parameter pelacak (`?xptdk=...`) pada tautan asli sengaja dibuang.
+- [1]: nama toko "CNC STORE BANDUNG" sudah dicocokkan dengan tangkapan layar halaman toko pada tautan yang sama (8 Okt. 2026). Judul diambil dari bagian URL; samakan dengan judul di halaman produk. Ganti tanggal akses bila dibuka di tanggal lain. Parameter pelacak (`?xptdk=...`) pada tautan asli sengaja dibuang.
 - [2]: dokumen tidak mencantumkan tanggal atau revisi pada halamannya ("n.d."); tautan adalah salinan yang di-hosting SparkFun, bukan situs Avia.
 - [3]: penulis tidak tertulis di halaman dokumen (metadata PDF menyebut nama "Irina", tetapi itu bukan data yang dicetak, jadi tidak dipakai sebagai penulis). Tautan adalah lampiran komunitas, bukan dokumen resmi pabrikan.
 
@@ -230,7 +230,7 @@ Nomor [1]-[3] mengikuti urutan kemunculan di tabel Identitas. Seperti kode lokal
 
 1. **Lebar 28 vs 30 mm:** rancang slot untuk 28-30 mm sampai diukur.
 2. **Eksitasi 3,3-5 V di bawah semua rentang yang tercantum** (9-12 atau 10-15 V): keluaran absolut lebih kecil (lihat noise di DS-HX1). Tanyakan ke vendor; verifikasi dengan uji linearitas sendiri.
-3. **Overload konservatif 120%/150%.** Beban maksimum manusia sekitar 59 kgf (Gotthelf), jauh di bawah.
+3. **Overload konservatif 120%/150%.** Gaya genggam tertinggi pada data Gotthelf sekitar 59 kgf (usia 20-24) sampai 78 kgf (usia 30-34), masih di bawah 96 kgf (120%).
 4. **Creep:** jangan pakai 0,0016%; pakai <0,025%.
 5. **Error gabungan +-0,03 %RO sekitar +-24 g**; ini batas bawah ketidakpastian kita (pemasangan dan kalibrasi menambah).
 6. **Warna signal:** hijau = S+, putih = S-; periksa tanda pembacaan di uji pertama.
@@ -354,13 +354,26 @@ Bukan sumber S1/S2/S3; ini pengukuran sendiri. Alat: papan DevKit V1 + kabel USB
 
 Kesimpulan: CPU 240 MHz (bawaan) atau 160 MHz aman untuk bit-bang HX711; 80 MHz masih di bawah batas. Pelindung `noInterrupts()` di sekitar 24 clock tidak wajib berdasarkan data ini, hanya pengaman tambahan.
 
+### Hasil ukur multimeter (10 Okt. 2026)
+
+Pengukuran sendiri dengan multimeter digital (DT9205A), rentang 20 V DC (DS-INS1). Kondisi: papan DevKit V1 dicatu dari USB laptop, tanpa HX711, LCD, atau load cell terpasang. Pembacaan terlihat stabil setelah beberapa detik.
+
+| Titik | Terbaca | Rentang yang masuk akal (hasil + ketidakpastian alat) | Dibandingkan dengan |
+|---|---|---|---|
+| Pin 3V3 terhadap GND | 3,30 V (stabil) | 3,26 sampai 3,34 V (± 0,037 V) | Sesuai nominal regulator 3,3 V. Catu logika ESP32 dan HX711 berada pada nilai yang diharapkan |
+| Pin VIN terhadap GND | 5,02 - 5,04 V; paling stabil 5,03 V | 4,98 sampai 5,08 V (± 0,045 V) | Di dalam rentang catu USB (5 V ± 5% menurut spesifikasi USB 2.0). Tegangan jalur 5 V dari laptop hampir tanpa penurunan |
+
+Belum diukur: 3V3 dan 5 V dengan beban (HX711, LCD, LED), arus total.
+
 ### Daftar cek saat modul tiba
 
 | No | Pemeriksaan | Hasil |
 |---|---|---|
 | 1 | Cetakan pada pelindung modul: tertulis ESP32-WROOM-32D? | Cetakan terbaca "ESP-32" dan "XXSR69" saja; chip terkonfirmasi D0WD-V3 lewat perangkat lunak (lihat hasil uji di atas). Huruf akhiran modul belum pasti |
-| 2 | Tegangan 3V3 saat beban (HX711 + LCD + LED) | |
-| 2a | Arus total dari USB (inline meter) pada 80 MHz dan 240 MHz dengan firmware proyek, Wi-Fi mati; bandingkan dengan Tabel B | |
+| 1a | Tegangan 3V3 tanpa beban (DT9205A, 20 V DC) | **3,30 V**, 10 Okt. 2026 (lihat hasil ukur multimeter di atas) |
+| 1b | Tegangan VIN tanpa beban | **5,03 V** (terbaca 5,02 - 5,04 V), 10 Okt. 2026 |
+| 2 | Tegangan 3V3 saat beban (HX711 + LCD + LED). Alat DT9205A, rentang 20 V DC, ketidakpastian sekitar ±0,04 V pada 3,3 V (DS-INS1) | *belum diukur* |
+| 2a | Arus total dari USB pada 80 MHz dan 240 MHz dengan firmware proyek, Wi-Fi mati; bandingkan dengan Tabel B. Alat DT9205A, rentang 200 mA DC lewat jack mA, dipasang seri di jalur 5 V (langkah dan batas di DS-INS1; sekring alat 200 mA); ketidakpastian sekitar ±(1,4% + 0,2 mA), dan layar hanya diperbarui tiap 2-3 detik sehingga puncak sesaat tidak terbaca | *belum diukur* |
 | 3 | Enam pin proyek terbaca pada tes GPIO sederhana | **Lulus**, 8 Okt. 2026 (loopback 6 dari 6 arah, lihat hasil uji di atas) |
 
 ---
@@ -422,9 +435,32 @@ Semua enam GPIO proyek dikeluarkan di header V1.
 | 1 | Foto papan: label pin, tombol EN/BOOT, jenis soket USB | |
 | 2 | Cetakan modul (WROOM-32D?) | |
 | 3 | Penanda regulator (AMS1117-3.3?) dan chip USB-UART (CP2102 atau CH340?) | |
-| 4 | Tegangan pin 3V3 dan VIN dengan USB tersambung | |
-| 5 | Posisi 18, 19, 21, 22, 25, 27 cocok dengan tabel pin S3 | |
-| 6 | Jumlah pin header (30?) | |
+| 4 | Tegangan pin 3V3 dan VIN dengan USB tersambung | **3,30 V dan 5,03 V**, 10 Okt. 2026 (DT9205A, tanpa beban) |
+| 5 | Posisi 18, 19, 21, 22, 25, 27 cocok dengan tabel pin S3 | Enam pin lulus loopback 8 Okt. 2026; kecocokan letak dengan label di papan belum dicatat |
+| 6 | Jumlah pin header (30?) | **15 per baris, 30 total** (diukur sendiri, 10 Okt. 2026) |
+
+### Dimensi papan (ukur sendiri, 10 Okt. 2026)
+
+Papan DevKit V1 tidak punya gambar dimensi pabrikan di berkas kita, jadi dimensi ini hasil ukur sendiri (jangka sorong atau penggaris; alat dan resolusinya belum dicatat). Acuan pabrikan hanya untuk modul WROOM-32D (lihat `esp32_dimensi_acuan.xlsx`).
+
+| Item | Hasil | Catatan |
+|---|---|---|
+| Panjang x lebar papan | 51,5 x 28,2 mm | Panjang **sudah termasuk** area antena Wi-Fi (keterangan pengguna). Area antena tidak boleh tertutup tembaga atau komponen pada PCB pembawa |
+| Jarak antar baris header, pusat ke pusat | 25,3 mm | Dihitung: 25,8 mm (tepi luar ke tepi luar kaki) - 0,5 mm (diameter kaki). Hampir 10 x 2,54 = 25,4 mm |
+| Pitch pin | 2,5 mm (pembulatan pengukuran) | Dianggap 2,54 mm; cocok dengan panjang barisan |
+| Jumlah pin per baris | 15 | - |
+| Panjang barisan (pusat pin pertama ke terakhir) | 35,5 mm | (15 - 1) x 2,54 = 35,56 mm, cocok |
+| Diameter kaki header | 0,5 mm | - |
+| Konektor USB (micro-USB) | 2,7 x 5,7 x 7,7 mm (urutan: tinggi x panjang x lebar, **dugaan kita**) | Keterangan pengguna 10 Okt. 2026. Urutan dugaan dari ukuran micro-USB umum (lebar sekitar 7,5 mm, tinggi sekitar 2,5 mm). Konektor **tidak menonjol** melewati tepi papan (keterangan pengguna); angka 5,6 mm yang tertulis sebelumnya kemungkinan panjang ini |
+| Tebal PCB papan | 1,0 mm | Diukur sendiri 10 Okt. 2026 |
+| Tebal papan + modul ESP32 | 4,2 mm | Diukur sendiri. Modul = 4,2 - 1,0 = 3,2 mm; datasheet Espressif 3,10 ± 0,15 mm (maks 3,25), jadi **cocok dalam toleransi** |
+| Tebal papan + pin header | 9,2 mm | Diukur sendiri. Dihitung: pin menonjol di bawah papan sekitar 9,2 - 1,0 = 8,2 mm (dugaan kita; bergantung apakah 9,2 diukur dari sisi atas PCB sampai ujung pin) |
+| Tebal papan + plastik header | 3,4 mm | Diukur sendiri. Plastik header di bawah papan = 3,4 - 1,0 = 2,4 mm (hitungan kita; mendekati 2,5 mm pada header 2,54 mm umum) |
+| Ujung pin di bawah plastik header | 5,8 mm | Hitungan kita: 9,2 - 3,4. Ini kedalaman yang masuk ke soket PCB pembawa |
+| Tinggi di atas soket (bagian papan) | 6,6 mm | Hitungan kita: 2,4 + 1,0 + 3,2 = 6,6 mm dari bibir atas soket sampai bagian atas modul; cocok dengan 12,4 - 5,8 |
+| Tinggi total, dari ujung pin header di bawah sampai komponen tertinggi | 12,4 mm | Sudah termasuk pin header (keterangan pengguna). Cek silang: 9,2 + 3,2 = 12,4 mm, cocok |
+
+Sisa tebal kiri-kanan antara tepi papan dan baris pin: (28,2 - 25,3) / 2 = 1,45 mm per sisi (hitungan kita).
 
 ### Daftar pustaka DS-ESP1 dan DS-ESP2 (IEEE)
 
@@ -439,10 +475,10 @@ Nomor melanjutkan DS-LC1 ([4]-[6]).
 [10] Espressif Systems, "ESP32 series datasheet," v5.3, Jul. 2026. [Online]. Available: https://documentation.espressif.com/esp32_datasheet_en.pdf (diakses 8 Okt. 2026).
 
 **Catatan sitasi (hapus setelah dicek):**
-- [7]: URL diambil dari catatan di halaman 1 dokumen (tautan ke versi terbaru). Versi v2.8 dan tanda NRND dari berkas yang Anda unggah.
-- [8]: berkas yang Anda unggah (esp-dev-kits-en-master-esp32-pages.pdf) adalah kumpulan halaman dari PDF lengkap pada URL di atas; hanya bab DevKitC (V4 dan V2) yang dipakai. Nama berkas dan judul "Release master" cocok; PDF lengkap terlalu besar untuk dibuka di sini, jadi tanggal 7 Okt. 2026 diambil dari halaman sampul berkas Anda.
+- [7]: URL diambil dari catatan di halaman 1 dokumen (tautan ke versi terbaru). Versi v2.8 dan tanda NRND dari berkas yang tersedia.
+- [8]: berkas yang tersedia (esp-dev-kits-en-master-esp32-pages.pdf) adalah kumpulan halaman dari PDF lengkap pada URL di atas; hanya bab DevKitC (V4 dan V2) yang dipakai. Nama berkas dan judul "Release master" cocok; PDF lengkap terlalu besar untuk dibuka di sini, jadi tanggal 7 Okt. 2026 diambil dari halaman sampul berkas Anda.
 - [9]: halaman tidak mencantumkan tanggal terbit; hanya catatan hak cipta 2026. Penulis halaman tidak tertulis (metadata berisi nilai tempat "title"), jadi situs dipakai sebagai penerbit.
-- [10]: angka dari Tabel 4-2 (Bagian 4.3.1, hlm. 30) dan Tabel 5-4 (Bagian 5.4, hlm. 52) berkas yang Anda unggah. Tautan lama espressif.com dialihkan ke alamat ini; tanggal Juli 2026 dari riwayat revisi. Judul DS-ESP1 dan DS-ESP2 berbagi daftar pustaka ini.
+- [10]: angka dari Tabel 4-2 (Bagian 4.3.1, hlm. 30) dan Tabel 5-4 (Bagian 5.4, hlm. 52) berkas yang tersedia. Tautan lama espressif.com dialihkan ke alamat ini; tanggal Juli 2026 dari riwayat revisi. Judul DS-ESP1 dan DS-ESP2 berbagi daftar pustaka ini.
 - Hasil "Lolos" dan perbandingan V1 dengan V4 adalah pemeriksaan kita terhadap dokumen, bukan angka dari sumber.
 
 ---
@@ -476,7 +512,7 @@ Nomor melanjutkan DS-LC1 ([4]-[6]).
 
 | Parameter | Nilai S2 | Dipakai di | Catatan |
 |---|---|---|---|
-| Catu VCC | **5,0 V** (rentang kerja 4,9-5,1 V; kondisi uji 5,0 +-0,5 V) | Catu | **Modul 5 V**, bukan 3,3 V. Catu dari pin VIN/USB, bukan 3V3 |
+| Catu VCC | **5,0 V** (rentang kerja 4,9-5,1 V; kondisi uji 5,0 +-0,5 V) | Catu | **modul praktikum V**, bukan 3,3 V. Catu dari pin VIN/USB, bukan 3V3 |
 | Arus kerja | 1 mA | Anggaran daya | Tanpa lampu latar |
 | Arus lampu latar (LED) | 18 mA | Anggaran daya | Pin 15/16 (BLA/BLK) tertulis "NC (LEDA/LEDK)": tidak jelas apakah modul punya lampu latar. Cek fisik; anggarkan 18 mA bila ada |
 | VIH / VIL | 2,2 V sampai VDD / -0,3 sampai 0,6 V | Level logika | Keluaran PCF8574 pada 3,3 V (di atas 2,2 V) memenuhi VIH; keluaran ESP32 langsung juga memenuhi |
@@ -503,7 +539,7 @@ Nomor melanjutkan DS-LC1 ([4]-[6]).
 
 ### Peringatan untuk desain kita
 
-1. **Modul 5 V.** Catu dari 5 V (VIN papan atau USB), dan itu menentukan rangkaian backpack (lihat DS-I2C1, Peringatan 1).
+1. **modul praktikum V.** Catu dari 5 V (VIN papan atau USB), dan itu menentukan rangkaian backpack (lihat DS-I2C1, Peringatan 1).
 2. **Anggaran daya LCD:** sekitar 1 mA ditambah 18 mA lampu latar bila ada, dari rel 5 V.
 3. **Kontras:** atur trimpot saat pertama; tulisan tidak tampak atau semua kotak terisi bukan berarti rusak.
 
@@ -578,6 +614,97 @@ Nomor melanjutkan DS-ESP ([10]).
 **Catatan sitasi (hapus setelah dicek):**
 - [11]: judul diambil dari bagian URL; samakan dengan judul di halaman. Parameter `xptdk` pada tautan asli sengaja dibuang.
 - [12]: tautan adalah halaman bagian JLCPCB yang menghosting datasheet pabrikan; pabrikan Hansheng dari halaman judul. Tidak ada nomor revisi selain tanggal "Ver: 20110521" (halaman judul juga memuat "VER 1.0/1.1").
-- [13]: "PCF8574_PCF8574A" Rev. 5, 27 Mei 2013, dari berkas yang Anda unggah.
+- [13]: "PCF8574_PCF8574A" Rev. 5, 27 Mei 2013, dari berkas yang tersedia.
 - [14]: penulis tertulis "lady ada"; panduan ini untuk MCP23008, bukan PCF8574. Disitasi sebagai contoh, bukan sumber spesifikasi backpack kita.
 - Angka yang ditandai "hitungan kita" adalah perhitungan dari dokumen, bukan angka sumber.
+
+---
+
+## DS-INS1: Multimeter digital (buku petunjuk bawaan paket)
+
+### Identitas dan bukti
+
+| Item | Isi |
+|---|---|
+| Alat | Multimeter digital genggam, LCD 3-1/2 digit (1999 hitungan), A/D dual-slope, dicatu baterai 9 V (NEDA 1604 / 6F22). Model **DT9205A**, tertulis pada kotak kemasan (keterangan pengguna) |
+| Sumber utama | Buku petunjuk pengoperasian yang **ikut dalam paket** [15]. Sampulnya "Digital Multimeter Operator's Instruction Manual"; nama model tidak tertulis di sampul, tetapi tertulis pada kotak kemasan yang sama dengan buku ini (keterangan pengguna); pabrikan, tanggal, dan revisi tidak tertulis pada halaman yang difoto. Spesifikasi berlaku satu tahun setelah kalibrasi pada 18 sampai 28 derajat C, RH sampai 80% |
+| Sumber pembanding | Salinan "DT9205A" dari distributor [16] (kode halaman TOODMM02). **Angkanya berbeda dari buku bawaan** (lihat tabel perbandingan). Yang dipakai di entri ini adalah buku bawaan, karena itu yang menyertai alat |
+| Kegunaan di proyek | Memeriksa tegangan catu (3V3, 5 V, eksitasi load cell), resistansi jembatan load cell, kontinuitas kabel dan perisai, serta arus total dari USB |
+
+### Tabel spesifikasi yang dipakai (dari [15])
+
+| Fungsi | Rentang | Akurasi | Resolusi (1 digit) | Dipakai untuk |
+|---|---|---|---|---|
+| Tegangan DC | 200 mV, 2 V, 20 V, 200 V | 0,5% + 2 digit | 0,1 mV; 1 mV; 10 mV; 0,1 V | 3V3 dan 5 V (rentang 20 V), keluaran jembatan (200 mV) |
+| Tegangan DC | 1000 V | 0,8% + 2 digit | 1 V | Tidak dipakai |
+| Arus DC | 2 mA, 20 mA | 1,2% + 2 digit | 1 uA; 10 uA | Arus kecil (LED, pull-up) |
+| Arus DC | 200 mA | 1,4% + 2 digit | 0,1 mA | Arus total papan |
+| Arus DC | 20 A | 2,0% + 2 digit | 10 mA | Tidak dipakai |
+| Resistansi | 200 Ω | 1,0% + 2 digit | 0,1 Ω | Kontinuitas, kabel pendek |
+| Resistansi | 2 kΩ, 20 kΩ, 200 kΩ, 2 MΩ | 0,8% + 2 digit | 1 Ω; 10 Ω; 100 Ω; 1 kΩ | **Jembatan load cell 350 / 400 Ω (rentang 2 kΩ)**, resistor LED |
+| Resistansi | 20 MΩ | 1,2% + 2 digit | 10 kΩ | Resistansi isolasi bila perlu |
+| Resistansi | 200 MΩ; 2000 MΩ | 5,0% + 10 digit; 10,0% + 10 digit | 100 kΩ; 1 MΩ | Tidak dipakai |
+| Resistansi | Tegangan buka maksimum | 3,2 V | - | Aman untuk jembatan load cell |
+| Proteksi | Sekring | **F 200 mA / 250 V (cepat)**; rentang 20 A tanpa sekring | - | Lihat peringatan 1 |
+| Proteksi | Lebih beban masukan | 250 V DC atau rms AC (rentang 200 mV dan 1000 V DC: lihat halaman 3 buku) | - | - |
+| Layar | Pembaruan | 2 sampai 3 detik | - | Puncak sesaat tidak terbaca |
+| Lingkungan | Operasi | 0 sampai 40 derajat C | - | - |
+
+Hal yang **tidak tertulis** di buku bawaan: impedansi masukan tegangan, jatuh tegangan pada rentang arus, batas bunyi kontinuitas, dan mati otomatis. Angka 10 MΩ, 200 mV, 30 ± 10 Ω, dan 15 menit pada dokumen [16] tidak boleh dianggap berlaku untuk alat ini tanpa diuji (lihat peringatan 2 dan 4).
+
+### Perbandingan dengan salinan distributor [16]
+
+| Item | Buku bawaan [15] | Salinan distributor [16] |
+|---|---|---|
+| DCV 200 mV sampai 200 V | 0,5% + 2 | 0,5% + 1 |
+| DCA 2 mA / 20 mA | 1,2% + 2 | 1% + 3 |
+| DCA 200 mA | 1,4% + 2 | 1,8% + 3 |
+| Resistansi 200 Ω | 1,0% + 2 | 0,8% + 3 |
+| Resistansi 2 kΩ sampai 2 MΩ | 0,8% + 2 | 0,8% + 1 (sebagian ambigu) |
+| Sekring | 200 mA / 250 V | 0,5 A / 250 V |
+| Kondisi akurasi | 18 sampai 28 derajat C, RH 80% | 23 ± 5 derajat C, RH di bawah 75% |
+
+Kemungkinan besar keduanya adalah revisi atau varian yang berbeda dari keluarga model yang sama. Entri ini memakai angka yang lebih longgar dari buku bawaan, jadi ketidakpastian yang dihitung tidak terlalu optimistis.
+
+### Ketidakpastian pada pengukuran yang direncanakan (hitungan kita, dari [15])
+
+| Pengukuran | Rentang | Ketidakpastian | Cara hitung |
+|---|---|---|---|
+| 3V3 (nilai nominal 3,3 V) | 20 V DC | ± 0,037 V | 0,5% × 3,3 V = 0,0165 V, ditambah 2 digit (0,02 V) |
+| 5 V | 20 V DC | ± 0,045 V | 0,5% × 5 V = 0,025 V, ditambah 0,02 V |
+| Jembatan load cell sekitar 400 Ω | 2 kΩ | ± 5 Ω | 0,8% × 400 Ω = 3,2 Ω, ditambah 2 digit (2 Ω) |
+| Jembatan sekitar 350 Ω | 2 kΩ | ± 5 Ω | 0,8% × 350 Ω = 2,8 Ω, ditambah 2 Ω |
+| Arus total sekitar 70 mA | 200 mA DC | ± 1,2 mA | 1,4% × 70 mA = 0,98 mA, ditambah 2 digit (0,2 mA) |
+| Arus total sekitar 30 mA | 200 mA DC | ± 0,6 mA | 1,4% × 30 mA = 0,42 mA, ditambah 0,2 mA |
+
+Dengan ketidakpastian 5 Ω, selisih 350 Ω dan 400 Ω jelas terbedakan. Untuk arus 80 MHz lawan 240 MHz, selisih 20 sampai 30 mA lebih besar daripada ketidakpastian, jadi layak dibandingkan.
+
+### Batas dan peringatan
+
+1. **Arus lewat jack "mA"** (bukan "V Ω"). Sekring alat ini **200 mA**: arus di atas itu memutus sekring. Pada pengukuran arus total, jangan menyalakan Wi-Fi (puncak ESP32 bisa melewati 200 mA) dan jangan menghidupkan beban besar. Rentang 20 A tidak berpengaman: **jangan dipakai** untuk papan ini.
+2. **Jatuh tegangan saat mengukur arus tidak tertulis di buku bawaan.** Dokumen [16] menyebut 200 mV. Anggap ada penurunan; pasang seri hanya di jalur 5 V dari USB, **bukan** di jalur 3V3 (penurunan dapat membuat HX711 atau ESP32 reset). Bila papan reset saat terukur, ganti dengan USB inline meter.
+3. **Layar diperbarui tiap 2 sampai 3 detik.** Arus sesaat tidak terbaca; hanya rata-rata yang tenang.
+4. **Mati otomatis** tidak tertulis di buku bawaan. Kalau layar mati sendiri saat pengukuran lama, catat berapa menit.
+5. **Tampilan "1"** berarti melebihi rentang; naikkan rentang. Bila tegangan tidak diketahui, mulai dari rentang tertinggi.
+6. **Resistansi jembatan diukur tanpa catu.** Lepaskan load cell dari HX711 sebelum mengukur Ω, dan jangan menekan load cell saat mengukur. Buku bawaan: jangan ukur resistansi pada rangkaian bertegangan.
+7. Cabut kabel ukur dari rangkaian sebelum memutar saklar rentang atau fungsi. Periksa isolasi kabel ukur dan kontinuitasnya sebelum dipakai.
+8. Soket kapasitansi: kapasitor harus sudah dikosongkan, dan adaptor dilepas sebelum ganti fungsi (peringatan buku).
+
+### Langkah pengukuran DS-ESP1 dan DS-LC1 (usulan, belum dijalankan)
+
+| No | Pengukuran | Langkah singkat | Dicatat |
+|---|---|---|---|
+| 1 | Tegangan 3V3 tanpa beban | USB tercolok; kabel hitam ke GND, merah ke pin 3V3; rentang 20 V DC | Nilai, tanggal |
+| 2 | Tegangan 3V3 dengan beban | Ulangi dengan HX711, LCD, dan LED terpasang dan firmware proyek berjalan | Nilai; turun berapa dari no. 1 |
+| 3 | Tegangan 5 V di pin VIN | Sama seperti no. 1 | Nilai |
+| 4 | Arus total pada 240 MHz dan 80 MHz | Putus jalur 5 V USB, pasang multimeter seri lewat jack mA, rentang 200 mA, Wi-Fi mati | mA pada tiap frekuensi |
+| 5 | Resistansi jembatan load cell | Load cell terlepas dari modul; ukur antar kabel (E+ ke E-, A+ ke A-) pada rentang 2 kΩ; catat warna kabel | Ω per pasangan |
+| 6 | Kontinuitas perisai (kawat kelima) | Mode kontinuitas antara perisai dan tiap kabel sinyal, dan dengan badan load cell | Bunyi atau tidak |
+
+Hasil pengukuran ditulis di tabel "Daftar cek saat modul tiba" masing-masing entri (DS-ESP1 no. 2 dan 2a, DS-LC1 untuk resistansi jembatan). Hasil di entri itu masih kosong sampai pengukuran dilakukan.
+
+### Daftar pustaka DS-INS1 (IEEE)
+
+[15] "Digital Multimeter Operator's Instruction Manual," buku petunjuk bawaan paket (foto halaman 1 sampai 7); model DT9205A dari kotak kemasan; pabrikan, tanggal, dan revisi tidak tertulis pada halaman yang difoto. Berkas PDF unggahan pengguna, 10 Okt. 2026.
+
+[16] "DT9205A Digital Multimeter," buku petunjuk pengoperasian (kode halaman TOODMM02), salinan dari distributor, mantech.co.za/datasheets/products/DT9205A-190514A.pdf. Pabrikan dan revisi tidak tertulis; berbeda dari [15] pada beberapa angka akurasi dan sekring. Diakses 10 Okt. 2026.
