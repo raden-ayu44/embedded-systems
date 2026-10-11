@@ -570,6 +570,8 @@ Caption proposal: Diagram blok firmware dan hardware. Load cell 180 kg terhubung
 |---|---|---|---|---|---|
 | Logic | 3,3 V | Regulator onboard ESP32 dev board (5 V USB ke 3,3 V; model chip regulator perlu dikonfirmasi ke board fisik) | ESP32, HX711, LCD I2C (termasuk backlight), LED indikator, push button | Sekitar 117 mA (ESP32 sekitar 80 mA + HX711 sekitar 1,5 mA + LCD sekitar 20 mA + LED sekitar 15 mA + button sekitar 0) | Sekitar 540 mA (didominasi lonjakan ESP32 sekitar 500 mA saat WiFi TX burst; komponen lain tidak berkontribusi lonjakan signifikan) |
 
+Koreksi v39: baris di atas adalah teks proposal apa adanya, dan **LCD I2C bukan beban rail 3,3 V**. DS-LCD1 (HS1602A) menyebut catu 5,0 V (4,9-5,1 V), "bukan 3,3 V", dari VIN atau USB; sinyal 3,3 V dari ESP32 tetap cukup (VIH 2,2 V). HX711 di 3,3 V benar (chip 2,6-5,5 V, DS-HX1) dan justru lebih aman untuk level DT. Pembagian yang benar: rail 3,3 V = ESP32, HX711, LED, button (sekitar 97 mA tipikal); rail 5 V (VIN) = LCD dan backlight (sekitar 20 mA tipikal, sampai sekitar 18 mA backlight + 1 mA operasi menurut DS-LCD1). Beban 5 V diambil dari USB lewat VIN, tidak melewati AMS1117, sehingga margin regulator 3,3 V justru bertambah. Risiko: pull-up SDA/SCL backpack ke VCC akan menaikkan SDA/SCL ke 5 V, di atas batas GPIO ESP32 (sekitar 3,6 V); ukur SDA/SCL sebelum backpack dicatu 5 V (DS-I2C1, Bagian 9).
+
 Catu daya: regulator onboard AMS1117-3.3 (rated 1 A), margin sekitar 460 mA (sekitar 46%) di atas peak current total sekitar 540 mA. Angka arus ESP32 berasal dari literatur umum, bukan hasil ukur; diverifikasi lewat S3 di G4. Catatan tambahan di catatan ini (bukan di proposal): pada jalur logging inti (USB-Serial) WiFi tidak aktif, sehingga lonjakan WiFi TX hanya relevan bila cloud (stretch goal) dikerjakan; estimasi puncak sekitar 540 mA kemungkinan konservatif.
 
 ### 13.7 Pin and interface allocation (proposal 3.4, nilai yang benar)
@@ -582,10 +584,14 @@ Catu daya: regulator onboard AMS1117-3.3 (rated 1 A), margin sekitar 460 mA (sek
 | HX711 SCK | GPIO 19 | GPIO (bit-bang) | Modul HX711 | Aman di WROOM dan WROVER |
 | LCD SDA | GPIO 21 | I2C | Modul LCD I2C | Alamat 0x27 atau 0x3f. **Di proposal tertulis GPIO 22 (salah ketik)** |
 | LCD SCL | GPIO 22 | I2C | Modul LCD I2C | - |
+| HX711 VCC | 3V3 | Catu | Modul HX711 | Catatan v39 (tidak ada di proposal): 3,3 V agar DT aman untuk GPIO18 (DS-HX1 Peringatan 2) |
+| HX711 GND | GND | Catu | Modul HX711 | Ground bersama |
+| LCD VCC | VIN (5 V) | Catu | Modul LCD I2C | Catatan v39 (tidak ada di proposal): DS-LCD1 menyebut 5,0 V. Ukur SDA/SCL dulu: pull-up ke VCC membawa SDA/SCL ke 5 V (DS-I2C1) |
+| LCD GND | GND | Catu | Modul LCD I2C | Ground bersama |
 
 Catatan tambahan di catatan ini (bukan di proposal): pin 21/22 adalah default `Wire.begin()` ESP32; sebaiknya ditulis eksplisit `Wire.begin(21, 22)` di kode agar nomor pin menjadi keputusan yang tertulis, bukan warisan default. Pin 18/19 adalah pin VSPI default tetapi dipakai sebagai GPIO bit-bang, bukan peripheral SPI. GPIO 16/17 sengaja dihindari karena dipakai PSRAM pada ESP32-WROVER.
 
-Catatan v38: keenam pin proyek (18, 19, 21, 22, 25, 27) lolos uji loopback pada papan yang dipegang (8 Okt. 2026, DS-ESP1); chip ESP32-D0WD-V3 rev v3.1, flash 4 MB, tanpa PSRAM. Pada PCB v1, VIN tidak dipakai dan semua beban logika memakai 3V3.
+Catatan v38: keenam pin proyek (18, 19, 21, 22, 25, 27) lolos uji loopback pada papan yang dipegang (8 Okt. 2026, DS-ESP1); chip ESP32-D0WD-V3 rev v3.1, flash 4 MB, tanpa PSRAM. Pada PCB v1, HX711 memakai 3V3; catu LCD (VIN 5 V atau 3V3) mengikuti keputusan Bagian 9 dan direncanakan 5 V dari VIN.
 
 ### 13.8 Tabel transisi state (Table 4, proposal 3.5): teks LCD dan durasi
 
@@ -727,7 +733,7 @@ Catatan hasil ESP32 (E1-E10): papan dan modul WROOM diukur sendiri; data pabrika
 | ESP32 | Dua soket betina 1x15 pitch 2,54 mm (J1 kiri, J2 kanan), jarak antar baris 25,4 mm (ukur 25,3 mm). Papan tidak disolder langsung | Papan bisa dicabut; sesuai persetujuan lab. Selisih 0,1 mm masih di dalam kelonggaran pin 0,5 mm di lubang 1,0 mm |
 | LCD dan HX711 | Tidak di PCB. Tersambung lewat kabel jumper betina-jantan (F-M): ujung F ke header jantan backpack LCD dan modul HX711, ujung M disolder ke PCB pada J3 (HX711) dan J4 (LCD) | Bagian yang aus adalah yang murah (kabel), bukan header modul atau PCB |
 | Urutan pin | J3: GND, DT, SCK, VCC. J4: GND, VCC, SDA, SCL (urutan umum backpack, cek saat tiba). Usulan (belum diputuskan): ubah J3 menjadi GND, VCC, DT, SCK supaya urutannya sama dengan J4 dan colokan yang tertukar tidak merusak | Urutan pin modul XFW-HX711 belum dicek pada barang yang tiba |
-| Catu | VIN tidak dipakai; papan dicatu dari USB. HX711 dan LCD dari 3V3 | **LCD 5 V atau 3,3 V belum pasti** (Bagian 9). Backpack tidak boleh dicatu 5 V sebelum SDA dan SCL diukur |
+| Catu | Papan dicatu dari USB. HX711 dari 3V3; LCD direncanakan dari VIN (5 V) per DS-LCD1 (diperbarui v39) | **LCD 5 V atau 3,3 V belum pasti** (Bagian 9). Backpack tidak boleh dicatu 5 V sebelum SDA dan SCL diukur |
 | Tombol | SW1 tactile, GPIO25, pull-up internal, interrupt. Footprint 6 x 6 mm sementara; hanya dua kaki diagonal dipakai | Ganti sesuai DS-BTN1 setelah diukur |
 | LED | D1 5 mm di GPIO27, R1 100 ohm | Sekitar 13 mA pada Vf 2,0 V ((3,3 - 2,0) / 100); anggaran daya memakai 15 mA. Cek Vf LED yang dipakai |
 | Kapasitor (opsional) | C1 100 nF keramik dan C2 10 uF elektrolit (6,3 V atau lebih), paralel antara 3V3 dan GND dekat J3 | Menahan riak catu HX711. Keramik tidak berpolaritas; elektrolit berpolaritas (+ ke 3V3). Ada di komponen lab |
