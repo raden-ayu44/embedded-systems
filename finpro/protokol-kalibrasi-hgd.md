@@ -8,11 +8,11 @@ Mencari **faktor skala** (hitungan HX711 per kg) supaya pembacaan alat bisa dita
 
 ## 2. Gambar setup
 
-**Tahap 1 (sampai 20 kg), dengan rakitan housing v5.** Tahap ini dikerjakan lebih dulu. Gambar di bawah memakai pelat aluminium 10 mm, spacer PLA 28 x 28 x 2,5 mm, load cell CZL 601, dan baut M6 x 25. Titik ukur: nol, dumbbell tunggal 1 sampai 6 kg (seri A), pasangan 6 kg (12 kg), lalu pasangan 4 kg di atas 6 kg (20 kg), dan turun kembali. Tumpukan 20 kg sekitar 19 cm, jauh lebih rendah daripada tumpukan 42 kg. 20 kg baru sekitar 29 persen dari 70 kgf, sehingga faktor skala dari tahap ini belum cukup untuk seluruh rentang. Alas karet perlu lubang untuk kepala baut di bawah A (usulan, belum ada di model).
+**Tahap 1 (sampai 20 kg), dengan rakitan housing v8 (gambar v11).** Tahap ini dikerjakan lebih dulu. Gambar `kalibrasi_setup_v11_20kg.svg` (folder `housing-grip/` pada Project; belum disalin ke `img/`) memakai pelat aluminium 10 mm, spacer PLA 28 x 28 x 2,5 mm, load cell CZL 601, dan baut M6 x 25. Titik ukur: nol, dumbbell tunggal 1 sampai 6 kg (seri A), pasangan 6 kg (12 kg), lalu pasangan 4 kg di atas 6 kg (20 kg), dan turun kembali. Tumpukan 20 kg sekitar 19 cm, jauh lebih rendah daripada tumpukan 42 kg. 20 kg baru sekitar 29 persen dari 70 kgf, sehingga faktor skala dari tahap ini belum cukup untuk seluruh rentang. Alas karet setebal 6 mm dengan satu slot 29 x 14 mm untuk kedua kepala baut di bawah A (usulan, belum ada di model).
 
-![Setup kalibrasi tahap 1, sampai 20 kg](img/kalibrasi_setup_v5_20kg.svg)
+Rakitan dibalik: A (telapak) di bawah di atas alas karet, B (jari) di atas, beban menekan B ke arah A. Kabel keluar lurus lewat klem, lalu lengkungnya diarahkan turun ke alas karet (rute khusus kalibrasi; pada posisi pakai lengkungnya ke arah B). Stiker panah beban menunjuk ke arah B, sedangkan gaya nyata B ke A berlawanan, jadi pembacaan akan negatif kecuali kemiringan skala dibalik di firmware. `img/kalibrasi_setup_v5_20kg.svg` adalah versi lama (kabel Ø5, klem lama) dan tidak berlaku.
 
-**Tahap 2 (sampai 42 kg)** memakai susunan di bawah ini, dengan gambar lama (belum diperbarui ke rakitan v5):
+**Tahap 2 (sampai 42 kg)** memakai susunan di bawah ini, dengan gambar lama (belum diperbarui ke rakitan v8):
 
 ![Setup kalibrasi](img/kalibrasi_protokol.svg)
 

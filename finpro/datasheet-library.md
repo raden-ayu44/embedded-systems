@@ -228,12 +228,12 @@ Nomor [1]-[3] mengikuti urutan kemunculan di tabel Identitas. Seperti kode lokal
 
 ### Peringatan untuk desain kita
 
-1. **Lebar 28 vs 30 mm:** rancang slot untuk 28-30 mm sampai diukur.
+1. **Lebar 28 vs 30 mm:** terselesaikan oleh pengukuran sendiri: 28 mm (10 Okt. 2026), cocok dengan Eagle Weigh; angka 30 mm pada dokumen GJ Impex tidak berlaku untuk barang kita. Tinggi terukur 21,5 mm.
 2. **Eksitasi 3,3-5 V di bawah semua rentang yang tercantum** (9-12 atau 10-15 V): keluaran absolut lebih kecil (lihat noise di DS-HX1). Tanyakan ke vendor; verifikasi dengan uji linearitas sendiri.
 3. **Overload konservatif 120%/150%.** Gaya genggam tertinggi pada data Gotthelf sekitar 59 kgf (usia 20-24) sampai 78 kgf (usia 30-34), masih di bawah 96 kgf (120%).
 4. **Creep:** jangan pakai 0,0016%; pakai <0,025%.
 5. **Error gabungan +-0,03 %RO sekitar +-24 g**; ini batas bawah ketidakpastian kita (pemasangan dan kalibrasi menambah).
-6. **Warna signal:** hijau = S+, putih = S-; periksa tanda pembacaan di uji pertama.
+6. **Warna kabel:** pengukuran resistansi 10 Okt. 2026 menunjukkan eksitasi = hitam dan putih, sinyal = merah dan hijau (bukan seperti datasheet). Jangan menyambung berdasarkan warna datasheet. Polaritas dicek lewat tanda pembacaan di uji pertama; bila terbalik, tukar dua kabel sinyal.
 7. **Kabel kelima:** hubungkan perisai di sisi elektronik saja, setelah uji kontinuitas.
 8. **Arah pembebanan** (ujung tetap/bebas) belum diketahui; tentukan sebelum cetak final.
 
@@ -242,11 +242,11 @@ Nomor [1]-[3] mengikuti urutan kemunculan di tabel Identitas. Seperti kode lokal
 | No | Pemeriksaan | Hasil |
 |---|---|---|
 | 1 | Label barang: kapasitas, mV/V, nomor seri, tanda panah beban | |
-| 2 | Jangka sorong: panjang, lebar (28 atau 30?), tinggi | |
+| 2 | Jangka sorong: panjang, lebar (28 atau 30?), tinggi | **130 x 28 x 21,5 mm** (diukur sendiri, 10 Okt. 2026). Lebar 28 mm cocok dengan Eagle Weigh; tinggi 21,5 mm lebih kecil 0,5 mm dari 22 mm pada Eagle (toleransi atau resolusi alat belum dicatat) |
 | 3 | Posisi lubang: 106 / 12 / 15 mm | |
 | 4 | Lubang M6 tembus atau buta; kedalaman ulir | |
 | 5 | Ujung tetap dan ujung bebas | |
-| 6 | Resistansi: E+/E- (sekitar 400), S+/S- (sekitar 350) | |
+| 6 | Resistansi: E+/E- (sekitar 400), S+/S- (sekitar 350) | **Diukur 10 Okt. 2026** (DT9205A, rentang 2 kΩ, pembacaan 0,001 kΩ): merah-hitam 306 Ω (sempat berkedip 400 Ω); hijau-putih 260 Ω; merah-hijau 347 Ω; merah-putih 260 Ω; hitam-hijau 306 Ω; hitam-putih 393 Ω. Hasil: **pasangan eksitasi = hitam-putih (393 Ω; datasheet 401 ± 10, lolos)**, **pasangan sinyal = merah-hijau (347 Ω; datasheet 350 ± 5, lolos)**. Empat pasangan silang 260 sampai 306 Ω cocok dengan perkiraan hitungan jembatan (260 sampai 310 Ω). Ketidakpastian alat sekitar ±5 Ω. **Pemetaan warna pada barang ini berbeda dari datasheet** (datasheet: merah/hitam eksitasi, hijau/putih sinyal). Urutan baris pembacaan mengikuti catatan pengguna; polaritas + dan - belum ditentukan (hanya membalik tanda) |
 | 7 | Kawat kelima: kontinuitas ke badan dan perisai | |
 | 8 | Panjang dan diameter kabel | |
 | 9 | Offset nol tanpa beban | |
@@ -708,3 +708,4 @@ Hasil pengukuran ditulis di tabel "Daftar cek saat modul tiba" masing-masing ent
 [15] "Digital Multimeter Operator's Instruction Manual," buku petunjuk bawaan paket (foto halaman 1 sampai 7); model DT9205A dari kotak kemasan; pabrikan, tanggal, dan revisi tidak tertulis pada halaman yang difoto. Berkas PDF unggahan pengguna, 10 Okt. 2026.
 
 [16] "DT9205A Digital Multimeter," buku petunjuk pengoperasian (kode halaman TOODMM02), salinan dari distributor, mantech.co.za/datasheets/products/DT9205A-190514A.pdf. Pabrikan dan revisi tidak tertulis; berbeda dari [15] pada beberapa angka akurasi dan sekring. Diakses 10 Okt. 2026.
+

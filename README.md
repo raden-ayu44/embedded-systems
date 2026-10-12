@@ -25,7 +25,7 @@ A hand grip strength meter (group project). Two plates are squeezed, a load cell
 
 - Target range: 20 to 70 kgf.
 - Parts: ESP32 DevKit V1, HX711 module, CZL 601 80 kg bending-beam load cell, 16×2 I2C LCD, push button, LED.
-- Housing: two plain aluminium plates (170 × 30 × 10 mm) with PLA spacers (28 × 28 × 2.5 mm), joined to the load cell with M6 × 25 bolts.
+- Housing: two plain aluminium plates (170 × 30 × 10 mm) with PLA spacers (28 × 28 × 2.5 mm), joined to the load cell with M6 × 25 bolts; cable clamp printed as one piece with spacer A.
 - Budget: maximum Rp300.000 per team.
 
 **Status:** design and documentation stage. The ESP32 and its six project pins have been tested; the housing, the wiring, and the calibration are still proposals. There is no measurement data from the load cell yet, and nothing in `finpro/` has been verified on hardware.
@@ -35,12 +35,14 @@ A hand grip strength meter (group project). Two plates are squeezed, a load cell
 | `finpro/catatan-proyek-hgd.md` | Main project notes: requirements, BOM, decisions, risks, changelog |
 | `finpro/desain-housing-load-cell.md` | Housing design: force path, stiffness, spacer and bolt checks, materials, calibration method |
 | `finpro/protokol-kalibrasi-hgd.md` | Calibration protocol (dumbbell method; stage 1 up to 20 kg, stage 2 up to 42 kg) |
-| `finpro/asumsi_v5.md` | Assumptions and open conflicts behind the v5 housing drawings |
+| `finpro/asumsi_v5.md` | Compiled assumptions, calculations and decisions behind the housing drawings (v2 to v4 history in section 9) |
+| `finpro/koreksi_v12.md` | Compiled instructions for the drawing assistant (replaces `koreksi.md` and `koreksi_v2` to `v11`) |
+| `finpro/instruksi_klem_tampak.md` | Task for the two cable-clamp views |
 | `finpro/datasheet-library.md` | Datasheet notes for each component |
 | `finpro/daftar-isian-datasheet.md` | Checklist of datasheet values still to be filled in |
 | `finpro/hgd_perhitungan.xlsx` | Signal, noise, and error-budget calculations (formulas; edit the Input sheet) |
-| `finpro/fusion/` | Fusion 360 parameters (CSV) and modelling work instructions |
-| `finpro/img/` | Drawings: v5 longitudinal section and exploded view, calibration setup (stage 1), older v4 drawings kept as history |
+| `finpro/fusion/` | Fusion 360 parameters (`fusion_parameters_housing_grip_v8.csv`) and modelling work instructions (still v5; to be updated) |
+| `finpro/img/` | Older drawings (v4, v5; superseded). Current drawings (section v11, exploded v12, calibration setup v11, clamp views v1) are in the Project folder `housing-grip/` and not yet copied here |
 
 The project documents are written in Indonesian. Drawings are SVG and open in any browser.
 

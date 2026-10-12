@@ -1,8 +1,10 @@
 # Work instructions: grip housing in Fusion (v5 layout, CZL 601 load cell)
 
+> **Outdated (12 Oct 2026):** this file still follows the v5 layout (total thickness 52 mm, no cable clamp, cable hole on the end face). The current values are in `fusion_parameters_housing_grip_v8.csv` and `asumsi_v5.md`; drawings in the Project folder `housing-grip/` (potongan v11, exploded v12, klem v1). Update before modelling.
+
 Scope: the load cell grip housing only (two bars, load cell, ridges, calibration platform, cable clamp). The electronics housing is separate. All values marked "working" or "TBD" are provisional; the model is built so they can be changed in one place.
 
-Inputs you need open: `potongan_memanjang_v5_logam.svg`, `exploded_isometrik_v5_logam.svg`, `asumsi_v5.md` (also summarised as Appendix A of `desain-housing-load-cell.md`), `fusion_parameters_housing_grip.csv`, and `desain-housing-load-cell.md` (and `catatan-proyek-hgd.md` for the caliper table).
+Inputs you need open: `potongan_memanjang_v5_logam.svg`, `exploded_isometrik_v5_logam.svg`, `asumsi_v5.md` (also summarised as Appendix A of `desain-housing-load-cell.md`), `fusion_parameters_housing_grip_v8.csv`, and `desain-housing-load-cell.md` (and `catatan-proyek-hgd.md` for the caliper table).
 
 ## Layout reference (all numbers come from parameters)
 
@@ -31,7 +33,7 @@ Total thickness: `2*bar_t + 2*gap + LC_H + ridge_h` = 52 mm.
 
 - [ ] Create a new design and save it with a clear name. If this part is also submitted for the 3D printing module, use the module's naming format.
 - [ ] Check the document units are mm (Browser, Document Settings; menu names can vary by version).
-- [ ] Open Change Parameters and use Import Parameters with `fusion_parameters_housing_grip.csv`.
+- [ ] Open Change Parameters and use Import Parameters with `fusion_parameters_housing_grip_v8.csv`.
 - [ ] Check the Value column: `total_t` reads 52 mm, `gap` reads 2.5 mm, `boss_L` reads 28 mm, `lever_arm` reads 37 mm, `spA_c` reads -51 mm. If decimals look wrong, retype them.
 - [ ] Do not model holes yet. The hole parameters are placeholders until the load cell is measured.
 
