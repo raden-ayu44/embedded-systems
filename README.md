@@ -35,13 +35,13 @@ A hand grip strength meter (group project). Two plates are squeezed, a load cell
 | `finpro/catatan-proyek-hgd.md` | Main project notes: requirements, BOM, decisions, risks, changelog |
 | `finpro/desain-housing-load-cell.md` | Housing design: force path, stiffness, spacer and bolt checks, materials, calibration method |
 | `finpro/protokol-kalibrasi-hgd.md` | Calibration protocol (dumbbell method; stage 1 up to 20 kg, stage 2 up to 42 kg) |
-| `finpro/asumsi_v5.md` | Compiled assumptions, calculations and decisions behind the housing drawings (v2 to v4 history in section 9) |
-| `finpro/koreksi_v12.md` | Compiled instructions for the drawing assistant (replaces `koreksi.md` and `koreksi_v2` to `v11`) |
+| `finpro/asumsi.md` | Compiled assumptions, calculations and decisions behind the housing drawings (v2 to v4 history in section 9) |
+| `finpro/koreksi.md` | Compiled instructions for the drawing assistant (replaces `koreksi.md` and `koreksi_v2` to `v11`) |
 | `finpro/instruksi_klem_tampak.md` | Task for the two cable-clamp views |
 | `finpro/datasheet-library.md` | Datasheet notes for each component |
 | `finpro/daftar-isian-datasheet.md` | Checklist of datasheet values still to be filled in |
 | `finpro/hgd_perhitungan.xlsx` | Signal, noise, and error-budget calculations (formulas; edit the Input sheet) |
-| `finpro/fusion/` | Fusion 360 parameters (`fusion_parameters_housing_grip_v8.csv`) and modelling work instructions (still v5; to be updated) |
+| `finpro/fusion/` | Fusion 360 parameters (`fusion_parameters_housing_grip.csv`) and modelling work instructions (still v5; to be updated) |
 | `finpro/img/` | Older drawings (v4, v5; superseded). Current drawings (section v11, exploded v12, calibration setup v11, clamp views v1) are in the Project folder `housing-grip/` and not yet copied here |
 
 The project documents are written in Indonesian. Drawings are SVG and open in any browser.
